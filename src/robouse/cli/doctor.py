@@ -24,6 +24,7 @@ WORKER_VENVS = {
     "maniskill": "maniskill",
     "robocasa": "robocasa",
     "yam": "yam",
+    "embodied_playground": "embodied-playground",
 }
 REMOTE = {"behavior", "gpu", "robodojo"}  # simulators on remote GPU workers
 UPSTREAM_PKGS = {
@@ -101,7 +102,14 @@ def run() -> int:
         except Exception as e:  # noqa: BLE001
             print(f"  -- {b} ({type(e).__name__}: {str(e)[:80]})")
     for b, venv in WORKER_VENVS.items():
-        py = config.sim_python(venv)
+        py = config.sim_python(venv.replace("-", "_"), venv)
+        if b == "embodied_playground":  # its simulation package is downloaded at run time
+            from ..backends.embodied_playground import source as ep_source
+
+            ready = py.exists() and not ep_source.missing()
+            hint = "" if not ep_source.missing() else "; package: robouse fetch-assets --embodied-playground"
+            print(f"  {_ok(ready)}{b} (worker virtualenv {py}{hint})")
+            continue
         print(f"  {_ok(py.exists())}{b} (worker virtualenv {py})")
     print("Harnesses")
     for h, exe in (("claude-code", "claude"), ("codex", "codex"), ("gemini-cli", "gemini")):

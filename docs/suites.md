@@ -36,7 +36,7 @@ img/suites/one-demo.webp | `one-demo` (a demonstration frame)
 ```
 
 <!-- suites-table -->
-robouse 0.6.0 bundles 790 tasks in 34 suites. "Needs" is what a suite needs beyond `pip install 'robouse[sim]'`, if anything. The last two columns count the tasks that scored 1 with the reference solution and with the no-op control.
+robouse 0.6.0 bundles 814 tasks in 35 suites. "Needs" is what a suite needs beyond `pip install 'robouse[sim]'`, if anything. The last two columns count the tasks that scored 1 with the reference solution and with the no-op control.
 
 | Suite | Tasks | Needs | Reference solution | No-op control |
 |---|---|---|---|---|
@@ -50,6 +50,7 @@ robouse 0.6.0 bundles 790 tasks in 34 suites. "Needs" is what a suite needs beyo
 | `dmcontrol`<br>dm_control: Control Suite, Jaco arm | 17 | own virtualenv (below) | 17/17 | 0/17 |
 | `driving`<br>MetaDrive car in traffic | 7 | own virtualenv (below) | 7/7 | 0/7 |
 | `drone`<br>Skydio X2 over a town | 10 | `robouse fetch-assets` | 10/10 | 0/10 |
+| `embodied-playground`<br>Embodied Playground: EP-100 Launch tasks, four conditions each | 24 | own virtualenv and `robouse fetch-assets --embodied-playground` (below) | 24/24 | 0/24 |
 | `gymrobotics`<br>Gymnasium-Robotics: Fetch, PointMaze | 12 | `[gymrobotics]` | 12/12 | 0/12 |
 | `hard`<br>Low-level control, uncalibrated cameras | 25 |  | 25/25 | 0/25 |
 | `humanoid`<br>Unitree G1 and H1, Apollo, Booster T1 | 9 | `robouse fetch-assets --all` | 9/9 | 0/9 |
@@ -138,6 +139,14 @@ uv pip install \
 uv pip install \
   -p ~/.cache/robouse/yam-venv/bin/python \
   --no-deps dreamlabs==1.0.0
+
+# embodied-playground (ROBOUSE_EMBODIED_PLAYGROUND_PYTHON): Embodied Playground's MuJoCo package, downloaded
+# into ~/.cache/robouse/embodied-playground (ROBOUSE_EMBODIED_PLAYGROUND_SOURCE), in its own pins
+robouse fetch-assets --embodied-playground
+uv venv -p 3.11 ~/.cache/robouse/embodied-playground-venv
+uv pip install \
+  -p ~/.cache/robouse/embodied-playground-venv/bin/python \
+  mujoco==3.3.7 gymnasium==1.2.1 numpy==1.26.4 scipy==1.15.3 Pillow==11.3.0
 ```
 
 `humanoidbench`, `maniskill` and `robocasa` run from the hub, with `bench eval run -d`.

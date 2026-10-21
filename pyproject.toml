@@ -103,7 +103,8 @@ exclude = ["**/__pycache__", "**/*.pyc"]
 # stationerybench (real robots: not run through Robo Use on live hardware yet), and chemlab (it needs ChemLab-Assets'
 # instrument files, which may not be used commercially; it runs from a checkout).
 # Suites whose simulator needs its own virtualenv (dexjoco, driving, dmcontrol, myosuite, humanoidbench, maniskill,
-# robocasa) still need that setup; docs/suites.md says how.
+# robocasa, yam, embodied-playground) still need that setup; docs/suites.md says how. embodied-playground also needs
+# `robouse fetch-assets --embodied-playground` (Embodied Playground's MuJoCo package, downloaded at run time).
 "tasks/adroit" = "robouse/bundled_tasks/adroit"
 "tasks/composed" = "robouse/bundled_tasks/composed"
 "tasks/arc-style" = "robouse/bundled_tasks/arc-style"
@@ -114,6 +115,7 @@ exclude = ["**/__pycache__", "**/*.pyc"]
 "tasks/dmcontrol" = "robouse/bundled_tasks/dmcontrol"
 "tasks/driving" = "robouse/bundled_tasks/driving"
 "tasks/drone" = "robouse/bundled_tasks/drone"
+"tasks/embodied-playground" = "robouse/bundled_tasks/embodied-playground"
 "tasks/gymrobotics" = "robouse/bundled_tasks/gymrobotics"
 "tasks/hard" = "robouse/bundled_tasks/hard"
 "tasks/humanoid" = "robouse/bundled_tasks/humanoid"
@@ -145,9 +147,10 @@ exclude = ["**/__pycache__", "**/*.pyc"]
 "assets/humanoidbench/provenance.json" = "robouse/assets_provenance/humanoidbench.json"
 "assets/robocasa/provenance.json" = "robouse/assets_provenance/robocasa.json"
 "assets/chemlab/provenance.json" = "robouse/assets_provenance/chemlab.json"
+"assets/embodied-playground/provenance.json" = "robouse/assets_provenance/embodied-playground.json"
 
 [tool.hatch.build.targets.sdist]
-include = ["/src/robouse", "/tasks", "/components", "/assets/menagerie/provenance.json", "/assets/menagerie/skydio_x2/PROVENANCE.json", "/assets/menagerie/embodiments.json", "/assets/humanoidbench/provenance.json", "/assets/robocasa/provenance.json", "/assets/chemlab/provenance.json", "/README.md", "/LICENSE", "/NOTICE", "/licenses", "/pyproject.toml"]
+include = ["/src/robouse", "/tasks", "/components", "/assets/menagerie/provenance.json", "/assets/menagerie/skydio_x2/PROVENANCE.json", "/assets/menagerie/embodiments.json", "/assets/humanoidbench/provenance.json", "/assets/robocasa/provenance.json", "/assets/chemlab/provenance.json", "/assets/embodied-playground/provenance.json", "/README.md", "/LICENSE", "/NOTICE", "/licenses", "/pyproject.toml"]
 exclude = ["**/__pycache__", "**/*.pyc", "**/.DS_Store", "/tasks/behavior"]
 
 [tool.ruff]
@@ -222,6 +225,9 @@ files = [
     "src/robouse/backends/__init__.py",
     "src/robouse/backends/base.py",
     "src/robouse/backends/chemlab",
+    "src/robouse/backends/embodied_playground/backend.py",
+    "src/robouse/backends/embodied_playground/source.py",
+    "src/robouse/backends/embodied_playground/planner.py",
 ]
 
 [tool.pytest.ini_options]

@@ -2,6 +2,17 @@
 
 Notable changes to the `robouse` package, newest first. Versions follow [semantic versioning](https://semver.org/); while the version is below 1.0, a minor version can change interfaces. Dates are PyPI release dates (UTC).
 
+## Unreleased
+
+### Security
+
+- The sandbox denies Embodied Playground's simulation package where `ROBOUSE_EMBODIED_PLAYGROUND_SOURCE` puts it, on macOS and Linux, as it denies Robo Use's cache, its default place: the embodied-playground worker imports it.
+
+### Added
+
+- The `embodied-playground` suite: 6 of the 34 Launch tasks of Embodied Playground's EP-100 benchmark (HKU, Sharpa, Tsinghua, Stanford, UNC, MIT; arXiv 2610.27039), each in the benchmark's four conditions (24 task folders), at its Level 0. Two Franka Pandas operate a passive spring launcher to clear targets; the agent sees the robots' joints and one camera, acts with Embodied Playground's 16 absolute joint targets and gripper commands, and has no skills. The simulation is Embodied Playground's own MuJoCo package, unmodified, which `robouse fetch-assets --embodied-playground` downloads from a pinned commit (107 files, about 35 MB, each checked by SHA-256) and which runs in its own virtualenv with Embodied Playground's pins (`ROBOUSE_EMBODIED_PLAYGROUND_PYTHON`); success is its own rule, the first time it holds. Each condition has a reference solution, a scripted pull-and-release of the launcher found by simulation and replayed through `robo act`. Reference solution 24/24, no-op 0/24. The other 28 Launch tasks have no reference solution yet, and EP-100's other suites need Isaac Sim (an NVIDIA RTX GPU) or ManiSkill's Vulkan renderer ([Embodied Playground](docs/suites/embodied-playground.md)).
+- `robouse doctor` says whether the embodied-playground virtualenv and download are there.
+
 ## 0.6.0 (2026-10-21)
 
 New content: the `libero-pro` and `one-demo` suites, the `chemlab` suite (from a checkout), the `jev`, `gemini-cli`, `kinex`, `aspire` and `aspire-codex` harnesses, and Gemini 4 Argon and Elorian's Glimpse as models. Isolation and scoring fixes: the model gateway's key opens only its model routes; the sandbox denies LIBERO's task data, `.env` files and the asset folders later trials load; and only a harness's own final error event makes a trial a harness failure.

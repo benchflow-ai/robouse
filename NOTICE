@@ -131,4 +131,10 @@ ChemLab-Assets
   3D models, contracts and data: Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0), non-commercial use only; code, including the behaviour runtimes: MIT License
   Downloaded by `robouse fetch-assets --chemlab` for the chemlab suite: the files listed in assets/chemlab/provenance.json (repository, sdist; in the wheel as robouse/assets_provenance/chemlab.json), with the release's LICENSE, LICENSE-ASSETS.md and CITATION.cff. None of them is in the repository or the package. The chemlab task folders (tasks/chemlab/, sdist) name the instruments and their parts and give positions, travel and target values taken from the contracts; they hold none of the models, contracts, data or code.
 
+Embodied Playground
+  https://github.com/Winniechen2002/Embodied-Playground, commit 45993d432ae58a9f3dd05dc2ff3c6e16eb39198f
+  Copyright (c) 2026 Chen Feng
+  Original code: Apache License 2.0; original documentation and independently authored non-code assets: Creative Commons Attribution 4.0 (CC BY 4.0); third-party material under its own terms (its LICENSING.md and THIRD_PARTY_NOTICES.md; the Panda model in its MuJoCo package is MuJoCo Menagerie's, Apache License 2.0)
+  Downloaded by `robouse fetch-assets --embodied-playground` for the embodied-playground suite: its MuJoCo package (source/agentbench/agentbench_mujoco) and the release's licence files, listed in assets/embodied-playground/provenance.json (repository, sdist; in the wheel as robouse/assets_provenance/embodied-playground.json). None of them is in the repository or the package. The task folders (tasks/embodied-playground/, wheel, sdist) quote each task's goal and carry its conditions' parameters from Embodied Playground's task catalog (docs/evaluation/tasks.json, CC BY 4.0); their reference plans are Robo Use's own.
+
 Robo Use's own RoboHarm suite (tasks/roboharm/) was written independently. It cites Robocurve's RoboHarm (https://github.com/robocurve/roboharm, CC BY-NC 4.0) for its design and contains none of its text, code or assets.

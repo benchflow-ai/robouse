@@ -2,7 +2,7 @@
 
 **Agent as a policy for embodied agents.** Robo Use turns robot benchmarks into tasks that a coding agent, such as Claude Code or Codex, solves by driving a simulated robot from its shell, one `robo` command at a time. An episode server owns the simulator, enforces the step budget, records a video and scores the final physical state; the agent acts only by sending `robo` requests to that server.
 
-- 790 tasks in 34 suites ship in the package: rule puzzles on a table, Meta-World, LIBERO, robosuite, RoboCasa, Gymnasium-Robotics, dm_control, MyoSuite, HumanoidBench, quadrupeds, humanoids, drones and more.
+- 814 tasks in 35 suites ship in the package: rule puzzles on a table, Meta-World, LIBERO, robosuite, RoboCasa, Gymnasium-Robotics, dm_control, MyoSuite, HumanoidBench, quadrupeds, humanoids, drones and more.
 - Harnesses for Claude Code, Codex, Gemini CLI, mini-swe-agent, dimcode, Kinex and Show-Harness, NVIDIA's ASPIRE workflow run by Claude Code or Codex, and a client for vision-language-action (VLA) policies served elsewhere.
 - Every task is a BenchFlow task folder (`task.md`) with a reference solution that scores 1 and a no-op control that scores 0. Every trial is a folder with the video, the agent's trajectory and the reward.
 
