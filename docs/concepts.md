@@ -160,3 +160,4 @@ incompatible: unitree-go2 + tabletop + put-in-container
 | `verifier/reward.txt` | `1` or `0` |
 | `artifacts/recording.mp4` | the video |
 | `artifacts/observations/` | camera images from the workspace |
+| `grader/flora.json` | Flora's labels of the recording, after `robouse flora import` ([Annotate trials with Flora](flora.md)) |

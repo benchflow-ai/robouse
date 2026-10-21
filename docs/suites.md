@@ -198,6 +198,8 @@ Some suites need software or data with stricter terms, which Robo Use does not i
 - `gpu-isaaclab` (not in the package): NVIDIA Isaac Sim.
 - `chemlab` (not in the package): ChemLab-Assets' instrument models, contracts and data (CC BY-NC 4.0), which `robouse fetch-assets --chemlab` downloads together with the release's behaviour runtimes (MIT).
 
+`robouse flora` writes input files for NVIDIA's Flora models and reads their results; the models and NVIDIA's inference scripts are under the NVIDIA License (research or evaluation use only), and Robo Use neither includes nor downloads them ([Annotate trials with Flora](flora.md#licence)).
+
 `robodojo`, `behavior` and `chemlab` cannot be run for commercial purposes, and `robodojo`, `behavior` and `gpu-isaaclab` need you to accept NVIDIA's Isaac Sim EULA. The `llm` and `benchflow` extras install `litellm[proxy]`, which pulls in `litellm-enterprise` under a proprietary license. The `robosuite` extra pulls in GPL and LGPL packages (quadprog, qpsolvers, pynput, python-xlib), and the `sim` extra's `imageio-ffmpeg` wheel bundles a GPL build of ffmpeg; Robo Use does not redistribute them, but an image built with them must carry their licenses.
 
 The suite images on this page are renders of each simulator's own scenes. The RoboCasa image shows RoboCasa's kitchen assets ([robocasa/robocasa](https://github.com/robocasa/robocasa), CC BY 4.0).

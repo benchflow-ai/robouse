@@ -2,6 +2,13 @@
 
 Notable changes to the `robouse` package, newest first. Versions follow [semantic versioning](https://semver.org/); while the version is below 1.0, a minor version can change interfaces. Dates are PyPI release dates (UTC).
 
+## Unreleased
+
+### Added
+
+- `robouse flora export` and `robouse flora import`: NVIDIA's Flora models label trial recordings. Flora-Rewarder gives an outcome score from 1 to 5 and a failure, suboptimal or normal label for every half second, with reasons; Flora-TempSeg and Flora-Captioner give timestamped captions. The models and NVIDIA's inference scripts are under the NVIDIA License (research or evaluation use only), so Robo Use neither includes nor downloads them: `export` writes the input files of NVIDIA's scripts for finished trials (each trial's recording, the Rewarder's jobs with the task's instruction, and the captioning pipeline's jobs), the scripts run unmodified on a GPU machine with 80 GB, and `import` writes each trial's `grader/flora.json`, with the agent's steps during each labelled stretch, and prints how often Flora's outcome agrees with the simulator's verdict ([Annotate trials with Flora](docs/flora.md)). Flora's models have not run on a trial yet: NVIDIA's scripts read the job files of 11 Claude Code trials in their dry-run and validation modes, and the import ran on a stand-in's results (`tests/flora_stand_in.py`).
+- `robouse report` metrics `flora_agree` (the share of trials where Flora's outcome agrees with the simulator) and `flora_progress` (Flora's progress estimate), from `grader/flora.json`.
+
 ## 0.6.0 (2026-10-21)
 
 New content: the `libero-pro` and `one-demo` suites, the `chemlab` suite (from a checkout), the `jev`, `gemini-cli`, `kinex`, `aspire` and `aspire-codex` harnesses, and Gemini 4 Argon and Elorian's Glimpse as models. Isolation and scoring fixes: the model gateway's key opens only its model routes; the sandbox denies LIBERO's task data, `.env` files and the asset folders later trials load; and only a harness's own final error event makes a trial a harness failure.

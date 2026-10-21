@@ -222,6 +222,7 @@ files = [
     "src/robouse/backends/__init__.py",
     "src/robouse/backends/base.py",
     "src/robouse/backends/chemlab",
+    "src/robouse/analysis/flora.py",
 ]
 
 [tool.pytest.ini_options]

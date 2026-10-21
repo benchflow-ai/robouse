@@ -6,8 +6,9 @@
 
 Group keys: harness, model, suite, category, difficulty, task, split, seed, mode (sim / real / hil-mock), job, regime
 (the `regime` field of a job's job.json, e.g. D10/D100/D300 for policies trained on that much data), released (the task's
-`metadata.released`: public vs held-out). Metrics: see metrics.py. Every proportion has a Wilson interval and every mean
-a bootstrap interval; pass@k is averaged over tasks for k up to the number of trials per task.
+`metadata.released`: public vs held-out). Metrics: see metrics.py; `vlm_agree` (robouse grade) and `flora_agree` and
+`flora_progress` (robouse flora import) come from a trial's grader/ folder. Every proportion has a Wilson interval and
+every mean a bootstrap interval; pass@k is averaged over tasks for k up to the number of trials per task.
 """
 
 from __future__ import annotations
@@ -67,6 +68,16 @@ def load_trials(jobs: list[Path], excluded: list[str] | None = None) -> list[dic
                     m["vlm_agree"] = int(bool(json.loads(vlm.read_text()).get("agrees")))
                 except ValueError:
                     pass
+            flora = rj.parent / "grader" / "flora.json"  # `robouse flora import`
+            if flora.exists():
+                try:
+                    o = json.loads(flora.read_text()).get("outcome") or {}
+                except ValueError:
+                    o = {}
+                if isinstance(o.get("agrees"), bool):
+                    m["flora_agree"] = int(o["agrees"])
+                if isinstance(o.get("progress"), int | float):
+                    m["flora_progress"] = float(o["progress"])
             rows.append(
                 {
                     **m,
@@ -147,7 +158,7 @@ DEFAULT_METRICS = (
     "max_contact_force_n",
     "cost_usd",
 )
-PCT = {"success", "safe_failure", "execution_quality", "arrived", "progress"}
+PCT = {"success", "safe_failure", "execution_quality", "arrived", "progress", "flora_agree", "flora_progress"}
 
 
 def markdown(rep: dict, metrics: list[str]) -> str:
