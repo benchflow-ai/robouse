@@ -142,6 +142,26 @@ def test_export_instruction_override(run: Path, tmp_path: Path) -> None:
         F.export([], tmp_path / "k", profile="robot")
 
 
+def test_export_instructions_per_task(run: Path, tmp_path: Path, capsys) -> None:
+    other = tmp_path / "runs" / "r2"
+    trial(other, "one-demo-box-mirrored__claude-code__ffffff", task="one-demo-box-mirrored")
+    given = tmp_path / "instructions.json"
+    given.write_text(json.dumps({"one-demo-box-mirrored": " Open the  box ", "no-such-task": "x"}))
+    assert (
+        main(["flora", "export", str(run), str(other), "--out", str(tmp_path / "j"), "--instructions", str(given)]) == 0
+    )
+    assert "--instructions: no exported trial has task no-such-task" in capsys.readouterr().out
+    manifest = json.loads((tmp_path / "j" / "trials.json").read_text())["jobs"]
+    by = {r["id"]: r["task"] for r in jsonl(tmp_path / "j" / "reward_jobs.jsonl")}
+    assert by["one-demo-box-mirrored__claude-code__ffffff"] == "Open the box"
+    assert manifest["one-demo-box-mirrored__claude-code__ffffff"]["instruction_from"] == "--instructions"
+    assert by["arc-gravity__claude-code__aaaaaa"] == "Rule inference: falling"  # not named: the task's own
+    for bad in ("[1, 2]", '{"t": ""}', "not json"):
+        given.write_text(bad)
+        assert main(["flora", "export", str(run), "--out", str(tmp_path / "k"), "--instructions", str(given)]) == 2
+        assert "--instructions" in capsys.readouterr().err and not (tmp_path / "k").exists()
+
+
 def test_job_ids_are_valid_and_unique() -> None:
     taken: set[str] = set()
     long = "very-long-task-name-" * 10 + "__claude-code__abcdef"
@@ -168,6 +188,12 @@ def test_import_writes_flora_json_with_the_agent_steps(run: Path, tmp_path: Path
     assert [(s["start_s"], s["end_s"]) for s in seg] == [(0.733, 1.2)]
     assert seg[0]["steps"] == [{"index": 3, "action": "robo move-to 0.1 0.2 0.3"}]
     assert seg[0]["rationale"] == "stand-in suboptimal stretch" and by["aaaaaa"]["dense"]["seconds"]["suboptimal"] > 0
+    # each clip's own labels: its span, its 32 scores and its stretches that are not normal, with its reasons
+    (clip,) = by["aaaaaa"]["dense"]["clips"]
+    assert clip["start_s"] == 0.0 and len(clip["quality"]) == 32 and "2" in clip["quality"] and clip["valid"] is True
+    assert clip["stretches"] == [
+        {"start_s": 0.733, "end_s": 1.2, "label": "suboptimal", "rationale": "stand-in suboptimal stretch"}
+    ]
     caps = by["bbbbbb"]["captions"]["segments"]
     assert [c["caption"] for c in caps] == ["Stand-in caption 1.", "Stand-in caption 2."]
     assert [s["index"] for s in caps[1]["steps"]] == [4, 5]  # 1.5-3.0 s

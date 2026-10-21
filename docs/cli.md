@@ -398,7 +398,7 @@ options:
 $ robouse flora export --help
 usage: robouse flora export [-h] --out OUT
                             [--caption-profile {human,yam,dex,tianji}]
-                            [--instruction INSTRUCTION]
+                            [--instruction INSTRUCTION | --instructions FILE]
                             trials [trials ...]
 
 positional arguments:
@@ -416,6 +416,8 @@ options:
                         (default: each task's own: the source benchmark's
                         language instruction, else the task's one-line
                         description)
+  --instructions FILE   a JSON file of task ids and the instruction Flora is
+                        given for each (the other tasks get their own)
 ```
 
 ### `robouse flora import`

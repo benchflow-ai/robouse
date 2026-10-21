@@ -173,11 +173,35 @@ def _link_or_copy(src: Path, dst: Path) -> None:
         shutil.copyfile(src, dst)
 
 
-def export(trials: list[Path], out: Path, *, profile: str = "yam", instruction: str | None = None) -> dict:
-    """Write Flora's job files for `trials` into `out` (which must not hold jobs yet). Returns {"jobs", "caption_jobs",
-    "long", "skipped": [(trial, reason)]}; with no job, nothing is written."""
+def read_instructions(path: str | Path) -> dict[str, str]:
+    """An --instructions file: a JSON object from task ids to the instruction Flora is given for that task."""
+    try:
+        d = json.loads(Path(path).read_text())
+    except (OSError, ValueError) as e:
+        raise ValueError(f"--instructions {path}: not a readable JSON file ({e})") from None
+    if not isinstance(d, dict) or not all(
+        isinstance(k, str) and isinstance(v, str) and _one_line(v) for k, v in d.items()
+    ):
+        raise ValueError(f"--instructions {path}: expected a JSON object of task ids to non-empty instructions")
+    return {k: _one_line(v) for k, v in d.items()}
+
+
+def export(
+    trials: list[Path],
+    out: Path,
+    *,
+    profile: str = "yam",
+    instruction: str | None = None,
+    instructions: dict[str, str] | None = None,
+) -> dict:
+    """Write Flora's job files for `trials` into `out` (which must not hold jobs yet). `instruction` replaces every
+    task's instruction, `instructions` (task id: instruction) those of the tasks it names. Returns {"jobs",
+    "caption_jobs", "long", "skipped": [(trial, reason)], "unused": [task ids in `instructions` no trial has]}; with no
+    job, nothing is written."""
     if profile not in PROFILES:
         raise ValueError(f"caption profile must be one of {', '.join(PROFILES)}")
+    instructions = instructions or {}
+    used: set[str] = set()
     if (out / TRIALS).exists():
         raise FileExistsError(f"{out} already holds Flora jobs ({TRIALS}); export into a new folder")
     taken: set[str] = set()
@@ -205,7 +229,13 @@ def export(trials: list[Path], out: Path, *, profile: str = "yam", instruction: 
         (out / "videos").mkdir(parents=True, exist_ok=True)
         _link_or_copy(video, out / rel)
         facts = video_facts(trial, video)
-        text, source = (_one_line(instruction), "--instruction") if instruction else task_instruction(cfg)
+        if instruction:
+            text, source = _one_line(instruction), "--instruction"
+        elif str(cfg.get("task")) in instructions:
+            text, source = instructions[str(cfg["task"])], "--instructions"
+            used.add(str(cfg["task"]))
+        else:
+            text, source = task_instruction(cfg)
         rewards.append({"id": jid, "task": text, "videos": [rel]})
         captioned = float(facts.get("duration_s", 0)) <= CAPTION_MAX_S
         if captioned:
@@ -234,7 +264,8 @@ def export(trials: list[Path], out: Path, *, profile: str = "yam", instruction: 
             "jobs": jobs,
         }
         (out / TRIALS).write_text(json.dumps(manifest, indent=2) + "\n")
-    return {"jobs": len(jobs), "caption_jobs": len(captions), "long": long, "skipped": skipped}
+    unused = sorted(set(instructions) - used)
+    return {"jobs": len(jobs), "caption_jobs": len(captions), "long": long, "skipped": skipped, "unused": unused}
 
 
 def _write_jsonl(p: Path, rows: list[dict]) -> None:
@@ -311,8 +342,30 @@ def outcome(r: dict, simulator: dict, success_score: int = 5) -> dict:
     }
 
 
+def _clip(c: dict) -> dict:
+    """One 16 s clip as dense_reward.py scored it: its span, its 32 half-second scores (`quality`) and the stretches
+    in it that are not normal, with the clip's own reasons."""
+    return {
+        "start_s": _num(c.get("start_s")),
+        "end_s": _num(c.get("end_s")),
+        "quality": c.get("quality"),
+        "valid": c.get("valid"),
+        "stretches": [
+            {
+                "start_s": _num(g.get("start_s")),
+                "end_s": _num(g.get("end_s")),
+                "label": g.get("label"),
+                "rationale": g.get("rationale"),
+            }
+            for g in c.get("regions") or []
+            if g.get("label") and g.get("label") != "normal"
+        ],
+    }
+
+
 def dense(r: dict, steps: list[dict]) -> dict:
-    """Flora-Rewarder's dense record (dense_reward.py): its labelled stretches, each with the agent's steps in it."""
+    """Flora-Rewarder's dense record (dense_reward.py): its labelled stretches, each with the agent's steps in it, and
+    each clip's own labels (where two clips overlap and disagree, the stitched stretches alternate between them)."""
     segments = []
     for s in r.get("segments") or []:
         start, end, score = float(s["start_s"]), float(s["end_s"]), int(s["score"])
@@ -337,7 +390,7 @@ def dense(r: dict, steps: list[dict]) -> dict:
         "seconds": seconds,
         "fraction": r.get("fraction"),
         "per_second": r.get("per_second"),
-        "clips": len(r.get("clips") or []),
+        "clips": [_clip(c) for c in r.get("clips") or [] if isinstance(c, dict)],
         "invalid_clips": int(r.get("invalid_clips") or 0),
         "segments": segments,
     }
@@ -432,15 +485,20 @@ def import_results(folder: Path, *, success_score: int = 5) -> tuple[list[tuple[
 # ---- command line ----------------------------------------------------------------------------------------------------
 
 
-def export_main(paths: list[str], out: str, profile: str, instruction: str | None) -> int:
+def export_main(
+    paths: list[str], out: str, profile: str, instruction: str | None, instructions: str | None = None
+) -> int:
     try:
+        per_task = read_instructions(instructions) if instructions else None
         trials = trial_folders(paths)
-        rep = export(trials, Path(out), profile=profile, instruction=instruction)
+        rep = export(trials, Path(out), profile=profile, instruction=instruction, instructions=per_task)
     except (FileNotFoundError, FileExistsError, ValueError) as e:
         print(f"robouse: {e}", file=sys.stderr)
         return 2
     for trial, reason in rep["skipped"]:
         print(f"skipped {trial}: {reason}")
+    if rep["unused"]:
+        print(f"--instructions: no exported trial has task {', '.join(rep['unused'])}")
     if not rep["jobs"]:
         print("robouse: no trial with a recording and a verdict; nothing written", file=sys.stderr)
         return 1

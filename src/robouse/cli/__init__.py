@@ -84,13 +84,21 @@ def _analysis(sub: argparse._SubParsersAction) -> None:
         default="yam",
         help="the captioning pipeline's profile (default yam, its robot-actions profile; dex for dexterous hands)",
     )
-    fe.add_argument(
+    given = fe.add_mutually_exclusive_group()
+    given.add_argument(
         "--instruction",
         help="the task instruction Flora is given, for every trial (default: each task's own: the source benchmark's "
         "language instruction, else the task's one-line description)",
     )
+    given.add_argument(
+        "--instructions",
+        metavar="FILE",
+        help="a JSON file of task ids and the instruction Flora is given for each (the other tasks get their own)",
+    )
     fe.set_defaults(
-        func=lambda a: _call("..analysis.flora", "export_main", a.trials, a.out, a.caption_profile, a.instruction)
+        func=lambda a: _call(
+            "..analysis.flora", "export_main", a.trials, a.out, a.caption_profile, a.instruction, a.instructions
+        )
     )
     fi = fsub.add_parser(
         "import",

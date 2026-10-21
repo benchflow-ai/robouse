@@ -79,6 +79,20 @@ def dense(job: dict, video: dict) -> dict:
             )
             start = i
     seconds = int(-(-n // fps))
+    # one clip over the whole video; its regions (window_regions in NVIDIA's core.py) are the segments
+    regions = [
+        {
+            "first_group": k + 1,
+            "last_group": k + 1,
+            "score": s["score"],
+            "label": s["label"],
+            "start_s": s["start_s"],
+            "end_s": s["end_s"],
+            "rationale": s["rationale"],
+        }
+        for k, s in enumerate(segments)
+    ]
+    quality = "".join(str(scores[min(n - 1, n * g // 32)]) for g in range(32))
     return {
         "id": job["id"],
         "task": job["task"],
@@ -90,7 +104,7 @@ def dense(job: dict, video: dict) -> dict:
         "fraction": {LABELS[s]: round(scores.count(s) / n, 4) for s in (1, 2, 3)},
         "segments": segments,
         "per_second": [scores[min(n - 1, int((t + 0.5) * fps))] for t in range(seconds)],
-        "clips": [{"start_s": 0.0, "end_s": round(n / fps, 3), "quality": "3" * 32, "regions": [], "valid": True}],
+        "clips": [{"start_s": 0.0, "end_s": round(n / fps, 3), "quality": quality, "regions": regions, "valid": True}],
         "invalid_clips": 0,
     }
 
