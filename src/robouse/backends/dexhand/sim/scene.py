@@ -1,5 +1,5 @@
-"""Scene builder for the dexhand suite: a table, a 6-DoF positioner hanging above it, one Menagerie hand on the
-positioner's flange, and the task's objects. Everything is built with MjSpec; the hand is the upstream XML attached
+"""Scene builder for the dexhand suite: a table, a 6-DoF positioner hanging above it, one hand on the positioner's
+flange (from MuJoCo Menagerie, or ROBOTIS's own model of its HX5-D20), and the task's objects. Everything is built with MjSpec; the hand is the upstream XML attached
 unchanged (kinematics, actuators, gains, contact and friction settings as shipped).
 
 World frame (metres): +x away from the positioner's home (forward), +y to the left, +z up; the floor is z = 0 and the
@@ -33,7 +33,7 @@ POSITIONER = [
     ("pos_roll", "hinge", (1, 0, 0), (math.radians(-190), math.radians(190)), 40.0),
 ]
 
-# Per hand: Menagerie folder, how it is mounted on the flange, which bodies make up each finger, the fingertip geoms,
+# Per hand: model folder (and the MJCF file in it, default right_hand.xml), how it is mounted on the flange, which bodies make up each finger, the fingertip geoms,
 # the grasp point (a site in front of the palm) and the upstream solver options kept for that hand.
 HANDS = {
     "shadow": dict(
@@ -81,6 +81,36 @@ HANDS = {
             "palm": ["palm"],
         },
         tips={"thumb": "th_ds", "index": "if_ds", "middle": "mf_ds", "ring": "rf_ds"},
+    ),
+    # ROBOTIS HX5-D20 rev2 (right): 20 DYNAMIXEL XM335 joints, each its own position servo (ROBOTIS's MuJoCo model in
+    # its robotis_hand repository, Apache-2.0). In the model's frame the fingers point along +z and the palm faces +x;
+    # mounted so that, like the other hands, the palm faces down and the fingers point along +x.
+    "hx5": dict(
+        folder="robotis_hx5_d20",
+        xml="robotis_hand_description/mujoco/hx5_d20_rev2/hx5_d20_right.xml",
+        robot="ROBOTIS HX5-D20 (right)",
+        licence="Apache-2.0",
+        mount_quat=[0.70710678, 0, 0.70710678, 0],
+        mount_pos=[-0.06, 0.0, -0.02],  # flange at the back of the palm
+        act_prefix="",
+        palm_body="hx5_d20_right_base",
+        grasp_site=(0.06, 0.005, 0.10),
+        impratio=10.0,
+        fingers={
+            "thumb": ["finger_r_link1", "finger_r_link2", "finger_r_link3", "finger_r_link4"],
+            "index": ["finger_r_link5", "finger_r_link6", "finger_r_link7", "finger_r_link8"],
+            "middle": ["finger_r_link9", "finger_r_link10", "finger_r_link11", "finger_r_link12"],
+            "ring": ["finger_r_link13", "finger_r_link14", "finger_r_link15", "finger_r_link16"],
+            "little": ["finger_r_link17", "finger_r_link18", "finger_r_link19", "finger_r_link20"],
+            "palm": ["hx5_d20_right_base"],
+        },
+        tips={
+            "thumb": "finger_r_link4",
+            "index": "finger_r_link8",
+            "middle": "finger_r_link12",
+            "ring": "finger_r_link16",
+            "little": "finger_r_link20",
+        },
     ),
 }
 
@@ -258,7 +288,7 @@ def build(hand: str, task: dict):
         a.ctrllimited = True
         a.ctrlrange = [-f, f]
 
-    hs = mujoco.MjSpec.from_file(str(robot_dir(H["folder"]) / "right_hand.xml"))
+    hs = mujoco.MjSpec.from_file(str(robot_dir(H["folder"]) / H.get("xml", "right_hand.xml")))
     frame = flange.add_frame(pos=H["mount_pos"], quat=H["mount_quat"])
     s.attach(hs, prefix="h/", frame=frame)
     if H["grasp_site"] is not None:

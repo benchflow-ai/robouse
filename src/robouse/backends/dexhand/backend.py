@@ -4,6 +4,9 @@ Menagerie, both attached unchanged (kinematics, position actuators, gains, conta
     3 each for index/middle/ring with the two distal joints coupled by a tendon, 4 for the little finger);
   - LEAP Hand, right (`leap_hand`, MIT): 16 joints and 16 position actuators (index/middle/ring: mcp, rot, pip, dip;
     thumb: cmc, axl, mcp, ipl).
+And ROBOTIS's HX5-D20 (right, rev2), from ROBOTIS's own MuJoCo model in its robotis_hand repository (Apache-2.0), also
+attached unchanged: 20 joints, each a DYNAMIXEL XM335 position servo (`finger_r_joint1`-`4` thumb: in-plane swing,
+opposition, two flexions; `5`-`8` index, `9`-`12` middle, `13`-`16` ring, `17`-`20` little: spread, then three flexions).
 
 Mounting (sim/scene.py): like a lab setup where the hand is carried by an arm or gantry, the hand is bolted to
 the flange of a positioner with three prismatic joints (x, y, z) and three revolute joints (yaw, pitch, roll). The
@@ -83,6 +86,21 @@ LEAP_ACTS = [
 ]
 
 
+HX5_ACTS = [f"finger_r_joint{i}" for i in range(1, 21)]
+# readable names for the HX5-D20's joints in postures and grasps (the actuators are the joints' own names)
+HX5_ALIAS = {
+    "th_swing": 1,  # thumb, in the palm's plane (+ toward the fingers)
+    "th_opp": 2,  # thumb opposition (- turns it in front of the palm)
+    "th_mcp": 3,
+    "th_ip": 4,
+    **{
+        f"{f}_{j}": 5 + 4 * k + n
+        for k, f in enumerate(("if", "mf", "rf", "lf"))
+        for n, j in enumerate(("abd", "mcp", "pip", "dip"))
+    },
+}
+
+
 def _shadow(**kw) -> dict:
     base = {k: 0.0 for k in SHADOW_ACTS}
     base.update(kw)
@@ -93,6 +111,19 @@ def _leap(**kw) -> dict:
     base = {k: 0.0 for k in LEAP_ACTS}
     base.update(kw)
     return base
+
+
+def _hx5(**kw) -> dict:
+    base = {k: 0.0 for k in HX5_ACTS}
+    base.update({f"finger_r_joint{HX5_ALIAS[k]}": v for k, v in kw.items()})
+    return base
+
+
+def _hx5_fingers(mcp: float, pip: float, dip: float, which=("if", "mf", "rf", "lf")) -> dict:
+    return {f"{f}_{j}": v for f in which for j, v in (("mcp", mcp), ("pip", pip), ("dip", dip))}
+
+
+ACTS = {"shadow": SHADOW_ACTS, "leap": LEAP_ACTS, "hx5": HX5_ACTS}
 
 
 POSTURES = {
@@ -204,6 +235,16 @@ POSTURES = {
             if_mcp=0.3, if_pip=0.3, mf_mcp=0.3, mf_pip=0.3, rf_mcp=1.6, rf_pip=1.6, rf_dip=1.2, th_cmc=1.5, th_axl=0.3
         ),
     },
+    "hx5": {
+        "open": _hx5(th_opp=-0.6),
+        "flat": _hx5(),
+        "relaxed": _hx5(th_opp=-0.6, th_mcp=0.2, **_hx5_fingers(0.3, 0.3, 0.2)),
+        "point": _hx5(th_opp=-1.2, th_mcp=0.9, th_ip=0.8, **_hx5_fingers(1.6, 1.5, 1.3, ("mf", "rf", "lf"))),
+        "fist": _hx5(th_opp=-1.2, th_mcp=0.9, th_ip=0.8, **_hx5_fingers(1.6, 1.5, 1.3)),
+        "power_ready": _hx5(th_swing=0.2, th_opp=-1.3, **_hx5_fingers(0.3, 0.2, 0.1)),
+        "pinch_ready": _hx5(th_swing=0.2, th_opp=-1.3, **_hx5_fingers(0.3, 0.2, 0.1, ("if",))),
+        "tripod_ready": _hx5(th_swing=0.2, th_opp=-1.3, **_hx5_fingers(0.3, 0.2, 0.1, ("if", "mf"))),
+    },
 }
 
 # grasp types: which fingers close, and the fully closed targets they are driven toward (contact stops them; the
@@ -305,6 +346,25 @@ GRASPS = {
             th_ipl=0.8,
         ),
     },
+}
+GRASPS["hx5"] = {
+    "power": _hx5(th_swing=0.4, th_opp=-1.3, th_mcp=1.1, th_ip=0.9, **_hx5_fingers(1.7, 1.3, 1.1)),
+    "pinch": _hx5(
+        th_swing=0.4,
+        th_opp=-1.3,
+        th_mcp=0.9,
+        th_ip=0.7,
+        **_hx5_fingers(1.3, 0.9, 0.7, ("if",)),
+        **_hx5_fingers(1.6, 1.5, 1.3, ("mf", "rf", "lf")),
+    ),
+    "tripod": _hx5(
+        th_swing=0.4,
+        th_opp=-1.3,
+        th_mcp=0.9,
+        th_ip=0.7,
+        **_hx5_fingers(1.3, 0.9, 0.7, ("if", "mf")),
+        **_hx5_fingers(1.6, 1.5, 1.3, ("rf", "lf")),
+    ),
 }
 GRASP_FINGERS = {
     "power": ["thumb", "index", "middle", "ring", "little"],
@@ -441,6 +501,44 @@ _task(
     start=dict(flange=(0.05, 0.0, 0.60), rpy=(180, 0, 0), posture="flat", cube_on_palm=(0.12, 0.0)),
 )
 
+_task(
+    "hx5-lift-ball",
+    hand="hx5",
+    kind="lift",
+    max_steps=700,
+    lift=0.15,
+    # the reference solution's grasp point: the HX5-D20's thumb opposes from beside the palm's heel, so the palm point
+    # goes 3.5 cm to the ball's right (-y), 0.6 cm ahead and 2.5 cm higher than a centred grasp
+    grasp_dx=0.006,
+    grasp_dy=-0.035,
+    grasp_dz=0.025,
+    objects=[
+        dict(kind="stand", name="stand", pos=(0.12, 0.04), r=0.022),
+        dict(kind="ball", name="ball", pos=(0.12, 0.04), r=0.033, mass=0.06, rgba=[0.8, 0.9, 0.2, 1]),
+    ],
+    start=dict(flange=(-0.05, 0.0, 0.70), rpy=(0, 0, 0), posture="open"),
+)
+_task(
+    "hx5-press-buttons",
+    hand="hx5",
+    kind="buttons",
+    max_steps=800,
+    sequence=["green", "blue", "green"],
+    objects=[
+        dict(
+            kind="buttons",
+            pos=(0.16, 0.0),
+            panel_h=0.06,
+            colors=[("red", [0.85, 0.12, 0.12, 1]), ("green", [0.15, 0.7, 0.2, 1]), ("blue", [0.15, 0.3, 0.9, 1])],
+            spacing=0.07,
+            r=0.016,
+            travel=0.012,
+            stiffness=150.0,
+        )
+    ],
+    start=dict(flange=(-0.05, 0.0, 0.72), rpy=(0, 0, 0), posture="open"),
+)
+
 BUTTON_CLICK = 0.008  # m of travel that counts as a click; released below half of it
 
 
@@ -464,7 +562,7 @@ class DexHandBackend(EmbodiedBackend):
         self.task_id, self.task = env, TASKS[env]
         self.hand = self.task["hand"]
         self.H = HANDS[self.hand]
-        self.act_names = SHADOW_ACTS if self.hand == "shadow" else LEAP_ACTS
+        self.act_names = ACTS[self.hand]
         self.camera = spec.get("camera", "front")
         self.decl = self._declare()
 
@@ -1273,7 +1371,7 @@ def _solve_lift(o: Oracle, t: dict) -> None:
     b = o.state()["objects"]["ball"]["pos"]
     o.skill("pose", "power_ready")
     o.skill("move_to", b[0], b[1], b[2] + 0.1)
-    o.skill("move_to", b[0], b[1], b[2] + 0.011)
+    o.skill("move_to", b[0] + t.get("grasp_dx", 0.0), b[1] + t.get("grasp_dy", 0.0), b[2] + t.get("grasp_dz", 0.011))
     o.skill("grasp", "power")
     o.skill("move_by", 0, 0, 0.20)
     o.skill("wait", 1.0)

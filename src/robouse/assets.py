@@ -3,7 +3,8 @@
 The menagerie, roboharm and drone suites use the Panda, ALOHA and Skydio X2 models: a checkout of the repository has
 them in assets/menagerie; an installed wheel does not ship them (about 43 MB). The embodiment suites (quadruped,
 humanoid, mobile-manip, dexhand, crazyflie) use 14 more robots (assets/menagerie/embodiments.json) that are never
-stored in git. `robouse fetch-assets` downloads the files listed in the provenance manifests from the pinned MuJoCo
+stored in git, and the dexhand suite also ROBOTIS's HX5-D20 hand (assets/robotis/hx5_d20.json, from ROBOTIS's own
+repository, Apache-2.0). `robouse fetch-assets` downloads the files listed in the provenance manifests from the pinned MuJoCo
 Menagerie commit, checks each SHA-256, and stores them in <cache>/menagerie: by default the base robots, with `--all`
 every robot, with `--robot NAME` only the named ones. $ROBOUSE_MENAGERIE_ASSETS overrides the location.
 """
@@ -19,6 +20,9 @@ from .lib.download import fetch as fetch_file
 
 HERE = Path(__file__).resolve().parent
 EMBODIMENTS_MANIFEST = "embodiments.json"
+ROBOTIS_MANIFEST = "robotis_hx5_d20.json"  # the packaged name; assets/robotis/hx5_d20.json in a checkout
+# manifests of the embodiment suites' robots, fetched only with --all or --robot
+OPTIONAL = (EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST, "hx5_d20.json")
 
 
 def cache() -> Path:
@@ -59,9 +63,14 @@ def manifests() -> list[Path]:
     """The Menagerie manifests (the packaged copies in an installed wheel, else the checkout's)."""
     shipped = HERE / "assets_provenance"
     if shipped.is_dir():
-        return [shipped / n for n in ("menagerie.json", "skydio_x2.json", EMBODIMENTS_MANIFEST)]
+        return [shipped / n for n in ("menagerie.json", "skydio_x2.json", EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST)]
     root = _checkout_root()
-    return [root / "provenance.json", root / "skydio_x2" / "PROVENANCE.json", root / EMBODIMENTS_MANIFEST]
+    return [
+        root / "provenance.json",
+        root / "skydio_x2" / "PROVENANCE.json",
+        root / EMBODIMENTS_MANIFEST,
+        root.parent / "robotis" / "hx5_d20.json",
+    ]
 
 
 def robot_names() -> list[str]:
@@ -74,7 +83,7 @@ def download_bytes(everything: bool = False) -> int:
     manifests' byte counts)."""
     total = 0
     for m in manifests():
-        if not everything and m.name == EMBODIMENTS_MANIFEST:
+        if not everything and m.name in OPTIONAL:
             continue
         try:
             total += sum(int(f.get("bytes", 0)) for f in json.loads(m.read_text())["files"])
@@ -104,7 +113,7 @@ def fetch(
             raise ValueError(f"no robot {', '.join(unknown)} in the manifests; robots: {', '.join(robot_names())}")
     n_new = 0
     for m in manifests():
-        if not (robots or everything) and m.name == EMBODIMENTS_MANIFEST:
+        if not (robots or everything) and m.name in OPTIONAL:
             continue
         for f in json.loads(m.read_text())["files"]:
             if robots and f["path"].split("/", 1)[0] not in robots:

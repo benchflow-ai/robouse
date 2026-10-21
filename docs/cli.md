@@ -336,7 +336,7 @@ options:
                  or $ROBOUSE_CHEMLAB_ASSETS)
   --robot ROBOT  only this Menagerie robot folder (repeatable), e.g.
                  unitree_go2
-  --all          every robot the bundled suites use (about 390 MB)
+  --all          every robot the bundled suites use (about 400 MB)
   --chemlab      instead, the ChemLab-Assets instrument files the chemlab
                  suite uses (about 11 MB; models, contracts and data under CC
                  BY-NC 4.0, for non-commercial use only)

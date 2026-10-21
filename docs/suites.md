@@ -36,7 +36,7 @@ img/suites/one-demo.webp | `one-demo` (a demonstration frame)
 ```
 
 <!-- suites-table -->
-robouse 0.6.0 bundles 790 tasks in 34 suites. "Needs" is what a suite needs beyond `pip install 'robouse[sim]'`, if anything. The last two columns count the tasks that scored 1 with the reference solution and with the no-op control.
+robouse 0.6.0 bundles 792 tasks in 34 suites. "Needs" is what a suite needs beyond `pip install 'robouse[sim]'`, if anything. The last two columns count the tasks that scored 1 with the reference solution and with the no-op control.
 
 | Suite | Tasks | Needs | Reference solution | No-op control |
 |---|---|---|---|---|
@@ -45,7 +45,7 @@ robouse 0.6.0 bundles 790 tasks in 34 suites. "Needs" is what a suite needs beyo
 | `composed`<br>Composed from components | 48 | `robouse fetch-assets --all` | 48/48 | 0/48 |
 | `crazyflie`<br>Crazyflie 2, one or three | 7 | `robouse fetch-assets --all` | 7/7 | 0/7 |
 | `cubepick`<br>Cube pick-and-reach | 5 |  | 5/5 | 0/5 |
-| `dexhand`<br>Shadow Hand, LEAP Hand | 7 | `robouse fetch-assets --all` | 7/7 | 0/7 |
+| `dexhand`<br>Shadow Hand, LEAP Hand, ROBOTIS HX5-D20 | 9 | `robouse fetch-assets --all` | 9/9 | 0/9 |
 | `dexjoco`<br>DexJoCo: Allegro hand tool use | 14 | own virtualenv (below) | 14/14 | 0/14 |
 | `dmcontrol`<br>dm_control: Control Suite, Jaco arm | 17 | own virtualenv (below) | 17/17 | 0/17 |
 | `driving`<br>MetaDrive car in traffic | 7 | own virtualenv (below) | 7/7 | 0/7 |
@@ -76,7 +76,7 @@ robouse 0.6.0 bundles 790 tasks in 34 suites. "Needs" is what a suite needs beyo
 | `yam`<br>Dual YAM: Dream Labs' station scene | 9 | own virtualenv (below) | 9/9 | 0/9 |
 <!-- /suites-table -->
 
-`robouse fetch-assets` downloads the MuJoCo Menagerie robot models for `menagerie`, `roboharm` and `drone`; `robouse fetch-assets --all` adds every robot the other suites and composed tasks use (about 390 MB). Each file is checked by SHA-256. Results of models on these suites: [Runs](https://robouse.ai/runs/).
+`robouse fetch-assets` downloads the MuJoCo Menagerie robot models for `menagerie`, `roboharm` and `drone`; `robouse fetch-assets --all` adds every robot the other suites and composed tasks use (about 400 MB). Each file is checked by SHA-256. Results of models on these suites: [Runs](https://robouse.ai/runs/).
 
 ## LIBERO
 
@@ -154,6 +154,7 @@ The Menagerie-based suites use MuJoCo Menagerie commit `8161bba2`; the models ar
 | Hello Robot Stretch 3, PAL TIAGo, Google Robot | Apache-2.0 | mobile-manip |
 | Shadow Hand E3M5 | Apache-2.0 | dexhand |
 | LEAP Hand, Bitcraze Crazyflie 2 | MIT | dexhand, crazyflie |
+| ROBOTIS HX5-D20 (from ROBOTIS's `robotis_hand` repository, commit `6f9e22a5`, not Menagerie) | Apache-2.0 | dexhand |
 
 The driving suite uses MetaDrive 0.4.3 (Apache-2.0).
 

@@ -142,12 +142,13 @@ exclude = ["**/__pycache__", "**/*.pyc"]
 "assets/menagerie/provenance.json" = "robouse/assets_provenance/menagerie.json"
 "assets/menagerie/skydio_x2/PROVENANCE.json" = "robouse/assets_provenance/skydio_x2.json"
 "assets/menagerie/embodiments.json" = "robouse/assets_provenance/embodiments.json"
+"assets/robotis/hx5_d20.json" = "robouse/assets_provenance/robotis_hx5_d20.json"
 "assets/humanoidbench/provenance.json" = "robouse/assets_provenance/humanoidbench.json"
 "assets/robocasa/provenance.json" = "robouse/assets_provenance/robocasa.json"
 "assets/chemlab/provenance.json" = "robouse/assets_provenance/chemlab.json"
 
 [tool.hatch.build.targets.sdist]
-include = ["/src/robouse", "/tasks", "/components", "/assets/menagerie/provenance.json", "/assets/menagerie/skydio_x2/PROVENANCE.json", "/assets/menagerie/embodiments.json", "/assets/humanoidbench/provenance.json", "/assets/robocasa/provenance.json", "/assets/chemlab/provenance.json", "/README.md", "/LICENSE", "/NOTICE", "/licenses", "/pyproject.toml"]
+include = ["/src/robouse", "/tasks", "/components", "/assets/menagerie/provenance.json", "/assets/menagerie/skydio_x2/PROVENANCE.json", "/assets/menagerie/embodiments.json", "/assets/robotis/hx5_d20.json", "/assets/humanoidbench/provenance.json", "/assets/robocasa/provenance.json", "/assets/chemlab/provenance.json", "/README.md", "/LICENSE", "/NOTICE", "/licenses", "/pyproject.toml"]
 exclude = ["**/__pycache__", "**/*.pyc", "**/.DS_Store", "/tasks/behavior"]
 
 [tool.ruff]

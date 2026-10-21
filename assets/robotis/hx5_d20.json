@@ -1,0 +1,98 @@
+{
+ "repository": "https://github.com/ROBOTIS-GIT/robotis_hand",
+ "commit": "6f9e22a5fc86fe2f0947a44405e52e776c8c08c8",
+ "note": "ROBOTIS's HX5-D20 hand (right, rev2) for the dexhand suite. Not stored in git; `robouse fetch-assets --all` downloads it into ~/.cache/robouse/menagerie/robotis_hx5_d20. Written by tools/assets/pin_robotis_hand.py.",
+ "robots": {
+  "robotis_hx5_d20": {
+   "suite": "dexhand",
+   "license": "Apache-2.0",
+   "license_file": "robotis_hx5_d20/LICENSE"
+  }
+ },
+ "files": [
+  {
+   "path": "robotis_hx5_d20/LICENSE",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/LICENSE",
+   "bytes": 11357,
+   "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+  },
+  {
+   "path": "robotis_hx5_d20/README.md",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/README.md",
+   "bytes": 1063,
+   "sha256": "039ba89e4abd6ce00ed5b9227be6fd1271754dc73228cc1ca7c57903bc2cc35e"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/mujoco/hx5_d20_rev2/hx5_d20_right.xml",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/mujoco/hx5_d20_rev2/hx5_d20_right.xml",
+   "bytes": 17707,
+   "sha256": "e6de4c63ff62d3e1ba2dac7b32bc0bb290714f051a3a17b347fe8df4660a2252"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/collision/hx5_d20_base_collision_00.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/collision/hx5_d20_base_collision_00.stl",
+   "bytes": 11184,
+   "sha256": "35ebcc3aee70daacd8d21b22cd539a5abfc93a0ed98c29a61e2dd72c9376a80b"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/collision/hx5_d20_base_collision_01.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/collision/hx5_d20_base_collision_01.stl",
+   "bytes": 34084,
+   "sha256": "838b402e4acc9e980d8429fae3cefeae0d9949fd5ddcdfee879f4287087ec8a1"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_base_unit.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_base_unit.stl",
+   "bytes": 2107884,
+   "sha256": "4ddee90cb3dd3a1c74da46b8e201715dc3061beb19e293ef0d87eed5547a2fa2"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_dip.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_dip.stl",
+   "bytes": 456084,
+   "sha256": "e582ee3126bd9b6e7c3ca1a8ac415be56c2395c70eeb6f6e339c23feccf09495"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_mcp.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_mcp.stl",
+   "bytes": 493284,
+   "sha256": "b3913fed373aae024fad967b4ce591d7eb0ea589f36b49bcc1be17120546e07c"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_pip.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_pip.stl",
+   "bytes": 456084,
+   "sha256": "d7f9d330496c0f32e066248bf8a81b1da8b22a250b710bbf0fc9738ff16dd307"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_tip.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_finger_tip.stl",
+   "bytes": 225884,
+   "sha256": "e23344be5dc686cdfcc9c3dfc3d187f0715bdbe971e655642e3cc8ff00ff6030"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_ip.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_ip.stl",
+   "bytes": 866184,
+   "sha256": "fa2759b28c8fd8fd3ef3fbeb6e280e6bb23f0cdcbfd6f0463261a0babad31b79"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_mcp.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_mcp.stl",
+   "bytes": 948484,
+   "sha256": "b050d0c2c8a3f7cac6e03dd8be2aa95cc3418617ebb686d61e672b39cb25cc51"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_mcp2.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_mcp2.stl",
+   "bytes": 480684,
+   "sha256": "72d2ae2396f7edffab447cb90b81a7ba52913df6196c74d20fd49851c370a119"
+  },
+  {
+   "path": "robotis_hx5_d20/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_tip.stl",
+   "url": "https://raw.githubusercontent.com/ROBOTIS-GIT/robotis_hand/6f9e22a5fc86fe2f0947a44405e52e776c8c08c8/robotis_hand_description/meshes/hx5_d20_rev2/hx5_d20_right/hx5_d20_thumb_tip.stl",
+   "bytes": 873184,
+   "sha256": "c94412c121cfdd6a98d0857010cd0d603415d832f05dbf369347f74f97b515d5"
+  }
+ ]
+}

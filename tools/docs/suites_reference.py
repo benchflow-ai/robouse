@@ -71,7 +71,7 @@ FROM = {
     "quadruped": "Unitree Go2 and Go1, Spot, ANYmal C",
     "humanoid": "Unitree G1 and H1, Apollo, Booster T1",
     "mobile-manip": "Stretch 3, TIAGo, Google Robot",
-    "dexhand": "Shadow Hand, LEAP Hand",
+    "dexhand": "Shadow Hand, LEAP Hand, ROBOTIS HX5-D20",
     "crazyflie": "Crazyflie 2, one or three",
     "composed": "Composed from components",
     "dexjoco": "DexJoCo: Allegro hand tool use",

@@ -1,5 +1,5 @@
 """Dexhand suite -> Robo Use tasks (suite "dexhand"): a Shadow Dexterous Hand (Apache-2.0) or a LEAP Hand (MIT) from
-MuJoCo Menagerie, hanging from a 6-axis positioner above a table, doing dexterous manipulation: reorienting a cube by
+MuJoCo Menagerie, or ROBOTIS's HX5-D20 (Apache-2.0, ROBOTIS's own MuJoCo model), hanging from a 6-axis positioner above a table, doing dexterous manipulation: reorienting a cube by
 regrasp, pouring from a cup, turning a hand wheel, lifting a ball, moving a marker between holders, pressing buttons in
 order and flipping a cube over in the palm with the fingers. Backend, scene, controllers, skills, judge and reference
 solutions: src/robouse/backends/dexhand.py (+ dexhand_sim/scene.py).
@@ -13,7 +13,7 @@ import argparse
 import shutil
 from pathlib import Path
 
-from robouse.backends.dexhand.backend import BUTTON_CLICK, CONTROL_DT, LEAP_ACTS, SHADOW_ACTS, TASKS, DexHandBackend
+from robouse.backends.dexhand.backend import ACTS, BUTTON_CLICK, CONTROL_DT, TASKS, DexHandBackend
 from robouse.backends.dexhand.sim.scene import HANDS, TABLE_C, TABLE_HALF, TABLE_Z
 from robouse.backends.embodied import write_embodied_task
 from robouse.core.prompts import EMBODIED_USAGE
@@ -28,6 +28,13 @@ HAND_TEXT = {
         "a right LEAP Hand (MuJoCo Menagerie model `leap_hand`, MIT: 16 joints, each driven by its own position actuator; "
         "index, middle and ring fingers have `mcp`, `rot` (side-to-side), `pip` and `dip` joints, the thumb has `cmc`, `axl`, "
         "`mcp` and `ipl`)"
+    ),
+    "hx5": (
+        "a right ROBOTIS HX5-D20 hand (one of ROBOTIS's open-source HX Friends designs; ROBOTIS's own MuJoCo model from its "
+        "`robotis_hand` repository, Apache-2.0: 20 joints, each a DYNAMIXEL XM335 position servo. `finger_r_joint1` to `4` "
+        "are the thumb (a swing in the palm's plane, opposition, then two flexions), `5` to `8` the index finger, `9` to "
+        "`12` the middle, `13` to `16` the ring and `17` to `20` the little finger (each: spread, then three flexions). The "
+        "thumb sits beside the heel of the palm and, opposed, points down past it)"
     ),
 }
 
@@ -132,6 +139,34 @@ TEXT = {
             "other clicks; `progress.clicks` lists the clicks so far"
         ),
     ),
+    "hx5-lift-ball": dict(
+        title="Lift the ball (HX5-D20)",
+        difficulty="easy",
+        category="grasping",
+        goal=(
+            "A 6.6 cm ball (60 g) rests in a small ring stand on the table at about (0.12, 0.04). Pick it up and hold it at "
+            "least 15 cm above the table top."
+        ),
+        success=(
+            "the ball's centre is at least 0.15 m above the table top (z >= 0.55), the ball touches the hand and not the "
+            "table, and it moves slower than 5 cm/s"
+        ),
+    ),
+    "hx5-press-buttons": dict(
+        title="Press the buttons in order (HX5-D20)",
+        difficulty="medium",
+        category="dexterous-manipulation",
+        goal=(
+            "A panel on the table at (0.16, 0.0) carries three spring-loaded push buttons (radius 1.6 cm, 12 mm travel): red at "
+            "y = -0.07, green at y = 0.0 and blue at y = 0.07 (`landmarks.buttons`). Press green, then blue, then green again. "
+            "Never press red."
+        ),
+        success=(
+            f"the recorded clicks are exactly green, blue, green in that order (a click is a button pushed down at least "
+            f"{BUTTON_CLICK * 1000:.0f} mm; it must come back up past half of that before it can click again), with no "
+            "other clicks; `progress.clicks` lists the clicks so far"
+        ),
+    ),
     "leap-cube-in-hand": dict(
         title="Flip the cube in the palm (in-hand)",
         difficulty="medium",
@@ -155,7 +190,7 @@ TEXT = {
 
 
 def controls(hand: str) -> str:
-    acts = SHADOW_ACTS if hand == "shadow" else LEAP_ACTS
+    acts = ACTS[hand]
     n = len(acts)
     return (
         "**Controls.** `robo act` takes {n6} numbers, each in [-1, 1], applied for one 40 ms step (`--repeat N` holds them for "
@@ -235,11 +270,19 @@ def main() -> None:
             robot=HANDS[hand]["robot"],
             category=x["category"],
             difficulty=x["difficulty"],
-            tags=["dexterous-hand", hand, "menagerie", "mujoco"],
+            tags=["dexterous-hand", hand, "robotis" if hand == "hx5" else "menagerie", "mujoco"],
             max_steps=t["max_steps"],
             camera=be.camera,
             cameras=be.decl.cameras,
             oracle_note="scripted with the hand's skills (grasp, move, rotate), reading only the public observation.",
+            extra_metadata=(
+                {
+                    "source_benchmark": "robouse original (dexhand suite; ROBOTIS HX5-D20 (right) from ROBOTIS's "
+                    "robotis_hand repository)"
+                }
+                if hand == "hx5"
+                else None
+            ),
         )
     print(f"wrote {len(TASKS)} tasks to {out}")
 

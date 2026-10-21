@@ -2,6 +2,12 @@
 
 Notable changes to the `robouse` package, newest first. Versions follow [semantic versioning](https://semver.org/); while the version is below 1.0, a minor version can change interfaces. Dates are PyPI release dates (UTC).
 
+## Unreleased
+
+### Added
+
+- ROBOTIS's HX5-D20 hand in the `dexhand` suite, with two tasks, `hx5-lift-ball` and `hx5-press-buttons` (the LEAP Hand tasks' scenes; reference solution 2/2, no-op 0/2). The HX5-D20 is one of ROBOTIS's open-source HX Friends designs: 20 joints, each a DYNAMIXEL XM335 position servo, from ROBOTIS's own MuJoCo model (robotis_hand, Apache-2.0), attached unchanged. `robouse fetch-assets --all` (or `--robot robotis_hx5_d20`) downloads it from a pinned commit of ROBOTIS's repository (14 files, about 7 MB, each checked by SHA-256; `assets/robotis/hx5_d20.json`). The lift's reference solution grasps with the ball off the palm's centre line, since this hand's thumb opposes from beside the heel of the palm (`grasp_dx`, `grasp_dy` and `grasp_dz` in a lift task).
+
 ## 0.6.0 (2026-10-21)
 
 New content: the `libero-pro` and `one-demo` suites, the `chemlab` suite (from a checkout), the `jev`, `gemini-cli`, `kinex`, `aspire` and `aspire-codex` harnesses, and Gemini 4 Argon and Elorian's Glimpse as models. Isolation and scoring fixes: the model gateway's key opens only its model routes; the sandbox denies LIBERO's task data, `.env` files and the asset folders later trials load; and only a harness's own final error event makes a trial a harness failure.
