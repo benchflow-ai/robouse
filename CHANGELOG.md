@@ -2,12 +2,21 @@
 
 Notable changes to the `robouse` package, newest first. Versions follow [semantic versioning](https://semver.org/); while the version is below 1.0, a minor version can change interfaces. Dates are PyPI release dates (UTC).
 
-## Unreleased
+## 0.6.1 (2026-10-21)
+
+NVIDIA's Flora models label trial recordings (`robouse flora export` and `import`). The docs give the first runs on real models of Gemini CLI, Kinex, Jev and the `chemlab` suite, and a limitation of Gemini CLI that those runs found.
 
 ### Added
 
 - `robouse flora export` and `robouse flora import`: NVIDIA's Flora models label trial recordings. Flora-Rewarder gives an outcome score from 1 to 5 and a failure, suboptimal or normal label for every half second, with reasons; Flora-TempSeg and Flora-Captioner give timestamped captions. The models and NVIDIA's inference scripts are under the NVIDIA License (research or evaluation use only), so Robo Use neither includes nor downloads them: `export` writes the input files of NVIDIA's scripts for finished trials (each trial's recording, the Rewarder's jobs with the task's instruction, and the captioning pipeline's jobs), the scripts run unmodified on a GPU machine with 80 GB, and `import` writes each trial's `grader/flora.json`, with the agent's steps during each labelled stretch, and prints how often Flora's outcome agrees with the simulator's verdict ([Annotate trials with Flora](docs/flora.md)). `--instructions FILE` gives named tasks the instruction Flora sees (for descriptions that also describe the agent's setup), and `grader/flora.json` keeps each dense clip's own labels beside the stitched ones. On an H100, over 21 trials of claude-opus-5-5, Flora's outcome agreed with the simulator on 11 (the simulator solved 19, Flora gave 9 of those a 5); the docs page has the scores, Flora's reasons, the dense labels and captions, and what to set without a CUDA toolkit (`VLLM_USE_FLASHINFER_SAMPLER=0`).
 - `robouse report` metrics `flora_agree` (the share of trials where Flora's outcome agrees with the simulator) and `flora_progress` (Flora's progress estimate), from `grader/flora.json`.
+
+### Documentation
+
+- Supported and Run agents give the first trials on real models of harnesses that had run only against local stand-ins. They ran on 2026-10-21 with Robo Use 0.6.0 on Linux x86_64 without the sandbox, one try per task, and every trial was audited. Gemini 4 Argon scored 1 on all five tasks Gemini CLI 0.64.0 ran and on the one Claude Code ran through the model gateway ($1.18 in all). Kinex 1.0.0 on `gemini/gemini-4-argon` scored 1 on all four of its tasks ($0.40). Jev 1.13.0 ran the 40 `nav` tasks and scored 1 on 13; the other 27 ran out of their step budget ($0.76). One try per task is not a measured success rate.
+- The `chemlab` suite's page gives its first runs with a model: Claude Code with `claude-opus-5-5` scored 1 on all 7 tasks, one try each, without the sandbox.
+- Run agents gives a limitation of Gemini CLI 0.64.0 in headless mode, found in those runs: it treats what its shell commands print as untrusted, and refuses a later command with an argument that starts with `-` and appeared in that output, such as a negative coordinate copied from `robo observe` or a flag `robo --help` printed. The agent sees only "Tool execution denied by policy." In the runs, agents went on with the commands written another way. Robo Use's prompt does not mention the check.
+- Supported lists `gemini/gemini-4-argon` for the `kinex` harness, and says that Flora's models have run on an H100.
 
 ## 0.6.0 (2026-10-21)
 

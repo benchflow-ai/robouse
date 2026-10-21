@@ -218,7 +218,7 @@ PAGES: list[tuple[str, str, str, str, str]] = [
         "docs/supported.md",
         "supported",
         "Supported",
-        "The models, harnesses, platforms, isolation modes and formats Robo Use 0.6.0 supports, and what each needs.",
+        "The models, harnesses, platforms, isolation modes and formats Robo Use 0.6.1 supports, and what each needs.",
     ),
     (
         "Get started",
