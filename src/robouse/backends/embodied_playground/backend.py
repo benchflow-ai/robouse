@@ -4,7 +4,7 @@ Embodied Playground (github.com/Winniechen2002/Embodied-Playground; HKU, Sharpa,
 long-horizon agentic robotics benchmark; its Launcher suite runs on its own MuJoCo package. That package is downloaded at
 run time from a pinned commit (source.py, `robouse fetch-assets --embodied-playground`) and runs, unmodified, in its own
 virtualenv (Python 3.11 with Embodied Playground's pins: MuJoCo 3.3.7, numpy 1.26.4, gymnasium 1.2.1), as a subprocess
-(worker.py); this module is the bridge. Setup: docs/suites/embodied-playground.md.
+(worker.py); this module is the bridge. Setup: the suites page of the docs (config.SUITES_DOCS).
 
 The scene: a power arm (`left`, base at (0, -0.45, 0)) and an aiming arm (`right`, base at (0.15, 0.60, 0)) stand by a
 launcher whose carriage slides on rails inclined 30 degrees, held by a spring; a handwheel sets its elevation. The
@@ -42,7 +42,7 @@ from ..base import ActionSpec, Backend, G, StepInfo, groups_from_layout
 from . import source
 
 WORKER = Path(__file__).with_name("worker.py")
-SETUP = "docs/suites/embodied-playground.md"
+SETUP = config.SUITES_DOCS
 SIDES = ("left", "right")
 NATIVE_W, NATIVE_H = 640, 400
 PUBLIC_FIELDS = (
