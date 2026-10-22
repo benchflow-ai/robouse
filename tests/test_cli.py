@@ -10,7 +10,7 @@ import pytest
 from robouse.cli import main, parser
 
 ROOT = Path(__file__).resolve().parents[1]
-VISIBLE = ["run", "run-many", "tasks", "components", "fetch-assets", "report", "summarize", "doctor"]
+VISIBLE = ["run", "run-many", "tasks", "components", "fetch-assets", "report", "flora", "summarize", "doctor"]
 HIDDEN = ["serve", "grade", "estop", "operator", "hil-check", "robots", "export"]
 COMMANDS = [c for c in VISIBLE + HIDDEN if c not in ("tasks", "components")]
 

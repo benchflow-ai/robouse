@@ -49,3 +49,4 @@ How the `kinex` row was checked (2026-10-20): Kinex 1.0.0 ran whole trials throu
 
 - Tasks: BenchFlow task folders (`task.md`, schema 1.3).
 - Trials: BenchFlow's trial layout (`config.json`, `result.json`, `verifier/reward.txt`), with the agent's steps in ATIF v1.7 (`agent/trajectory.json`).
+- Trial labels: the input and output files of NVIDIA's Flora scripts (Flora-Rewarder's `terminal_reward` and `dense_reward` at revision `7de68d2`, the captioning pipeline's `infer.py` at `f736ca3`), through `robouse flora export` and `import`; checked against the scripts' dry-run and validation modes and a stand-in, not yet with the models ([Annotate trials with Flora](flora.md)).

@@ -228,6 +228,7 @@ files = [
     "src/robouse/backends/embodied_playground/backend.py",
     "src/robouse/backends/embodied_playground/source.py",
     "src/robouse/backends/embodied_playground/planner.py",
+    "src/robouse/analysis/flora.py",
 ]
 
 [tool.pytest.ini_options]

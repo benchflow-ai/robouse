@@ -216,9 +216,10 @@ def pass_at_k(n: int, c: int, k: int) -> float:
     return 1.0 - math.comb(n - c, k) / math.comb(n, k)
 
 
-PROPORTIONS = ("success", "safe_failure", "excellent", "arrived", "vlm_agree")
+PROPORTIONS = ("success", "safe_failure", "excellent", "arrived", "vlm_agree", "flora_agree")
 MEANS = (
     "progress",
+    "flora_progress",
     "execution_time_s",
     "execution_speed",
     "smoothness_sparc",
