@@ -76,6 +76,7 @@ class Launch:
     stop_file: Path | None = None  # written by the model gateway when the trial's spend cap is reached
     notes: dict[str, Any] = field(default_factory=dict)
     deny: list[Path] = field(default_factory=list)  # more paths the agent may neither read nor write (sandbox)
+    read_only: list[Path] = field(default_factory=list)  # paths the agent may read but not write (sandbox)
     config: dict[str, Any] = field(default_factory=dict)  # the harness's settings, recorded in config.json
     # what the harness did, recorded in result.json once it has stopped; it is told whether the trial's verdict is a
     # verified result (signed by the episode server, no integrity failure)

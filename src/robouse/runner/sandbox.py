@@ -23,7 +23,8 @@ On macOS it also cannot start `open`, `osascript`, `shortcuts` or `security` (`M
 which act outside the sandbox.
 Program folders inside a denied folder that a harness runs from (`HOME_PROGRAMS`, e.g. Codex's standalone install in
 ~/.codex/packages, and `CACHE_PROGRAMS`, e.g. the `dream` client's virtualenv and Kinex's Python) stay readable, never
-writable, and so does the runner's Python (`interpreters`), which the episode server and the verifier run on. The agent
+writable, and so does the runner's Python (`interpreters`), which the episode server and the verifier run on, and every
+path a harness names as read-only (`Launch.read_only`, e.g. the Kinex install every Kinex trial runs from). The agent
 keeps its own workspace, the episode socket and the network (model APIs). On macOS, TCP connections to this machine are refused except to `local_ports` (a harness's own local
 proxy); on Linux the agent runs in its own PID namespace, so it cannot see the episode server's process. Set
 ROBOUSE_SANDBOX=0 to run without a sandbox (unsafe: the agent can then read the reference solution).
@@ -222,6 +223,15 @@ def _inside(path: str, roots: list[str]) -> bool:
     return any(path == r or path.startswith(r.rstrip("/") + "/") for r in roots)
 
 
+def _read_only(paths: Iterable[str | Path], workspace: str | Path | None, denied: list[str]) -> list[str]:
+    """A harness's read-only paths (`Launch.read_only`) that exist, without one that holds the workspace (which stays
+    writable) or lies in a denied folder (which stays hidden)."""
+    ws = _real([workspace]) if workspace else []
+    return [
+        p for p in _real(paths) if os.path.exists(p) and not _inside(p, denied) and not any(_inside(w, [p]) for w in ws)
+    ]
+
+
 def _ancestors(path: str) -> list[str]:
     """The folders above `path`, up to and without the root."""
     out, p = [], os.path.dirname(path)
@@ -250,6 +260,7 @@ def sandbox_profile(
     deny: list[Path] | None = None,
     own: list[str] | None = None,
     socket: str | None = None,
+    read_only: list[Path] | None = None,
 ) -> str:
     """The macOS Seatbelt profile: everything is allowed except the module docstring's list. Later rules win. A file
     rule does not stop a connection to a Unix socket, so each denied path also gets a network rule; other trials'
@@ -270,6 +281,7 @@ def sandbox_profile(
     rules += "".join(f'(allow file-read* (subpath "{p}"))' for p in _programs())
     for d in [*_real([workspace] if workspace else []), *_real(own or [])]:
         rules += f'(allow file-read* file-write* (subpath "{d}"))'
+    rules += "".join(f'(deny file-write* (subpath "{p}"))' for p in _read_only(read_only or [], workspace, denied))
     # the folders above a home or program folder that sits inside a denied one: their metadata (stat), not their
     # contents, so a program can resolve its own path there (Codex canonicalizes CODEX_HOME, inside robouse's cache)
     above = sorted({a for p in [*_programs(), *_real(own or [])] for a in _ancestors(p)})
@@ -282,10 +294,13 @@ def sandbox_profile(
     return "(version 1)(allow default)" + rules
 
 
-def bwrap_args(workspace: Path, socket: str, deny: list[Path], own: list[str] | None = None) -> list[str]:
+def bwrap_args(
+    workspace: Path, socket: str, deny: list[Path], own: list[str] | None = None, read_only: list[Path] | None = None
+) -> list[str]:
     """The bubblewrap command prefix on Linux: the host file system as it is, a fresh /tmp holding only this trial's
     workspace and socket, an empty folder over every denied folder and /dev/null over every denied file, the agent's
-    own homes and the program folders bound back in, and a PID namespace of its own."""
+    own homes and the program folders bound back in, the harness's read-only paths bound read-only, and a PID namespace
+    of its own."""
     args = [
         "bwrap",
         "--die-with-parent",
@@ -316,6 +331,8 @@ def bwrap_args(workspace: Path, socket: str, deny: list[Path], own: list[str] | 
     for h in _real(own or []):
         if os.path.isdir(h) and not h.startswith(str(workspace)):
             args += ["--bind", h, h]
+    for p in _read_only(read_only or [], workspace, _denied(deny)):
+        args += ["--ro-bind", p, p]
     return [*args, "--chdir", str(workspace)]
 
 
@@ -336,16 +353,18 @@ def wrap(
     deny: list[Path],
     local_ports: tuple[int, ...] = (),
     own: list[str] | None = None,
+    read_only: list[Path] | None = None,
 ) -> tuple[list[str], str]:
     """The agent command inside this platform's sandbox, and the sandbox's name. `own`: the agent's own config homes
-    (`own_homes`). Raises SandboxUnavailable when there is none (Linux without bubblewrap) unless ROBOUSE_SANDBOX=0."""
+    (`own_homes`); `read_only`: paths the agent may read but not write (`Launch.read_only`). Raises SandboxUnavailable
+    when there is none (Linux without bubblewrap) unless ROBOUSE_SANDBOX=0."""
     if not config.flag("ROBOUSE_SANDBOX", default=True):
         return cmd, "none"
     if sys.platform == "darwin":
-        profile = sandbox_profile(workspace, local_ports, deny, own, socket)
+        profile = sandbox_profile(workspace, local_ports, deny, own, socket, read_only)
         return ["sandbox-exec", "-p", profile, *cmd], "macos-seatbelt"
     if sys.platform.startswith("linux") and bwrap_works():
-        return [*bwrap_args(workspace, socket, deny, own), *cmd], "linux-bubblewrap"
+        return [*bwrap_args(workspace, socket, deny, own, read_only), *cmd], "linux-bubblewrap"
     raise SandboxUnavailable(
         "no sandbox for the agent on this machine: install bubblewrap (`bwrap`; on Ubuntu 24.04 also an AppArmor "
         "profile that allows it user namespaces), or set ROBOUSE_SANDBOX=0 to run without one (the agent can then "

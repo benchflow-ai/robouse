@@ -4,6 +4,18 @@ Notable changes to the `robouse` package, newest first. Versions follow [semanti
 
 ## Unreleased
 
+### Changed
+
+- The `chemlab` suite's gripper is the Franka Hand of MuJoCo Menagerie's Franka Emika Panda instead of a gripper made of boxes: Menagerie's meshes, materials, inertias and collision geometry, with the fingertip pads, the fingers' coupled slide joints (0.04 m each) and the hand's actuator at the real hand's force, from the pinned Menagerie files robouse already uses. It floats on the same welded body, with the tool point between the fingertip pads, and turns about its tool axis as before; actions and observations are unchanged, except that fully open the fingers are 8 cm apart, not 10. Each task's instruction gives the hand's size. The balance task starts with the top door open rather than the right one, which a hand pointing down cannot push shut by its grip without its body meeting the glass; the reference solutions of the balance, oven, moisture analyzer and shaker tasks keep the hand's body clear of the instruments. Reference solution 7/7, no-op 0/7. `robouse doctor` also checks that the hand's model is there.
+
+## 0.6.1 (2026-10-22)
+
+NVIDIA's Flora models label trial recordings (`robouse flora export` and `import`), and agents can no longer change the Kinex install that every `kinex` trial runs. The docs give the first runs on real models of Gemini CLI, Kinex, Jev and the `chemlab` suite, and a limitation of Gemini CLI that those runs found.
+
+### Security
+
+- The sandbox lets agents read but not change the Kinex install that every `kinex` trial runs, on macOS and Linux: the `node_modules` folder of an npm install, which holds Kinex's launcher, its packages and the Python helpers its tools and drivers import. Kinex's Python processes keep their bytecode in the trial's workspace (`PYTHONPYCACHEPREFIX`) and ignore `__pycache__` folders next to the sources. Before, Kinex's tools wrote bytecode into that shared install, which agents could write to as well, so one trial's agent could leave code there that a later trial ran. A harness can name paths its agent may read but not write.
+
 ### Added
 
 - `robouse flora export` and `robouse flora import`: NVIDIA's Flora models label trial recordings. Flora-Rewarder gives an outcome score from 1 to 5 and a failure, suboptimal or normal label for every half second, with reasons; Flora-TempSeg and Flora-Captioner give timestamped captions. The models and NVIDIA's inference scripts are under the NVIDIA License (research or evaluation use only), so Robo Use neither includes nor downloads them: `export` writes the input files of NVIDIA's scripts for finished trials (each trial's recording, the Rewarder's jobs with the task's instruction, and the captioning pipeline's jobs), the scripts run unmodified on a GPU machine with 80 GB, and `import` writes each trial's `grader/flora.json`, with the agent's steps during each labelled stretch, and prints how often Flora's outcome agrees with the simulator's verdict ([Annotate trials with Flora](docs/flora.md)). `--instructions FILE` gives named tasks the instruction Flora sees (for descriptions that also describe the agent's setup), and `grader/flora.json` keeps each dense clip's own labels beside the stitched ones. On an H100, over 21 trials of claude-opus-5-5, Flora's outcome agreed with the simulator on 11 (the simulator solved 19, Flora gave 9 of those a 5); the docs page has the scores, Flora's reasons, the dense labels and captions, and what to set without a CUDA toolkit (`VLLM_USE_FLASHINFER_SAMPLER=0`).
@@ -11,7 +23,14 @@ Notable changes to the `robouse` package, newest first. Versions follow [semanti
 
 ### Changed
 
-- The `chemlab` suite's gripper is the Franka Hand of MuJoCo Menagerie's Franka Emika Panda instead of a gripper made of boxes: Menagerie's meshes, materials, inertias and collision geometry, with the fingertip pads, the fingers' coupled slide joints (0.04 m each) and the hand's actuator at the real hand's force, from the pinned Menagerie files robouse already uses. It floats on the same welded body, with the tool point between the fingertip pads, and turns about its tool axis as before; actions and observations are unchanged, except that fully open the fingers are 8 cm apart, not 10. Each task's instruction gives the hand's size. The balance task starts with the top door open rather than the right one, which a hand pointing down cannot push shut by its grip without its body meeting the glass; the reference solutions of the balance, oven, moisture analyzer and shaker tasks keep the hand's body clear of the instruments. Reference solution 7/7, no-op 0/7. `robouse doctor` also checks that the hand's model is there.
+- The model gateway uses the model price list LiteLLM ships with (`LITELLM_LOCAL_MODEL_COST_MAP`), instead of downloading LiteLLM's newest list from GitHub each time a trial starts. The spend cap and each trial's cost come from Robo Use's own price table, as before.
+
+### Documentation
+
+- Supported and Run agents give the first trials on real models of harnesses that had run only against local stand-ins. They ran on 2026-10-21 with Robo Use 0.6.0 on Linux x86_64 without the sandbox, one try per task, and every trial was audited. Gemini 4 Argon scored 1 on all five tasks Gemini CLI 0.64.0 ran and on the one Claude Code ran through the model gateway ($1.18 in all). Kinex 1.0.0 on `gemini/gemini-4-argon` scored 1 on all four of its tasks ($0.40). Jev 1.13.0 ran the 40 `nav` tasks and scored 1 on 13; the other 27 ran out of their step budget ($0.76). One try per task is not a measured success rate.
+- The `chemlab` suite's page gives its first runs with a model: Claude Code with `claude-opus-5-5` scored 1 on all 7 tasks, one try each, without the sandbox.
+- Run agents gives a limitation of Gemini CLI 0.64.0 in headless mode, found in those runs: it treats what its shell commands print as untrusted, and refuses a later command with an argument that starts with `-` and appeared in that output, such as a negative coordinate copied from `robo observe` or a flag `robo --help` printed. The agent sees only "Tool execution denied by policy." In the runs, agents went on with the commands written another way. Robo Use's prompt does not mention the check.
+- Supported lists `gemini/gemini-4-argon` for the `kinex` harness, and says that Flora's models have run on an H100.
 
 ## 0.6.0 (2026-10-21)
 
