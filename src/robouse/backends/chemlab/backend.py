@@ -1,14 +1,15 @@
 """chemlab backend: a ChemLab-Assets laboratory instrument on a bench, operated by a floating two-finger gripper.
 
 The instrument is its URDF converted to MuJoCo (scene.py), with the behaviour runtime from the same release driven
-alongside (runtime.py). The robot is the tabletop suites' gripper, a free body welded to a mocap target, with one more
-degree of freedom: it turns about its own tool axis ("twist"), so it can turn knobs. Its tool axis is fixed per task:
-pointing down, or pointing horizontally into the instrument (+y).
+alongside (runtime.py). The robot is the Franka Hand (MuJoCo Menagerie's model of the Franka Emika Panda's hand) on a
+free body welded to a mocap target, as the tabletop suites' gripper is, with one more degree of freedom: it turns about
+its own tool axis ("twist"), so it can turn knobs. Its tool axis is fixed per task: pointing down, or pointing
+horizontally into the instrument (+y).
 
 Action: [dx, dy, dz, dtwist, grip] in [-1, 1]. dx/dy/dz move the tool point (between the fingertips) by about 1 cm per
 unit per step; dtwist turns the gripper about its tool axis by 5 degrees per unit per step (positive: clockwise seen
 from behind the gripper, looking along its tool axis); grip +1 closes the fingers, -1 opens them, values in between
-give a partial opening (finger gap = 10 cm * (1 - grip) / 2). One step = 20 ms (10 physics steps of 2 ms). `robo
+give a partial opening (finger gap = 8 cm * (1 - grip) / 2). One step = 20 ms (10 physics steps of 2 ms). `robo
 move-to` and `robo grip` send [dx, dy, dz, grip] (no twist).
 
 Frame: the instrument's own frame (metres; +x right, +y toward the back, +z up; the front faces -y; the bench top is
@@ -26,7 +27,7 @@ from ..base import ActionSpec, Backend, G, StepInfo
 from . import assets
 from .instruments import DEFAULT_JOINT, INSTRUMENTS, Instrument
 from .runtime import Runtime
-from .scene import FINGER_OPEN, SETTLE_SUBSTEPS, SUBSTEPS, hand_quat, read_urdf, scene_xml
+from .scene import FINGER_OPEN, GRIP_OPEN_CTRL, HAND, SETTLE_SUBSTEPS, SUBSTEPS, hand_quat, read_urdf, scene_model
 from .tasks import TASKS, Task
 
 STEP_M = 0.01  # metres per action unit per step
@@ -38,7 +39,6 @@ LEAD_M = 0.03  # the target stays this close to the tool point (no wind-up when 
 # hood's sash (16 kg, 20 N of friction), which this tracks within about 5 mm while it creeps at 2 cm/s.
 FOLLOW_KP, FOLLOW_KD, FOLLOW_MAX = 10000.0, 1200.0, 400.0
 DT = SUBSTEPS * 0.002
-GRIPPER_GEOMS = ("palm", "finger_l", "finger_r")
 
 
 def _r(v, n: int = 4) -> list[float]:
@@ -81,7 +81,7 @@ class ChemLabBackend(Backend):
         self.camera = str(spec.get("camera", self.task.camera))
         self._mj = mujoco
         urdf = read_urdf(root / self.inst.urdf)
-        self.model = mujoco.MjModel.from_xml_string(scene_xml(urdf, scene_config(self.inst, self.task)))
+        self.model = scene_model(urdf, scene_config(self.inst, self.task))
         self.data = mujoco.MjData(self.model)
         self.action_spec = ActionSpec(
             names=["dx", "dy", "dz", "dtwist", "grip"],
@@ -89,14 +89,15 @@ class ChemLabBackend(Backend):
             high=[1, 1, 1, 1, 1],
             doc="dx/dy/dz: tool point velocity, about 1 cm per unit per step; dtwist: turn about the tool axis, "
             "5 degrees per unit per step (positive: clockwise seen from behind the gripper); grip: +1 close, "
-            "-1 open (intermediate values give a partial opening: finger gap = 10 cm * (1 - grip) / 2)",
+            "-1 open (intermediate values give a partial opening: finger gap = 8 cm * (1 - grip) / 2)",
         )
         m = self.model
         self._hand = m.body("hand").id
         self._lo = np.asarray(self.task.workspace[0], float)
         self._hi = np.asarray(self.task.workspace[1], float)
-        self._fl = m.jnt_qposadr[m.joint("fl").id]
-        self._fr = m.jnt_qposadr[m.joint("fr").id]
+        self._fl = m.jnt_qposadr[m.joint(HAND + "finger_joint1").id]
+        self._fr = m.jnt_qposadr[m.joint(HAND + "finger_joint2").id]
+        self._grip_act = m.actuator(HAND + "actuator8").id
         # the operated joints, and which instrument geoms belong to each part (its joint's body and its children)
         self._joint = {}
         for j in {*(p.joint for p in self.task.parts), *self.task.start, *self._runtime_joints()}:
@@ -114,7 +115,9 @@ class ChemLabBackend(Backend):
                     break
                 b = int(m.body_parentid[b])
             self._part_of_geom[g] = owner
-        self._gripper_geoms = {m.geom(n).id for n in GRIPPER_GEOMS}
+        # the hand's collision geoms: its mesh, and each finger's mesh and fingertip pads
+        hand_bodies = {b for b in range(m.nbody) if m.body(b).name.startswith(HAND)}
+        self._gripper_geoms = {g for g in range(m.ngeom) if m.geom_bodyid[g] in hand_bodies and m.geom_contype[g]}
         self._renderers: dict = {}
         self.runtime: Runtime | None = None
         self.steps = 0
@@ -143,7 +146,7 @@ class ChemLabBackend(Backend):
         d.mocap_pos[0] = self.task.home
         d.mocap_quat[0] = hand_quat(self.task.approach, 0.0)
         self._grip = -1.0
-        d.ctrl[:] = FINGER_OPEN
+        d.ctrl[self._grip_act] = GRIP_OPEN_CTRL
         d.qpos[self._fl] = d.qpos[self._fr] = FINGER_OPEN
         mj.mj_forward(m, d)
         for _ in range(SETTLE_SUBSTEPS):
@@ -175,7 +178,7 @@ class ChemLabBackend(Backend):
         tw = float(np.clip(self._twist + a[3] * TWIST_STEP, -TWIST_LIMIT, TWIST_LIMIT))
         self._twist = float(np.clip(tw, actual - TWIST_LEAD, actual + TWIST_LEAD))
         d.mocap_quat[0] = hand_quat(self.task.approach, self._twist)
-        d.ctrl[:] = FINGER_OPEN * (1.0 - self._grip) / 2.0
+        d.ctrl[self._grip_act] = GRIP_OPEN_CTRL * (1.0 - self._grip) / 2.0
         held = self.touching()
         follow = self._follow_targets(held)
         for _ in range(SUBSTEPS):

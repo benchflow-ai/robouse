@@ -1,8 +1,8 @@
 # chemlab suite: ChemLab-Assets laboratory instruments
 
-7 tasks on 6 chemistry laboratory instruments from [ChemLab-Assets](https://github.com/mbzuai-nlp/ChemLab-Assets) (Zirui Song, Jiadong Zhang, Jiahao Zhang, Xiaosong Ma, Xiaojun Chang and Xiuying Chen, MBZUAI; release 1.3.0, 2026-10-17). Each task operates one part of an instrument to a target state from the instrument's contract: raise a fume hood's sash to its working stop, close an analytical balance's draft shield until the balance reads STABLE, set a hotplate's temperature and its stirring speed with its knobs, close a drying oven's door so that it heats again, open a moisture analyzer's lid and an incubated shaker's hood. A floating two-finger gripper does the work in MuJoCo, and the instrument's own behaviour runtime from the release runs alongside, driven by the scene.
+7 tasks on 6 chemistry laboratory instruments from [ChemLab-Assets](https://github.com/mbzuai-nlp/ChemLab-Assets) (Zirui Song, Jiadong Zhang, Jiahao Zhang, Xiaosong Ma, Xiaojun Chang and Xiuying Chen, MBZUAI; release 1.3.0, 2026-10-17). Each task operates one part of an instrument to a target state from the instrument's contract: raise a fume hood's sash to its working stop, close an analytical balance's draft shield until the balance reads STABLE, set a hotplate's temperature and its stirring speed with its knobs, close a drying oven's door so that it heats again, open a moisture analyzer's lid and an incubated shaker's hood. A floating Franka Hand, the Franka Emika Panda's two-finger gripper as MuJoCo Menagerie models it, does the work in MuJoCo, and the instrument's own behaviour runtime from the release runs alongside, driven by the scene.
 
-- Backend: `src/robouse/backends/chemlab/`: `scene.py` (URDF to MJCF, the bench, the gripper), `runtime.py` (the behaviour runtimes), `instruments.py` (the six instruments), `tasks.py` (the seven tasks and their checks), `backend.py`, `oracle.py` (reference solutions), `assets.py` (the download).
+- Backend: `src/robouse/backends/chemlab/`: `scene.py` (URDF to MJCF, the bench, the Franka Hand), `runtime.py` (the behaviour runtimes), `instruments.py` (the six instruments), `tasks.py` (the seven tasks and their checks), `backend.py`, `oracle.py` (reference solutions), `assets.py` (the download).
 - Generator: `python adapters/chemlab/generate.py` writes `tasks/chemlab/<task>/` from `tasks.py`.
 - Pinned files: `assets/chemlab/provenance.json`, written by `python tools/assets/pin_chemlab.py`.
 - Not in the package and not on the hub: it runs from a checkout (see [Package or hub](#package-or-hub)).
@@ -38,7 +38,7 @@ robouse run-many --tasks tasks/chemlab --harness oracle --out runs/chemlab-oracl
 | Task | Instrument | Part, start | Target (from the contract) | Also checked | Budget | Reference solution |
 |---|---|---|---|---|---|---|
 | `chemlab-fume-hood-sash` | CHEM-199 Esco Frontier Acela EFA-5UDUVW-9 fume hood | sash, 150 mm open | opening 447 to 467 mm: the 457 mm sash stop (`sash_stop_m`) | the airflow monitor raises no alarm (runtime `monitor.alarm`) | 900 | 278 steps |
-| `chemlab-balance-draft-shield` | CHEM-001 METTLER TOLEDO XPR204E analytical balance | right door 80 mm open | all three doors open no more than 1.1 mm (the runtime counts a door as open above 1 % of its 109 mm) | the balance reads STABLE (runtime `balance.status`) | 600 | 234 steps |
+| `chemlab-balance-draft-shield` | CHEM-001 METTLER TOLEDO XPR204E analytical balance | top door 80 mm open | all three doors open no more than 1.1 mm (the runtime counts a door as open above 1 % of its 109 mm) | the balance reads STABLE (runtime `balance.status`) | 600 | 234 steps |
 | `chemlab-hotplate-temperature` | CHEM-008 IKA Plate RCT digital hotplate stirrer | temperature knob at its stop (0 degC) | set temperature 97.5 to 102.5 degC (runtime `heating.set_k`, from the knob through the contract's binding) | | 600 | 203 steps |
 | `chemlab-hotplate-stirring` | the same | speed knob at its stop (0 rpm) | set speed 490 to 510 rpm (runtime `stirring.set_rad_s`) | | 600 | 203 steps |
 | `chemlab-drying-oven-door` | CHEM-011 BINDER FD 56 drying oven at 105 degC | door open 100 degrees | door within 0.05 rad of shut: the door switch angle (`door_switch_rad`) | the fan runs again (runtime `fan.running`) | 900 | 450 steps |
@@ -56,10 +56,14 @@ How the runtime gives the tasks their meaning:
 
 ## The robot
 
-The tabletop suites' floating two-finger gripper (a free body welded to a mocap target, 10 cm maximum gap), with two changes:
+The Franka Hand, the Franka Emika Panda's two-finger gripper, as MuJoCo Menagerie models it (`franka_emika_panda`, from the pinned Menagerie files robouse uses for the Panda: a checkout's `assets/menagerie/`, or `robouse fetch-assets`). It is Menagerie's hand and two fingers with their meshes, materials, inertias and collision geometry (the hand's and the fingers' meshes and each finger's five fingertip pads), the fingers' slide joints (0 to 0.04 m each, so 8 cm apart fully open), the tendon and joint equality that move them together, and the hand's actuator; the arm's meshes are not loaded. It floats as the tabletop suites' gripper does, fixed to a free body welded to a mocap target, with the tool point (between the fingertip pads) at the body's origin. Changes from Menagerie's model:
 
-- It also turns about its own tool axis ("twist", up to two turns either way), so it can turn knobs: the action is `[dx, dy, dz, dtwist, grip]`, with dtwist at 5 degrees per unit per step. `robo move-to` and `robo grip` work as in the tabletop suites and do not turn it.
-- Its palm is as narrow as its fingers (2.4 cm across the closing direction, where the tabletop gripper's is 4.4 cm). The wider palm reached past the fingers and hit the balance's glass door when the fingers pushed the door's grip, and the oven door when they pushed its face.
+- The actuator's gain, stiffness and damping are 20 times Menagerie's, as in the roboharm suite. Menagerie's squeezes with 2 to 4 N near closure, too little to turn a knob by friction; a closed grasp now squeezes with about 20 to 70 N, the real hand's range (70 N continuous).
+- The fingers' contact with the instrument has the friction (1.5, with torsional friction) and stiffness the tasks were built with, and the two fingers do not collide with each other. Every part is gravity-compensated, and the free body carries a token 1 g at the tool point, from which MuJoCo sizes the weld.
+
+It also turns about its own tool axis ("twist", up to two turns either way), so it can turn knobs: the action is `[dx, dy, dz, dtwist, grip]`, with dtwist at 5 degrees per unit per step. `robo move-to` and `robo grip` work as in the tabletop suites and do not turn it.
+
+The hand's body is wider than its fingers: 3.8 cm across the closing direction where the fingers leave it and 6.3 cm at its widest (9.5 to 11.5 cm behind the tool point), against 2.1 cm for a finger, and 20.4 cm long along the closing direction; it begins 3.7 cm behind the tool point. Each task's instruction gives these sizes (`scene.HAND_SIZE`, which the tests measure on the model). The body reaches past the fingers toward a door or a panel they work next to, so the reference solutions keep it clear: the oven door is pushed with the fingers on its top 4 cm and the hand above its edge, the moisture analyzer's lid with the fingers on the top of its face and the hand above the lid, and the shaker's hood is held by its handle only up to 42 degrees (the hand keeps its orientation while the hood turns, so further up the hood's front window comes into the lower finger), then let go and pushed on by its handle.
 
 Its tool axis is fixed per task: straight down (balance, hotplate, oven, moisture analyzer), or horizontally into the instrument (fume hood, shaker), so that its fingers close one above the other around a horizontal handle bar. Steps are 20 ms (10 physics steps of 2 ms), as in the tabletop suites.
 
@@ -83,7 +87,7 @@ Scene and runtime:
 Start states and parts chosen:
 - The sash starts 150 mm open: closed, its handle bar sits 5 mm above the airfoil sill, too close for a finger to pass under it.
 - The oven door task closes the door, a push along its arc. Opening it would mean holding its handle while the door turns about a vertical axis, which a parallel gripper with a fixed tool axis does only as long as the handle can turn between its fingers: a round bar along the hinge (the shaker's handle) can, the FD 56's block handle cannot.
-- The balance task closes the open door by pushing the back of its grip toward the front, with the closed fingers beside the glass.
+- The balance task starts with the top door open 80 mm and closes it by the ridge across its top, the closed fingers' tips on its glass. A side door would have to be pushed by its grip, low on the door's outer face; with the hand pointing down, the hand's body, wider than the fingers, meets the side glass or the shield's frame above the grip before a finger reaches it.
 
 ## Instruments considered and left out
 

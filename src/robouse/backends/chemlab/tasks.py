@@ -102,7 +102,7 @@ _add(
             Part(_LEFT, "left door", "opening_m", points={"handle_pos": Point("door_left", (-0.007, -0.07, -0.062))}),
             Part(_TOP, "top door", "opening_m", points={"handle_pos": Point("door_top", (0.0, -0.085, 0.003))}),
         ),
-        start={_RIGHT: 0.08},
+        start={_TOP: 0.08},
         approach="down",
         home=(0.0, -0.25, 0.42),
         workspace=((-0.3, -0.4, 0.03), (0.3, 0.35, 0.5)),
@@ -126,8 +126,9 @@ _add(
         scene_text=(
             "An analytical balance, the METTLER TOLEDO XPR204E (0.1 mg readability), stands on a bench; its front faces "
             "-y. Its glass draft shield has three sliding doors, on the left side, the right side and the top, each "
-            "sliding toward the back (+y) by up to 109 mm to open. The right door is open 80 mm. Each side door has a "
-            "small vertical grip on its outer face near its front edge. While any door is open the balance cannot "
+            "sliding toward the back (+y) by up to 109 mm to open. The top door is open 80 mm. Each side door has a "
+            "small vertical grip on its outer face near its front edge, and the top door a low ridge across its top "
+            "face near its front edge, 70 mm long, 8 mm deep and 5 mm tall. While any door is open the balance cannot "
             "settle: it shows UNSTABLE, and every movement of a door restarts its stability check, which needs the "
             "reading to hold still for 1.5 s with the doors shut before the balance shows STABLE."
         ),

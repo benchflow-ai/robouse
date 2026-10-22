@@ -7,7 +7,17 @@ import math
 
 import numpy as np
 
+from .scene import HAND_SIZE
 from .tasks import TASKS, Task
+
+# The Franka Hand's size, as the task instructions give it (scene.HAND_SIZE)
+FINGERTIP = HAND_SIZE["tip"]  # the fingertips reach this far beyond the tool point
+FINGER_HALF_WIDTH = HAND_SIZE["finger_width"] / 2
+PALM = HAND_SIZE["palm"]  # the hand's body begins this far behind the tool point
+HANDLE_RADIUS = 0.006  # the shaker hood's handle, a 12 mm bar
+HX_LID_TOP = 0.1403  # the top of the moisture analyzer's closed lid, its rim (as the camera shows it)
+TIP_GRASP_BACK = 0.008  # the shaker's handle held by the fingertips only, clear of the hood's window behind it
+SHAKER_LET_GO = 42.0  # degrees: the hood's angle up to which the hand holds its handle
 
 
 class _Finished(Exception):
@@ -94,16 +104,20 @@ def _sash(rb: _Robot, task: Task) -> None:
 
 
 def _balance(rb: _Robot, task: Task) -> None:
-    """Push the open right door shut by the back of its grip, then wait for the balance to settle."""
+    """Push the open top door shut by the ridge across its top, with the closed fingers turned across the door and
+    their tips on its glass, so that the fingertip pads' flat sides meet the ridge; lift off, then wait for the
+    balance to settle."""
     rb.grip(1.0, 15)
-    h = np.array(rb.part("right door")["handle_pos"])
-    x, z = h[0] + 0.01, h[2] - 0.015
-    rb.move([x, h[1] + 0.024, 0.4], 1.0, tol=0.006)
-    rb.move([x, h[1] + 0.024, z], 1.0, tol=0.003)
-    closed_y = h[1] - rb.part("right door")["opening_m"]
-    rb.move([x, closed_y + 0.012, z], 1.0, tol=0.002)
-    rb.move([x, closed_y + 0.05, z], 1.0, tol=0.004)
-    rb.move([x, closed_y + 0.05, 0.4], 1.0, tol=0.01)
+    rb.twist_to(90.0)
+    h = np.array(rb.part("top door")["handle_pos"])  # the ridge's centre: 8 mm deep, standing 5 mm on the glass
+    z = h[2] - 0.002 + FINGERTIP  # the fingertips on the glass
+    behind = h[1] + 0.004 + FINGER_HALF_WIDTH + 0.006
+    rb.move([h[0], behind, z + 0.06], 1.0, tol=0.006)
+    rb.move([h[0], behind, z], 1.0, tol=0.002)
+    shut = h[1] - rb.part("top door")["opening_m"] + 0.004 + FINGER_HALF_WIDTH  # the fingers against the shut ridge
+    rb.move([h[0], shut - 0.002, z], 1.0, tol=0.002)
+    rb.move([h[0], shut + 0.002, z + 0.03], 1.0, tol=0.004)
+    rb.move([h[0], shut + 0.03, z + 0.08], 1.0, tol=0.01)
     for _ in range(10):
         if rb.obs().get("readouts", {}).get("balance.status") == "STABLE":
             break
@@ -133,11 +147,14 @@ def _knob(label: str, target_deg: float, readout: str, want: float, per_deg: flo
 
 
 def _oven_door(rb: _Robot, task: Task) -> None:
-    """Push the open door shut by its outer face near its top edge, following its arc with the palm along the door."""
+    """Push the open door shut by its outer face near its top edge, following its arc with the hand along the door:
+    the fingers on the door's top 4 cm, the hand just above the door's top edge."""
     door = rb.part("door")
     hinge = np.array(door["hinge_xy"])
-    r, z = 0.3, 0.58  # push 0.3 m from the hinge, the fingers on the top 5 cm of the door
-    out = -0.063 - 0.012 - 0.004  # the outer face is 0.063 m in front of the hinge line; half a finger; a gap
+    r, z = 0.3, door["top_z"] - PALM + 0.008  # push 0.3 m from the hinge
+    out = (
+        -0.063 - FINGER_HALF_WIDTH - 0.004
+    )  # the outer face is 0.063 m in front of the hinge line; half a finger; a gap
 
     def at(theta: float, off: float) -> np.ndarray:
         c, s = math.cos(theta), math.sin(theta)
@@ -165,11 +182,12 @@ def _oven_door(rb: _Robot, task: Task) -> None:
 
 
 def _hx_lid(rb: _Robot, task: Task) -> None:
-    """Push the lid's front face along the lid's diagonal until it is fully open."""
+    """Push the lid's front face along the lid's diagonal until it is fully open, with the fingers on the face's top
+    part and the hand above the lid."""
     rb.grip(1.0, 15)
     rb.twist_to(90.0)
     f = np.array(rb.part("lid")["front_face_pos"])
-    start = np.array([f[0], f[1] - 0.012 - 0.006, 0.075])
+    start = np.array([f[0], f[1] - FINGER_HALF_WIDTH - 0.0075, HX_LID_TOP - PALM + 0.003])
     rb.move(start + [0, 0, 0.12], 1.0, tol=0.005)
     rb.move(start, 1.0, tol=0.003)
     u = np.array([0.0, 0.80066215, 0.59911611])
@@ -185,29 +203,48 @@ def _hx_lid(rb: _Robot, task: Task) -> None:
 
 
 def _shaker_hood(rb: _Robot, task: Task) -> None:
-    """Close the gripper around the hood's handle bar from the front and swing the hood up along its arc."""
+    """Close the gripper around the hood's handle bar from the front, by the fingertips, and swing the hood up along
+    its arc to 42 degrees; then let go, turn the closed fingers flat (90 degrees about the tool axis) and push the
+    handle on along its arc with the fingertips, pressed on its front, to 83 degrees (the gas springs hold the hood
+    wherever it is let go). The hand keeps its orientation while the hood turns, so holding the handle further would
+    bring the hood's front window into the lower finger and then its lower lip into the hand."""
     hood = rb.part("hood")
     hinge = np.array(hood["hinge_yz"])
     h = np.array(hood["handle_pos"])
     rel = h[1:] - hinge
-    rb.move(h + [0, -0.12, 0], -1.0, tol=0.006)
-    rb.move(h + [0, -0.002, 0], -1.0, tol=0.003)
-    rb.grip(1.0, 15)
 
     def handle_at(theta: float) -> np.ndarray:
         c, s = math.cos(theta), math.sin(theta)
         y, z = rel
         return np.array([h[0], hinge[0] + y * c + z * s, hinge[1] - y * s + z * c])
 
-    for _ in range(40):
+    hold = np.array([0.0, -TIP_GRASP_BACK, 0.0])
+    rb.move(h + [0, -0.12, 0], -1.0, tol=0.006)
+    rb.move(h + hold, -1.0, tol=0.003)
+    rb.grip(1.0, 15)
+    for _ in range(30):
         theta = math.radians(rb.part("hood")["angle_deg"])
-        if theta >= math.radians(85):
+        if theta >= math.radians(SHAKER_LET_GO):
             break
-        nxt = min(theta + math.radians(6), math.radians(87))
-        rb.move(handle_at(nxt) + [0, -0.002, 0], 1.0, tol=0.004, tries=1)
+        nxt = min(theta + math.radians(6), math.radians(SHAKER_LET_GO + 1))
+        rb.move(handle_at(nxt) + hold, 1.0, tol=0.004, tries=1)
     rb.grip(-1.0, 12)
     hp = np.array(rb.obs()["hand_pos"])
-    rb.move(hp + [0, -0.12, 0], -1.0, tol=0.01)
+    rb.move(hp + [0, -0.05, 0], -1.0, tol=0.006)
+    rb.grip(1.0, 15)
+    rb.twist_to(90.0)
+    push = np.array([0.0, -(HANDLE_RADIUS + FINGERTIP), 0.003])  # the fingertips on the handle's front
+    theta = math.radians(rb.part("hood")["angle_deg"])
+    rb.move(handle_at(theta) + push + [0, -0.02, 0], 1.0, tol=0.004)
+    push += [0.0, 0.002, 0.0]  # pressed on the handle
+    rb.move(handle_at(theta) + push, 1.0, tol=0.002)
+    for _ in range(50):
+        theta = math.radians(rb.part("hood")["angle_deg"])
+        if theta >= math.radians(83):
+            break
+        rb.move(handle_at(min(theta + math.radians(5), math.radians(86))) + push, 1.0, tol=0.002, tries=1)
+    hp = np.array(rb.obs()["hand_pos"])
+    rb.move(hp + [0, -0.1, 0], 1.0, tol=0.01)
 
 
 PLANS = {

@@ -91,11 +91,19 @@ def run() -> int:
             importlib.import_module(f"robouse.backends.{mod}")
             pkg = UPSTREAM_PKGS.get(b)
             ready = pkg is None or importlib.util.find_spec(pkg) is not None
-            if b == "chemlab":  # instrument files downloaded at run time (CC BY-NC 4.0)
+            if b == "chemlab":  # instrument files downloaded at run time (CC BY-NC 4.0), and Menagerie's Franka Hand
+                from ..assets import asset_root
                 from ..backends.chemlab import assets as chemlab_assets
+                from ..backends.chemlab.scene import HAND_MODEL
 
-                ready = not chemlab_assets.missing()
-                print(f"  {_ok(ready)}{b}" + ("" if ready else " (instrument files: robouse fetch-assets --chemlab)"))
+                need = ["instrument files: robouse fetch-assets --chemlab"] if chemlab_assets.missing() else []
+                try:
+                    hand = (asset_root() / HAND_MODEL).is_file()
+                except FileNotFoundError:
+                    hand = False
+                if not hand:
+                    need.append("the Franka Hand's model: robouse fetch-assets")
+                print(f"  {_ok(not need)}{b}" + (f" ({'; '.join(need)})" if need else ""))
                 continue
             print(f"  {_ok(ready)}{b}" + ("" if ready else f" (missing package {pkg})"))
         except Exception as e:  # noqa: BLE001

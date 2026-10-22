@@ -1,7 +1,7 @@
 """ChemLab-Assets laboratory instruments -> Robo Use tasks (the chemlab suite).
 
 Each task operates one part of a ChemLab-Assets instrument (MBZUAI, release 1.3.0) to a target state from its contract,
-with a floating two-finger gripper: raise a fume hood's sash to its stop, close a balance's draft shield, set a
+with a floating Franka Hand: raise a fume hood's sash to its stop, close a balance's draft shield, set a
 hotplate's temperature or stirring speed with its knob, close a drying oven's door, open a moisture analyzer's lid and
 an incubated shaker's hood. The instrument is its URDF converted to MuJoCo, and its behaviour runtime runs alongside;
 the episode server scores the final joint state and, where the task says so, the runtime's state. The task
@@ -20,6 +20,7 @@ import shutil
 from pathlib import Path
 
 from robouse.backends.chemlab.instruments import INSTRUMENTS, RELEASE
+from robouse.backends.chemlab.scene import HAND_SIZE
 from robouse.backends.chemlab.tasks import TASKS, Task
 from robouse.backends.embodied import VERIFY_SH, oracle_sh
 from robouse.tasks import write_task
@@ -34,9 +35,19 @@ APPROACH = {
         "other; turning it (DTWIST) turns it about the y axis."
     ),
 }
+
+
+def _cm(key: str) -> str:
+    return f"{HAND_SIZE[key] * 100:.1f}".removesuffix(".0")
+
+
 GRIPPER = (
-    "Each finger is 7.2 cm long, 2.4 cm wide and 1.2 cm thick, the fingertips reach 1 cm beyond the tool point along "
-    "the tool axis, and the palm behind the fingers is 13 cm long along the closing direction and 2.4 cm wide."
+    f"Its fingers open to an {_cm('gap')} cm gap. Each finger is {_cm('finger_width')} cm wide across the closing "
+    f"direction and {_cm('finger_thickness')} cm thick where it leaves the hand, reaches {_cm('finger_out')} cm out of "
+    f"the hand, and its tip reaches {_cm('tip')} cm beyond the tool point along the tool axis. The hand's body begins "
+    f"{_cm('palm')} cm behind the tool point: it is {_cm('hand_length')} cm long along the closing direction, and "
+    f"across it {_cm('hand_width')} cm wide where the fingers leave it and {_cm('hand_width_max')} cm at its widest, "
+    "9.5 to 11.5 cm behind the tool point, so it reaches past the fingers on both sides."
 )
 QUANTITY = {
     "opening_m": "how far it is open, in metres",
@@ -123,7 +134,7 @@ def body(t: Task) -> str:
 
 {t.scene_text}
 
-A two-finger parallel gripper (a floating gripper, no arm) works in front of the instrument. {APPROACH[t.approach]} {GRIPPER}
+A two-finger parallel gripper, the Franka Hand of a Franka Emika Panda (floating, no arm), works in front of the instrument. {APPROACH[t.approach]} {GRIPPER}
 
 ## Task
 
@@ -133,7 +144,7 @@ A two-finger parallel gripper (a floating gripper, no arm) works in front of the
 
 **Frame.** Metres, in the instrument's own frame: x to the right as seen from the front, y toward the back of the instrument, z up. The instrument's front faces -y, its footprint is centred on the origin and the bench top is at z = 0. The gripper's tool point (the point between the fingertips) can reach x in {_range(x0, x1)}, y in {_range(y0, y1)} and z in {_range(z0, z1)}.
 
-**Controls.** `robo act DX DY DZ DTWIST GRIP` takes five numbers in [-1, 1]. DX, DY and DZ move the tool point by about 1 cm per unit per step. DTWIST turns the gripper about its own tool axis by 5 degrees per unit per step; positive is clockwise as seen from behind the gripper, looking along its tool axis (from above when it points down). GRIP is the fingers' target: +1 closed, -1 fully open (a 10 cm gap), and values in between give a partial opening (gap = 10 cm * (1 - GRIP) / 2); keep sending +1 to keep holding. `robo move-to X Y Z [--grip G]` moves the tool point in a straight line toward a point without turning the gripper, and `robo grip G [--steps N]` holds the hand still while it sets the fingers. One step is 20 ms of simulated time.
+**Controls.** `robo act DX DY DZ DTWIST GRIP` takes five numbers in [-1, 1]. DX, DY and DZ move the tool point by about 1 cm per unit per step. DTWIST turns the gripper about its own tool axis by 5 degrees per unit per step; positive is clockwise as seen from behind the gripper, looking along its tool axis (from above when it points down). GRIP is the fingers' target: +1 closed, -1 fully open (an {_cm('gap')} cm gap), and values in between give a partial opening (gap = {_cm('gap')} cm * (1 - GRIP) / 2); keep sending +1 to keep holding. `robo move-to X Y Z [--grip G]` moves the tool point in a straight line toward a point without turning the gripper, and `robo grip G [--steps N]` holds the hand still while it sets the fingers. One step is 20 ms of simulated time.
 
 **Observation.** {obs}
 
