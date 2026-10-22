@@ -256,6 +256,13 @@ PAGES: list[tuple[str, str, str, str, str]] = [
         "Run many tasks with robouse run-many, or a published dataset in Docker with bench eval run -d.",
     ),
     (
+        "Guides",
+        "docs/flora.md",
+        "flora",
+        "Annotate trials with Flora",
+        "Label trial recordings with NVIDIA's open Flora models, and see how often Flora's verdict agrees with the simulator's.",
+    ),
+    (
         "Reference",
         "docs/cli.md",
         "cli",

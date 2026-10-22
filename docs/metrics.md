@@ -52,3 +52,4 @@ Proportions and progress are in percent; brackets are 95% intervals (Wilson for 
 - `--by harness,model` (default) groups trials; other keys: `suite`, `category`, `difficulty`, `task`, `split`, `seed`, `mode` (sim, real or hil-mock), `run`, `regime`, `released`.
 - When a task has several trials, pass@k is averaged over tasks.
 - `--metrics` picks the columns, `--json FILE` writes everything, and `--cost-quality FILE` and `--svg FILE` write cost against solve rate.
+- After `robouse flora import`, `flora_agree` is the share of trials where Flora's outcome score agrees with the simulator's verdict, and `flora_progress` the mean of Flora's progress estimate ([Annotate trials with Flora](flora.md)).

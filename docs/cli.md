@@ -25,6 +25,8 @@ commands:
                   instruments)
     report        metrics with 95% confidence intervals over run folders,
                   grouped by trial attributes
+    flora         score and caption trial recordings with NVIDIA's Flora
+                  models: export their input, import their results
     summarize     distil a trial into learnings (markdown) for --prior-
                   learnings
     doctor        what this machine can run: simulators, harnesses,
@@ -365,6 +367,73 @@ options:
                         write cost-versus-success points (JSON) for groups
                         with a known cost
   --svg SVG             write a cost-versus-success scatter (SVG)
+```
+
+## `robouse flora`
+
+```console
+$ robouse flora --help
+usage: robouse flora [-h] ACTION ...
+
+NVIDIA's Flora models label a trial's recording: an outcome score, a quality
+label for every half second and timestamped captions. Their weights and
+scripts are not part of Robo Use (NVIDIA's non-commercial license) and run on
+a GPU machine: `export` writes their input files, `import` reads their results
+into the trial folders. https://robouse.ai/docs/flora/
+
+positional arguments:
+  ACTION
+    export    write the input files of NVIDIA's Flora scripts for finished
+              trials
+    import    write Flora's results into the trial folders (grader/flora.json)
+              and compare its outcome scores with the simulator's verdicts
+
+options:
+  -h, --help  show this help message and exit
+```
+
+### `robouse flora export`
+
+```console
+$ robouse flora export --help
+usage: robouse flora export [-h] --out OUT
+                            [--caption-profile {human,yam,dex,tianji}]
+                            [--instruction INSTRUCTION | --instructions FILE]
+                            trials [trials ...]
+
+positional arguments:
+  trials                trial folders or run folders
+
+options:
+  -h, --help            show this help message and exit
+  --out OUT             a new folder for the job files and copies (hard links)
+                        of the recordings
+  --caption-profile {human,yam,dex,tianji}
+                        the captioning pipeline's profile (default yam, its
+                        robot-actions profile; dex for dexterous hands)
+  --instruction INSTRUCTION
+                        the task instruction Flora is given, for every trial
+                        (default: each task's own: the source benchmark's
+                        language instruction, else the task's one-line
+                        description)
+  --instructions FILE   a JSON file of task ids and the instruction Flora is
+                        given for each (the other tasks get their own)
+```
+
+### `robouse flora import`
+
+```console
+$ robouse flora import --help
+usage: robouse flora import [-h] [--success-score N] folder
+
+positional arguments:
+  folder             the export folder, with NVIDIA's output files in its
+                     results/ folder
+
+options:
+  -h, --help         show this help message and exit
+  --success-score N  the lowest outcome score (1-5) that counts as Flora
+                     calling the task solved (default 5, complete success)
 ```
 
 ## `robouse summarize`
