@@ -37,13 +37,13 @@ robouse run-many --tasks tasks/chemlab --harness oracle --out runs/chemlab-oracl
 
 | Task | Instrument | Part, start | Target (from the contract) | Also checked | Budget | Reference solution |
 |---|---|---|---|---|---|---|
-| `chemlab-fume-hood-sash` | CHEM-199 Esco Frontier Acela EFA-5UDUVW-9 fume hood | sash, 150 mm open | opening 447 to 467 mm: the 457 mm sash stop (`sash_stop_m`) | the airflow monitor raises no alarm (runtime `monitor.alarm`) | 900 | 278 steps |
-| `chemlab-balance-draft-shield` | CHEM-001 METTLER TOLEDO XPR204E analytical balance | top door 80 mm open | all three doors open no more than 1.1 mm (the runtime counts a door as open above 1 % of its 109 mm) | the balance reads STABLE (runtime `balance.status`) | 600 | 234 steps |
-| `chemlab-hotplate-temperature` | CHEM-008 IKA Plate RCT digital hotplate stirrer | temperature knob at its stop (0 degC) | set temperature 97.5 to 102.5 degC (runtime `heating.set_k`, from the knob through the contract's binding) | | 600 | 203 steps |
-| `chemlab-hotplate-stirring` | the same | speed knob at its stop (0 rpm) | set speed 490 to 510 rpm (runtime `stirring.set_rad_s`) | | 600 | 203 steps |
-| `chemlab-drying-oven-door` | CHEM-011 BINDER FD 56 drying oven at 105 degC | door open 100 degrees | door within 0.05 rad of shut: the door switch angle (`door_switch_rad`) | the fan runs again (runtime `fan.running`) | 900 | 450 steps |
+| `chemlab-fume-hood-sash` | CHEM-199 Esco Frontier Acela EFA-5UDUVW-9 fume hood | sash, 150 mm open | opening 447 to 467 mm: the 457 mm sash stop (`sash_stop_m`) | the airflow monitor raises no alarm (runtime `monitor.alarm`) | 900 | 237 steps |
+| `chemlab-balance-draft-shield` | CHEM-001 METTLER TOLEDO XPR204E analytical balance | top door 80 mm open | all three doors open no more than 1.1 mm (the runtime counts a door as open above 1 % of its 109 mm) | the balance reads STABLE (runtime `balance.status`) | 600 | 233 steps |
+| `chemlab-hotplate-temperature` | CHEM-008 IKA Plate RCT digital hotplate stirrer | temperature knob at its stop (0 degC) | set temperature 97.5 to 102.5 degC (runtime `heating.set_k`, from the knob through the contract's binding) | | 600 | 197 steps |
+| `chemlab-hotplate-stirring` | the same | speed knob at its stop (0 rpm) | set speed 490 to 510 rpm (runtime `stirring.set_rad_s`) | | 600 | 195 steps |
+| `chemlab-drying-oven-door` | CHEM-011 BINDER FD 56 drying oven at 105 degC | door open 100 degrees | door within 0.05 rad of shut: the door switch angle (`door_switch_rad`) | the fan runs again (runtime `fan.running`) | 900 | 432 steps |
 | `chemlab-moisture-analyzer-lid` | CHEM-002 METTLER TOLEDO HX204 halogen moisture analyzer | lid closed | lid lifted at least 100 mm of 108.5 mm: the runtime loads a sample only from 100 mm (`sample.configure`) | | 500 | 174 steps |
-| `chemlab-shaker-hood` | CHEM-009 IKA KS 4000 i control incubated shaker | hood closed | hood open at least 1.4 rad: the runtime lets the platform be loaded only from 1.4 rad (`load.configure`) | | 900 | 538 steps |
+| `chemlab-shaker-hood` | CHEM-009 IKA KS 4000 i control incubated shaker | hood closed | hood open at least 1.4 rad: the runtime lets the platform be loaded only from 1.4 rad (`load.configure`) | | 900 | 702 steps |
 
 In every task the gripper must also have let go: it touches none of the operated parts when the episode is judged, 10 still steps after `robo done`. The episode server judges from the joint state and, in the tasks that say so, from the runtime's evaluator view; the agent never sees the evaluator view.
 
@@ -98,21 +98,21 @@ Start states and parts chosen:
 
 ## Validation
 
-2026-10-20 on a Linux x86_64 machine with 32 cores (Ubuntu 24.04, Python 3.12, MuJoCo 3.3.0, OSMesa): a fresh clone at commit 54ac912, a fresh virtualenv (`pip install -e '.[sim]'`) and a fresh home folder, so the download started from nothing. `robouse fetch-assets --chemlab` printed the licence and downloaded the 493 files with their hashes checked (`493 file(s) downloaded; ChemLab-Assets 1.3.0 (revision 4ca4a42dab2c)`), and `robouse run --task tasks/chemlab/chemlab-fume-hood-sash --harness oracle --out runs/chemlab` returned reward 1.0 (done, 278 steps, 13.6 s). Then `robouse tasks check` on every task:
+With the Franka Hand, 2026-10-22, on a Linux x86_64 machine with 32 cores (Ubuntu 24.04, Python 3.12, MuJoCo 3.3.0, OSMesa): a fresh clone of the change (commit 65f5ed1), a fresh virtualenv (`pip install -e '.[sim]'`), and the ChemLab-Assets files `robouse fetch-assets --chemlab` had downloaded before (the same pinned revision; the runtimes' hashes are checked at every episode start). `robouse tasks check` on every task:
 
 | Task | Reference solution | No-op control |
 |---|---|---|
-| `chemlab-balance-draft-shield` | 1.0 (done, 234 steps) | 0.0 (done) |
-| `chemlab-drying-oven-door` | 1.0 (done, 450 steps) | 0.0 (done) |
-| `chemlab-fume-hood-sash` | 1.0 (done, 278 steps) | 0.0 (done) |
-| `chemlab-hotplate-stirring` | 1.0 (done, 203 steps) | 0.0 (done) |
-| `chemlab-hotplate-temperature` | 1.0 (done, 203 steps) | 0.0 (done) |
+| `chemlab-balance-draft-shield` | 1.0 (done, 233 steps) | 0.0 (done) |
+| `chemlab-drying-oven-door` | 1.0 (done, 432 steps) | 0.0 (done) |
+| `chemlab-fume-hood-sash` | 1.0 (done, 237 steps) | 0.0 (done) |
+| `chemlab-hotplate-stirring` | 1.0 (done, 195 steps) | 0.0 (done) |
+| `chemlab-hotplate-temperature` | 1.0 (done, 197 steps) | 0.0 (done) |
 | `chemlab-moisture-analyzer-lid` | 1.0 (done, 174 steps) | 0.0 (done) |
-| `chemlab-shaker-hood` | 1.0 (done, 538 steps) | 0.0 (done) |
+| `chemlab-shaker-hood` | 1.0 (done, 702 steps) | 0.0 (done) |
 
-Each check ended `valid`. The suites page's table is generated from these runs (`tools/docs/suites_reference.py --keep`, against the built wheel).
+Each check ended `valid`, and `robouse run` with the `oracle` and `noop` harnesses gave the same rewards and steps. On the same commit, `tests/test_chemlab.py` (every reference solution and no-op control in process, when the files are there; it skips those tests without them) and `tests/test_counts.py` passed, on that machine and on macOS.
 
-`tests/test_chemlab.py` runs every reference solution and no-op control in process when the files are there, and skips those tests without them.
+The first validation, 2026-10-20 with the earlier gripper (commit 54ac912), started from a fresh home folder, so the download started from nothing: `robouse fetch-assets --chemlab` printed the licence and downloaded the 493 files with their hashes checked (`493 file(s) downloaded; ChemLab-Assets 1.3.0 (revision 4ca4a42dab2c)`), and every task's reference solution scored 1.0 and its no-op control 0.0. The suites page's table is generated from such runs (`tools/docs/suites_reference.py --keep`, against the built wheel).
 
 ## Not done yet
 
