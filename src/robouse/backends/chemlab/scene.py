@@ -501,6 +501,10 @@ def scene_xml(urdf: Urdf, cfg: dict) -> str:
     colliders (instrument_xml), bench_half and bench_height, the gripper's approach and home, cameras
     {name: (position, target, fovy)}. scene_model() attaches the hand and compiles it.
 
+    The look: a light grey gradient sky, a plain light grey floor and a lab bench (bench_look), lit by a key light that
+    casts shadows, a fill and a rim light, with a dim headlight. The floor and the bench collide through boxes and a
+    plane that are not drawn (group 3); what is drawn of them collides with nothing.
+
     The floating body has a token mass at the tool point: without one its centre of mass is undefined, and MuJoCo would
     size the weld's softness from a point far from the hand, which made the weld pull a tenth as hard."""
     assets, tree = instrument_xml(urdf, cfg.get("joints", {}), cfg.get("default_joint", {}), cfg.get("colliders", ()))
@@ -512,19 +516,24 @@ def scene_xml(urdf: Urdf, cfg: dict) -> str:
     return f"""<mujoco model="robouse-chemlab">
   <compiler angle="radian" autolimits="true" balanceinertia="true"/>
   <option timestep="0.002" cone="elliptic" impratio="10" integrator="implicitfast"><flag multiccd="enable"/></option>
-  <visual><global offwidth="1280" offheight="1280"/><quality shadowsize="4096"/><map znear="0.01" zfar="40"/>
-    <headlight ambient="0.38 0.38 0.38" diffuse="0.45 0.45 0.45" specular="0.05 0.05 0.05"/></visual>
+  <visual><global offwidth="1280" offheight="1280"/><quality shadowsize="8192"/><map znear="0.01" zfar="60"/>
+    <headlight ambient="0.25 0.25 0.26" diffuse="0.1 0.1 0.1" specular="0 0 0"/></visual>
   <asset>
-    <texture name="tfloor" type="2d" builtin="checker" rgb1="0.80 0.82 0.84" rgb2="0.72 0.74 0.76" width="256" height="256"/>
-    <material name="floor" texture="tfloor" texrepeat="8 8"/>
-    <material name="bench" rgba="0.86 0.86 0.84 1"/>
+    <texture name="sky" type="skybox" builtin="gradient" rgb1="0.80 0.81 0.83" rgb2="0.95 0.95 0.96" width="512" height="3072"/>
+    <material name="floor" rgba="0.80 0.805 0.815 1" specular="0.03" shininess="0.05"/>
+    <material name="benchtop" rgba="0.19 0.195 0.2 1" specular="0.45" shininess="0.7" reflectance="0.04"/>
+    <material name="cabinet" rgba="0.83 0.84 0.85 1" specular="0.05" shininess="0.1"/>
+    <material name="plinth" rgba="0.26 0.27 0.28 1" specular="0.03" shininess="0.05"/>
     {assets}
   </asset>
   <worldbody>
-    <light pos="0.4 -1.6 2.6" dir="-0.15 0.5 -1" diffuse="0.5 0.5 0.5" castshadow="true"/>
-    <light pos="-1.2 -0.8 2.0" dir="0.4 0.3 -1" diffuse="0.25 0.25 0.25" castshadow="false"/>
-    <geom name="floor" type="plane" pos="0 0 {-bench_h}" size="6 6 0.1" material="floor" {STATIC}/>
-    <geom name="bench" type="box" pos="0 0 {-bench_h / 2}" size="{_f(bx, by, bench_h / 2)}" material="bench" {STATIC}/>
+    <light name="key" directional="true" dir="0.45 0.75 -1" diffuse="0.55 0.55 0.53" specular="0.12 0.12 0.12" castshadow="true"/>
+    <light name="fill" directional="true" dir="-0.7 0.35 -0.55" diffuse="0.2 0.2 0.21" specular="0 0 0" castshadow="false"/>
+    <light name="rim" directional="true" dir="0.1 -0.85 -0.5" diffuse="0.12 0.12 0.12" specular="0 0 0" castshadow="false"/>
+    <geom name="floor" type="plane" pos="0 0 {-bench_h}" size="6 6 0.1" group="3" {STATIC}/>
+    <geom name="floor_look" type="plane" pos="0 0 {-bench_h}" size="40 40 1" material="floor" {VISUAL}/>
+    <geom name="bench" type="box" pos="0 0 {-bench_h / 2}" size="{_f(bx, by, bench_h / 2)}" group="3" {STATIC}/>
+    {bench_look(bx, by, bench_h)}
     {tree}
     <body name="mocap" mocap="true" pos="{_f(*home)}" quat="{_f(*q)}"/>
     <body name="hand" pos="{_f(*home)}" quat="{_f(*q)}" gravcomp="1"><freejoint name="hand_free"/>
@@ -534,6 +543,22 @@ def scene_xml(urdf: Urdf, cfg: dict) -> str:
   </worldbody>
   <equality><weld body1="mocap" body2="hand" solref="0.01 1"/></equality>
 </mujoco>"""
+
+
+def bench_look(bx: float, by: float, height: float) -> str:
+    """How the bench looks, drawn over its collision box (which is not drawn): a lab bench, a dark epoxy-resin top 3 cm
+    thick overhanging the cabinet by 2 cm, on a light cabinet with a dark recessed plinth. Visual only: these geoms
+    collide with nothing, and the top's upper face is the collision box's, at z = 0."""
+    top, over, kick, inset = 0.03, 0.02, 0.1, 0.04
+    body = (height - top - kick) / 2
+    return (
+        f'<geom name="bench_top" type="box" pos="0 0 {_f(-top / 2)}" size="{_f(bx + over, by + over, top / 2)}" '
+        f'material="benchtop" {VISUAL}/>'
+        f'<geom name="bench_cabinet" type="box" pos="0 0 {_f(-top - body)}" size="{_f(bx, by, body)}" '
+        f'material="cabinet" {VISUAL}/>'
+        f'<geom name="bench_plinth" type="box" pos="0 0 {_f(-height + kick / 2)}" '
+        f'size="{_f(bx - inset, by - inset, kick / 2)}" material="plinth" {VISUAL}/>'
+    )
 
 
 def scene_model(urdf: Urdf, cfg: dict):
