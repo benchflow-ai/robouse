@@ -633,7 +633,7 @@ def run_trial(
             )
             deny = [job_dir, task.path, *launch.deny]
             own = sandbox.own_homes(launch.env)
-            launch.cmd, cfg["sandbox"] = sandbox.wrap(launch.cmd, ws, sock, deny, ports, own)
+            launch.cmd, cfg["sandbox"] = sandbox.wrap(launch.cmd, ws, sock, deny, ports, own, launch.read_only)
             if cfg["sandbox"] != "none":  # PATH entries the agent cannot read (e.g. `uvx`'s, in the uv cache)
                 launch.env["PATH"] = sandbox.reachable_path(launch.env.get("PATH", ""), deny, own)
         # what the agent was given besides its prompt (the task.md body): the files in its workspace

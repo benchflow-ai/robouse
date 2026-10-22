@@ -4,12 +4,20 @@ Notable changes to the `robouse` package, newest first. Versions follow [semanti
 
 ## 0.6.1 (2026-10-21)
 
-NVIDIA's Flora models label trial recordings (`robouse flora export` and `import`). The docs give the first runs on real models of Gemini CLI, Kinex, Jev and the `chemlab` suite, and a limitation of Gemini CLI that those runs found.
+NVIDIA's Flora models label trial recordings (`robouse flora export` and `import`), and agents can no longer change the Kinex install that every `kinex` trial runs. The docs give the first runs on real models of Gemini CLI, Kinex, Jev and the `chemlab` suite, and a limitation of Gemini CLI that those runs found.
+
+### Security
+
+- The sandbox lets agents read but not change the Kinex install that every `kinex` trial runs, on macOS and Linux: the `node_modules` folder of an npm install, which holds Kinex's launcher, its packages and the Python helpers its tools and drivers import. Kinex's Python processes keep their bytecode in the trial's workspace (`PYTHONPYCACHEPREFIX`) and ignore `__pycache__` folders next to the sources. Before, Kinex's tools wrote bytecode into that shared install, which agents could write to as well, so one trial's agent could leave code there that a later trial ran. A harness can name paths its agent may read but not write.
 
 ### Added
 
 - `robouse flora export` and `robouse flora import`: NVIDIA's Flora models label trial recordings. Flora-Rewarder gives an outcome score from 1 to 5 and a failure, suboptimal or normal label for every half second, with reasons; Flora-TempSeg and Flora-Captioner give timestamped captions. The models and NVIDIA's inference scripts are under the NVIDIA License (research or evaluation use only), so Robo Use neither includes nor downloads them: `export` writes the input files of NVIDIA's scripts for finished trials (each trial's recording, the Rewarder's jobs with the task's instruction, and the captioning pipeline's jobs), the scripts run unmodified on a GPU machine with 80 GB, and `import` writes each trial's `grader/flora.json`, with the agent's steps during each labelled stretch, and prints how often Flora's outcome agrees with the simulator's verdict ([Annotate trials with Flora](docs/flora.md)). `--instructions FILE` gives named tasks the instruction Flora sees (for descriptions that also describe the agent's setup), and `grader/flora.json` keeps each dense clip's own labels beside the stitched ones. On an H100, over 21 trials of claude-opus-5-5, Flora's outcome agreed with the simulator on 11 (the simulator solved 19, Flora gave 9 of those a 5); the docs page has the scores, Flora's reasons, the dense labels and captions, and what to set without a CUDA toolkit (`VLLM_USE_FLASHINFER_SAMPLER=0`).
 - `robouse report` metrics `flora_agree` (the share of trials where Flora's outcome agrees with the simulator) and `flora_progress` (Flora's progress estimate), from `grader/flora.json`.
+
+### Changed
+
+- The model gateway uses the model price list LiteLLM ships with (`LITELLM_LOCAL_MODEL_COST_MAP`), instead of downloading LiteLLM's newest list from GitHub each time a trial starts. The spend cap and each trial's cost come from Robo Use's own price table, as before.
 
 ### Documentation
 
