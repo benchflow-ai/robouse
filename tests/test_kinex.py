@@ -472,7 +472,7 @@ def _launch_env(tmp_path, monkeypatch):
 
     monkeypatch.setattr(harnesses, "_gateway", fake_gateway)
     monkeypatch.setenv("GLM_API_KEY", "sk-SECRET")  # the runner's environment; never the agent's
-    exe = tmp_path / "kinex" / "bin" / "kinex.mjs"
+    exe = tmp_path / "kinex-1.0.0" / "node_modules" / "kinex" / "bin" / "kinex.mjs"  # an npm install, as documented
     exe.parent.mkdir(parents=True)
     exe.write_text("")
     venv = tmp_path / "kinex-venv"
@@ -526,6 +526,9 @@ def test_kinex_launch_is_isolated_and_holds_no_key(tmp_path, monkeypatch) -> Non
     assert not any(s in f.read_text() for f in root.rglob("*") if f.is_file() for s in ("sk-SECRET", gw.key))
     # Kinex's managed Python is the shared environment, linked
     assert (ws / ".kinex" / "python" / ".venv").resolve() == venv.resolve()
+    # the npm install every Kinex trial runs is read-only to the agent, and Python's bytecode stays in this trial
+    assert launch.read_only == [Path(os.path.realpath(tmp_path / "kinex-1.0.0" / "node_modules"))]
+    assert e["PYTHONPYCACHEPREFIX"] == str(root / "pycache")
     cmd = launch.cmd
     assert (
         cmd[1] == str(ws / ".robouse" / "bin" / "roboenv_bridge.py")
@@ -622,6 +625,35 @@ def test_agents_can_read_kinex_s_python_but_not_change_it(tmp_path, monkeypatch)
     assert ("--ro-bind", real) in pairs and args.index(real) > args.index(os.path.realpath(cache))
 
 
+def test_agents_can_read_kinex_s_install_but_not_change_it(tmp_path) -> None:
+    """Every Kinex trial runs Kinex's npm install: the node_modules folder of its launcher, with Kinex's packages and
+    the Python helpers its tools and drivers import. A file an agent left there (a changed module, a __pycache__ file)
+    would run in a later trial, so the sandbox lets agents read it, never write it."""
+    from robouse.harnesses.kinex import install
+    from robouse.runner import sandbox
+
+    mods = tmp_path / "kinex-1.0.0" / "node_modules"
+    exe = mods / "kinex" / "bin" / "kinex.mjs"
+    exe.parent.mkdir(parents=True)
+    exe.write_text("")
+    real = os.path.realpath(mods)
+    assert install(["/opt/node/bin/node", os.path.realpath(exe)]) == Path(real)
+    assert install([str(tmp_path / "bin" / "kinex")]) is None  # a launcher outside an npm install
+    ws = tmp_path / "ws"
+    ws.mkdir()
+    prof = sandbox.sandbox_profile(ws, read_only=[mods])
+    rule = f'(deny file-write* (subpath "{real}"))'
+    assert rule in prof and f'(allow file-read* file-write* (subpath "{real}"))' not in prof
+    # later rules win: after the workspace's
+    assert prof.index(rule) > prof.index(f'(allow file-read* file-write* (subpath "{os.path.realpath(ws)}"))')
+    args = sandbox.bwrap_args(ws, str(tmp_path / "sock"), [], read_only=[mods])
+    assert ("--ro-bind", real) in list(zip(args, args[1:], strict=False))
+    # never a folder that holds the workspace (it stays writable), nor one inside a denied folder (it stays hidden)
+    assert sandbox._read_only([tmp_path], ws, []) == []
+    assert sandbox._read_only([mods], ws, [os.path.realpath(tmp_path / "kinex-1.0.0")]) == []
+    assert sandbox._read_only([mods, tmp_path / "missing"], ws, []) == [real]
+
+
 def test_the_trajectory_gives_each_kinex_tool_call_the_requests_it_made(tmp_path) -> None:
     """A Kinex session (Pi's format) timestamps each tool call's result; the bridge stamps its requests with the time it
     sent them. Each request belongs to the tool call running then; the bridge's start-up requests to none."""
@@ -713,7 +745,7 @@ def outside_tmp():
 FAKE_KINEX = r"""#!/usr/bin/env python3
 # Stands in for `kinex run`: loads each device's driver as Kinex would (its folder, its connection.json) with a
 # stand-in for Kinex's runtime Python, drives the robot through them, writes what it saw, and ends the episode.
-import importlib.util, json, pathlib, subprocess, sys
+import importlib.util, json, os, pathlib, subprocess, sys
 
 ws = pathlib.Path.cwd()
 stub = ws / ".robouse" / "kinex-stub" / "kinex"
@@ -740,6 +772,18 @@ try:
     seen["venv_writable"] = True
 except OSError:
     seen["venv_writable"] = False
+# this stand-in sits in an npm install, as Kinex does: try to leave a file there, and import the install's Python helper
+# from a child process with this environment, as Kinex's tools do
+install = next(p for p in pathlib.Path(__file__).resolve().parents if p.name == "node_modules")
+try:
+    open(install / "kinex" / "planted.txt", "w").write("x")
+    seen["install_writable"] = True
+except OSError:
+    seen["install_writable"] = False
+helpers = install / "@kinex" / "core" / "assets" / "python"
+subprocess.run([sys.executable, "-c", "import kinex_helper"], env={**os.environ, "PYTHONPATH": str(helpers)}, check=True)
+prefix = pathlib.Path(os.environ.get("PYTHONPYCACHEPREFIX", "/nonexistent")).resolve()
+seen["pycache"] = [str(p.relative_to(ws.resolve())) for p in [prefix] if any(p.rglob("kinex_helper*.pyc"))]
 print(json.dumps(seen))
 subprocess.run(["robo", "done", "fake kinex"], check=True)
 """
@@ -748,7 +792,8 @@ subprocess.run(["robo", "done", "fake kinex"], check=True)
 def test_a_kinex_trial_runs_under_the_sandbox(tmp_path, monkeypatch, outside_tmp) -> None:
     """The whole launch under this platform's sandbox (Seatbelt on macOS, bubblewrap on Linux), with a stand-in for
     Kinex: the bridge serves on its loopback port, the drivers reach it, the devices move the robot through the episode
-    server, and Kinex's Python environment (linked into the workspace) can be read but not changed."""
+    server, and Kinex's Python environment (linked into the workspace) and its install can be read but not changed.
+    Python's bytecode for the install's helpers stays in the trial's workspace."""
     pytest.importorskip("mujoco")
     pytest.importorskip("benchflow")  # the model registry
     from types import SimpleNamespace
@@ -765,7 +810,12 @@ def test_a_kinex_trial_runs_under_the_sandbox(tmp_path, monkeypatch, outside_tmp
     (venv / "bin").mkdir(parents=True)
     (venv / "bin" / "python3").symlink_to(sys.executable)
     monkeypatch.setenv("ROBOUSE_CACHE_DIR", str(cache))
-    exe = outside_tmp / "fake-kinex"
+    install = outside_tmp / "kinex-1.0.0" / "node_modules"  # an npm install, with a Python helper as @kinex/core has
+    exe = install / "kinex" / "bin" / "fake-kinex"
+    exe.parent.mkdir(parents=True)
+    helpers = install / "@kinex" / "core" / "assets" / "python"
+    helpers.mkdir(parents=True)
+    (helpers / "kinex_helper.py").write_text("VALUE = 1\n")
     # an explicit interpreter: macOS's /usr/bin/python3 shim loses its output under Seatbelt when stdout is a file in
     # the (denied) trial folder
     exe.write_text(FAKE_KINEX.replace("#!/usr/bin/env python3", "#!" + sys.executable, 1))
@@ -795,5 +845,8 @@ def test_a_kinex_trial_runs_under_the_sandbox(tmp_path, monkeypatch, outside_tmp
     assert seen["write"] is True and seen["wait"]["ok"] is True and seen["wait"]["waited_s"] == pytest.approx(1.0)
     assert seen["arm"][0] == pytest.approx(0.05, abs=0.001) and seen["camera"] > 1000
     assert seen["venv_writable"] is False and not (venv / "planted.txt").exists()
+    assert seen["install_writable"] is False and not (install / "kinex" / "planted.txt").exists()
+    # the helper's bytecode went to the trial's own folder, never next to it in the install
+    assert seen["pycache"] == [".robouse/kinex/pycache"] and not list(install.rglob("__pycache__"))
     assert res["outcome"] == "done" and res["steps"] == 20
     assert "roboenv bridge: task arc-gravity" in (trial / "agent" / "stderr.txt").read_text()

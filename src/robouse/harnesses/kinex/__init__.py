@@ -19,7 +19,10 @@ per-trial gateway key from $ROBOUSE_GATEWAY_KEY (no key is written to a file).
 Kinex's tools and drivers run in its managed Python (`.kinex/python/.venv`). Each trial's is a link to one shared,
 read-only environment with Kinex's runtime packages (ROBOUSE_KINEX_VENV), which the sandbox lets agents read and not
 write, so no trial installs packages. The bridge runs on its Python too: the first python3 on PATH may be older than the
-3.11 it needs (macOS's own is 3.9).
+3.11 it needs (macOS's own is 3.9). Kinex's own install, which every Kinex trial runs (`install`: the node_modules folder
+of an npm install, with Kinex's packages and the Python helpers its tools and drivers import), is read-only to the agent
+as well (`Launch.read_only`). Kinex's Python processes keep their bytecode in the trial's workspace (PYTHONPYCACHEPREFIX)
+and ignore any in __pycache__ folders next to the sources, so no trial leaves code there that a later trial runs.
 
 The trajectory is Pi's session file, copied to agent/pi_session.jsonl and converted by runner/atif.py.
 
@@ -82,6 +85,13 @@ def launcher() -> list[str]:
     if real.endswith((".mjs", ".js", ".cjs")):
         return [config.env("ROBOUSE_KINEX_NODE") or shutil.which("node") or "node", real]
     return [real]
+
+
+def install(exe: list[str]) -> Path | None:
+    """The Kinex install every Kinex trial runs from: the node_modules folder that holds the launcher (`launcher()`'s
+    resolved bin/kinex.mjs of an npm install), with Kinex's own packages, the Python helpers its tools and drivers
+    import (@kinex/core's assets/python) and its dependencies. None for a launcher outside a node_modules folder."""
+    return next((p for p in Path(exe[-1]).parents if p.name == "node_modules"), None)
 
 
 def _free_port() -> int:
@@ -166,6 +176,9 @@ def build(model: str, prompt: str, workspace: Path, task: Any, env: dict) -> Any
             "PI_OFFLINE": "1",
             "PI_SKIP_VERSION_CHECK": "1",
             "PI_TELEMETRY": "0",
+            # Kinex passes its environment on to its Python tools and drivers: their bytecode stays in this trial, and
+            # __pycache__ folders in the shared install are not read
+            "PYTHONPYCACHEPREFIX": str(root / "pycache"),
             "ROBOUSE_GATEWAY_KEY": gw.key,
             "ROBOUSE_GATEWAY_URL": gw.url,  # also lets the macOS sandbox allow this local port
             "ROBOENV_ENDPOINT": f"http://127.0.0.1:{_free_port()}",  # the bridge's port, allowed the same way
@@ -192,4 +205,5 @@ def build(model: str, prompt: str, workspace: Path, task: Any, env: dict) -> Any
     ]
     launch = _gateway_launch(gw, ref, cmd, env)
     launch.notes["collect"] = [["kinex/data/agent/sessions", "agent/pi_session.jsonl"]]
+    launch.read_only = [p] if (p := install(exe)) else []
     return launch

@@ -61,6 +61,10 @@ MODEL_ROUTES = (
     "/v1/models",
     "/models",
 )
+# LiteLLM's own settings for every proxy: no API docs pages, and the model price list bundled with LiteLLM rather than
+# the newest one, which LiteLLM otherwise downloads from GitHub each time it starts. The spend cap and the trial's cost
+# come from Robo Use's own price table (ROBOUSE_GATEWAY_PRICE), not from LiteLLM's list
+PROXY_ENV = {"DOCS_URL": "", "NO_DOCS": "true", "LITELLM_LOCAL_MODEL_COST_MAP": "True"}
 
 
 @dataclass
@@ -326,8 +330,7 @@ def start(
         **({"ROBOUSE_GATEWAY_DROP_THINKING": "1"} if drop_thinking else {}),
         **({"ROBOUSE_GATEWAY_MOVE_TOOL_IMAGES": "1"} if moves_tool_result_images(route, protocol) else {}),
         **({"ROBOUSE_GATEWAY_KEEP_SIGNATURES": "1"} if keeps_signatures(route, protocol) else {}),
-        "DOCS_URL": "",
-        "NO_DOCS": "true",
+        **PROXY_ENV,
     }
     log = open(d / "proxy.log", "w")  # noqa: SIM115 - the child keeps its own handle
     proc = subprocess.Popen(

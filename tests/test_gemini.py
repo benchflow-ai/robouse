@@ -375,6 +375,40 @@ def test_the_trial_key_opens_only_the_model_routes(gemini_standin, tmp_path, mon
     assert "allowed_routes" in (tmp_path / "trial" / "gateway" / "config.yaml").read_text()
 
 
+def test_the_gateway_uses_litellm_s_bundled_price_list(gemini_standin, tmp_path, monkeypatch) -> None:
+    """LiteLLM downloads its newest model price list from GitHub each time it starts, unless told to use the one it
+    ships with. The gateway's proxy is told to (the spend cap and the trial's cost come from Robo Use's own price
+    table), and the trial's model still answers on LiteLLM's Gemini route, which LiteLLM's bundled list does not know."""
+    import subprocess
+    from types import SimpleNamespace
+
+    from robouse.harnesses import gateway
+
+    assert gateway.PROXY_ENV["LITELLM_LOCAL_MODEL_COST_MAP"] == "True"
+    pytest.importorskip("litellm")
+    envs: list[dict] = []
+
+    def popen(*args, **kwargs):
+        envs.append(kwargs["env"])
+        return subprocess.Popen(*args, **kwargs)
+
+    shim = SimpleNamespace(Popen=popen, STDOUT=subprocess.STDOUT, TimeoutExpired=subprocess.TimeoutExpired)
+    monkeypatch.setattr(gateway, "subprocess", shim)
+    gw = harnesses._gateway(
+        models.resolve("mini-swe-agent", "gemini/gemini-4-argon"), _gateway_env(tmp_path), "openai-completions"
+    )
+    try:
+        body = {"model": gw.model, "messages": [{"role": "user", "content": "Solve the task."}]}
+        headers = {"Content-Type": "application/json", "Authorization": "Bearer " + gw.key}
+        req = urllib.request.Request(gw.url + "/v1/chat/completions", json.dumps(body).encode(), headers)
+        with urllib.request.urlopen(req, timeout=60) as r:
+            assert r.status == 200
+    finally:
+        gw.stop()
+    assert len(envs) == 1 and envs[0]["LITELLM_LOCAL_MODEL_COST_MAP"] == "True"
+    assert [r.get("call") for r in gemini_standin] == ["generateContent"]
+
+
 def test_a_lone_tool_result_image_reaches_an_openai_compatible_provider_as_an_image(
     monkeypatch, clean_env, tmp_path
 ) -> None:

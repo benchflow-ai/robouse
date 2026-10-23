@@ -51,6 +51,7 @@ from pathlib import Path
 from typing import Any
 
 from ..core.protocol import is_runner_request
+from .robo_calls import unexplained
 
 FPS = 30
 OBS_LIMIT = 4000  # characters kept of one tool result (head and tail)
@@ -200,12 +201,24 @@ def _call(cid: str, name: str, args: dict, command: str | None = None) -> dict:
         "is_error": None,
         "images": [],
         "trace": [],
+        "epoch_start": None,  # when the agent made the call (Claude Code stamps its events)
         "epoch_end": None,
     }
 
 
 # ---------------------------------------------------------------------------------------------
 # Claude Code stream-json
+
+
+def _event_epoch(ev: dict) -> float | None:
+    """The time Claude Code stamped on a stream-json event (ISO 8601), or None."""
+    ts = ev.get("timestamp")
+    if not isinstance(ts, str):
+        return None
+    try:
+        return datetime.fromisoformat(ts.replace("Z", "+00:00")).timestamp()
+    except ValueError:
+        return None
 
 
 def _parse_claude(events: list[dict], trial: Path) -> tuple[list[dict], dict]:
@@ -266,6 +279,7 @@ def _parse_claude(events: list[dict], trial: Path) -> tuple[list[dict], dict]:
                     name = str(b.get("name") or "tool")
                     cmd = inp.get("command") if name == "Bash" and isinstance(inp.get("command"), str) else None
                     c = _call(str(b.get("id") or f"call-{len(by_call)}"), name, inp, cmd)
+                    c["epoch_start"] = _event_epoch(ev)
                     st["calls"].append(c)
                     by_call[c["id"]] = c
             if texts:
@@ -293,6 +307,7 @@ def _parse_claude(events: list[dict], trial: Path) -> tuple[list[dict], dict]:
                         continue
                     c["output"] = text
                     c["is_error"] = bool(b.get("is_error"))
+                    c["epoch_end"] = _event_epoch(ev)
                     if isinstance(out, list):
                         c["images"] += [x for x in out if isinstance(x, dict) and x.get("type") == "image"]
                 elif b.get("type") == "text" and str(b.get("text", "")).strip():
@@ -1239,6 +1254,88 @@ def _finite(x: Any) -> bool:
     return isinstance(x, int | float) and not isinstance(x, bool) and math.isfinite(x)
 
 
+def _offset_intervals(
+    times: dict[int, float], spans: list[tuple[float, float]]
+) -> tuple[int, list[tuple[float, float]]]:
+    """The clock offsets (the epoch of the episode's t = 0) that put the most trace entries inside some span: that
+    count, and every interval of offsets that does (several when the calls are short and evenly spaced)."""
+    events = sorted((x - t, kind, j) for j, t in times.items() for a, b in spans for x, kind in ((a, 0), (b, 1)))
+
+    def sweep(want: int | None) -> tuple[int, list[tuple[float, float]]]:
+        inside: dict[int, int] = {}
+        covered = best = 0
+        out: list[tuple[float, float]] = []
+        for k, (x, kind, j) in enumerate(events):
+            before = inside.get(j, 0)
+            inside[j] = before + (1 if kind == 0 else -1)
+            if kind == 0 and before == 0:
+                covered += 1
+            elif kind == 1 and inside[j] == 0:
+                covered -= 1
+            best = max(best, covered)
+            if want is not None and covered == want:
+                out.append((x, events[k + 1][0] if k + 1 < len(events) else x))
+        return best, out
+
+    most, _ = sweep(None)
+    merged: list[tuple[float, float]] = []
+    for lo, hi in sorted(sweep(most)[1]):
+        if merged and lo <= merged[-1][1] + 1e-9:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], hi))
+        else:
+            merged.append((lo, hi))
+    return most, merged
+
+
+def _align_by_call_times(
+    steps: list[dict], agent_entries: list[int], trace: list[dict], anchor: float | None
+) -> list[int] | None:
+    """Assign agent trace entries to the shell calls that sent them, by the transcript's own timestamps (Claude Code
+    stamps the event that makes each tool call and the one that returns its result). Counting the robo commands a
+    call wrote, as _align does, cannot see the requests of a loop or of a script the agent wrote; the clock can.
+
+    The trace's t counts from the episode's start; the start is put on the transcript's clock by the offset that places
+    every entry inside exactly one shell call. When several offsets do (short, evenly spaced calls), the one under which
+    every call's robo commands explain its entries wins (robo_calls.unexplained: a literal command matches its own
+    request), then the one nearest `anchor` (the episode's start as its result file's time gives it). Returns [] with
+    every entry assigned (call['trace']), or None when the calls have no timestamps or no offset fits every entry: the
+    caller then falls back to _align. A call without a result (the agent was stopped while it ran) runs to the end."""
+    calls = [c for st in steps for c in st["calls"] if isinstance(c.get("command"), str)]
+    if not calls or not agent_entries:
+        return None
+    if any(c.get("epoch_start") is None for c in calls):
+        return None
+    # a call without a result (the agent was stopped while it ran) runs on to the end
+    spans = [
+        (float(c["epoch_start"]), math.inf if c.get("epoch_end") is None else float(c["epoch_end"])) for c in calls
+    ]
+    times = {j: float(trace[j].get("t") or 0.0) for j in agent_entries}
+    most, intervals = _offset_intervals(times, spans)
+    if most < len(agent_entries):
+        return None
+    best: tuple[tuple[int, float], dict[int, list[int]]] | None = None
+    for lo, hi in intervals:
+        off = (lo + hi) / 2 if math.isfinite(hi) else max(lo, anchor if anchor is not None else lo)
+        owner: dict[int, list[int]] = {}
+        for j in agent_entries:
+            inside = [i for i, (a, b) in enumerate(spans) if a <= off + times[j] <= b]
+            if len(inside) != 1:
+                break
+            owner.setdefault(inside[0], []).append(j)
+        else:
+            bad = sum(
+                unexplained(calls[i]["command"], [trace[j].get("req") or {} for j in js]) for i, js in owner.items()
+            )
+            dist = 0.0 if anchor is None or lo <= anchor <= hi else min(abs(anchor - lo), abs(anchor - hi))
+            if best is None or (bad, dist) < best[0]:
+                best = ((bad, dist), owner)
+    if best is None or best[0][0] > 0:
+        return None
+    for i, c in enumerate(calls):
+        c["trace"] = list(best[1].get(i, []))
+    return []
+
+
 def _align_by_time(steps: list[dict], agent_entries: list[int], trace: list[dict], epoch0: float) -> list[int]:
     """Assign agent trace entries to the tool calls running when the episode server got them, for transcripts that
     timestamp each call's result (Pi sessions): a call owns the entries after the previous call's result (or after its
@@ -1497,7 +1594,14 @@ def build(trial: Path, harness: str | None = None) -> tuple[dict, dict]:
         if harness == "kinex" and epoch0 is not None:
             leftover = _align_by_time(steps, agent_entries, trace, epoch0)
         else:
-            leftover = _align(steps, agent_entries, trace)
+            timed = _align_by_call_times(steps, agent_entries, trace, epoch0)
+            if timed is not None:
+                leftover = timed
+                notes.append(
+                    "Each robo request is placed in the tool call that sent it by the transcript's timestamps."
+                )
+            else:
+                leftover = _align(steps, agent_entries, trace)
         if leftover:
             notes.append(
                 f"{len(leftover)} robo request(s) in the trace could not be matched to a tool call; "

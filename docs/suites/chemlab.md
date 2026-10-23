@@ -110,9 +110,25 @@ Each check ended `valid`. The suites page's table is generated from these runs (
 
 `tests/test_chemlab.py` runs every reference solution and no-op control in process when the files are there, and skips those tests without them.
 
+## Runs with a model
+
+2026-10-21: Claude Code 2.1.304 with `claude-opus-5-5` (`--harness claude-code --model claude-opus-5-5`) ran each of the 7 tasks once, with Robo Use 0.6.0 (a clean clone at the release's commit) and ChemLab-Assets 1.3.0 from `robouse fetch-assets --chemlab`, on Linux x86_64 without the sandbox (`ROBOUSE_SANDBOX=0`), with each task's default budget, after each task's reference solution had scored 1 and its no-op control 0 on the same commit. All 7 scored 1:
+
+| Task | Reward | Steps | Wall time |
+|---|---|---|---|
+| `chemlab-balance-draft-shield` | 1.0 (done) | 257 of 600 | 37.8 s |
+| `chemlab-drying-oven-door` | 1.0 (done) | 307 of 900 | 40.2 s |
+| `chemlab-fume-hood-sash` | 1.0 (done) | 399 of 900 | 58.0 s |
+| `chemlab-hotplate-stirring` | 1.0 (done) | 189 of 600 | 44.7 s |
+| `chemlab-hotplate-temperature` | 1.0 (done) | 159 of 600 | 34.6 s |
+| `chemlab-moisture-analyzer-lid` | 1.0 (done) | 77 of 500 | 40.0 s |
+| `chemlab-shaker-hood` | 1.0 (done) | 530 of 900 | 85.2 s |
+
+Claude Code reported $1.14 for the 7 sessions at list prices. Since the sandbox was off, every tool call was read. The agents ran `robo` and read their own camera images; in two trials they drove a door or a hood along its arc with a loop that computed the points with `python3 -c`, which the shaker trial wrote as a script in `/tmp`. Apart from that script, no trial read or wrote a file outside its workspace, none used the network, and every request in each episode's trace matched a `robo` command of the Bash call that was running when the server got it. One try per task is not a measured success rate.
+
 ## Not done yet
 
-- No hub dataset (see above) and no runs with model harnesses.
+- No hub dataset (see above).
 - State observations only: there is no vision variant of these tasks yet.
 - Only joints the tasks operate are bridged. Push keys and buttons (the hotplate's knob push, the fume hood's light and fan switches, the panels' keys) move and spring back, but the scene does not yet send their presses to the runtime.
 - No randomized start states or instrument placements: every task has one layout.
