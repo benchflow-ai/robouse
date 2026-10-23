@@ -2,7 +2,7 @@
 
 Notable changes to the `robouse` package, newest first. Versions follow [semantic versioning](https://semver.org/); while the version is below 1.0, a minor version can change interfaces. Dates are PyPI release dates (UTC).
 
-## 0.6.1 (2026-10-22)
+## 0.6.1 (2026-10-23)
 
 NVIDIA's Flora models label trial recordings (`robouse flora export` and `import`), and agents can no longer change the Kinex install that every `kinex` trial runs. The docs give the first runs on real models of Gemini CLI, Kinex, Jev and the `chemlab` suite, and a limitation of Gemini CLI that those runs found.
 
