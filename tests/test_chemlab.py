@@ -113,6 +113,145 @@ def test_urdf_becomes_a_scene_with_its_joints_proxies_and_coloured_meshes(tmp_pa
     assert list(d.xpos[m.body("i_door").id]) == pytest.approx([0.2, -0.15, 0.0])
 
 
+SCENE_CFG = {"cameras": {"front": ((0, -1.5, 1.0), (0, 0, 0.2), 45)}}
+
+
+def _hand_frame(m, d, points):
+    """Points (world) in the floating hand's frame: its origin is the tool point, its -z the tool axis."""
+    import numpy as np
+
+    b = m.body("hand").id
+    return (np.asarray(points) - d.xpos[b]) @ d.xmat[b].reshape(3, 3)
+
+
+def _geom_points(m, d, g):
+    """A geom's mesh vertices or box corners, in world coordinates."""
+    import mujoco
+    import numpy as np
+
+    if m.geom_type[g] == mujoco.mjtGeom.mjGEOM_MESH:
+        k = m.geom_dataid[g]
+        local = m.mesh_vert[m.mesh_vertadr[k] : m.mesh_vertadr[k] + m.mesh_vertnum[k]]
+    else:
+        local = np.array([[a, b, c] for a in (-1, 1) for b in (-1, 1) for c in (-1, 1)]) * m.geom_size[g]
+    return local @ d.geom_xmat[g].reshape(3, 3).T + d.geom_xpos[g]
+
+
+@pytest.mark.skipif(not HAVE_MUJOCO, reason="needs MuJoCo")
+def test_the_gripper_is_menageries_franka_hand(tmp_path) -> None:
+    """The floating gripper is MuJoCo Menagerie's Franka Hand, from the pinned Menagerie files robouse uses for the
+    Panda: the hand and both fingers with their inertias, meshes, materials and collision geometry (the hand's mesh,
+    and each finger's mesh and five fingertip pads), all of it colliding with the instrument and the bench."""
+    import mujoco
+    import numpy as np
+
+    from robouse.assets import asset_root
+    from robouse.backends.chemlab import scene
+
+    m = scene.scene_model(scene.read_urdf(_cabinet(tmp_path)), SCENE_CFG)
+    panda = mujoco.MjModel.from_xml_path(str(asset_root() / scene.HAND_MODEL))
+    for name in ("hand", "left_finger", "right_finger"):
+        ours, theirs = m.body(scene.HAND + name), panda.body(name)
+        assert ours.mass[0] == pytest.approx(theirs.mass[0]) and list(ours.inertia) == pytest.approx(theirs.inertia)
+        mine = [g for g in range(m.ngeom) if m.geom_bodyid[g] == ours.id]
+        orig = [g for g in range(panda.ngeom) if panda.geom_bodyid[g] == theirs.id]
+        assert len(mine) == len(orig)
+        for g, h in zip(mine, orig, strict=True):
+            assert m.geom_type[g] == panda.geom_type[h] and list(m.geom_size[g]) == pytest.approx(panda.geom_size[h])
+            assert (m.geom_contype[g] == 0) == (panda.geom_contype[h] == 0)  # visual or collision, as Menagerie's
+            if m.geom_matid[g] >= 0 or panda.geom_matid[h] >= 0:
+                assert list(m.mat_rgba[m.geom_matid[g]]) == pytest.approx(panda.mat_rgba[panda.geom_matid[h]])
+            if m.geom_type[g] == mujoco.mjtGeom.mjGEOM_MESH:
+                a, b = m.geom_dataid[g], panda.geom_dataid[h]
+                va = m.mesh_vert[m.mesh_vertadr[a] : m.mesh_vertadr[a] + m.mesh_vertnum[a]]
+                vb = panda.mesh_vert[panda.mesh_vertadr[b] : panda.mesh_vertadr[b] + panda.mesh_vertnum[b]]
+                assert va.shape == vb.shape and np.allclose(va, vb)
+        colliders = [g for g in mine if m.geom_contype[g]]
+        boxes = [g for g in colliders if m.geom_type[g] == mujoco.mjtGeom.mjGEOM_BOX]
+        assert len(colliders) == (1 if name == "hand" else 6) and len(boxes) == (0 if name == "hand" else 5)
+        assert all(m.geom_contype[g] == 1 and m.geom_conaffinity[g] == 6 for g in colliders)
+    # only the hand's eight meshes are loaded, not the arm's
+    assert sorted(m.mesh(k).name for k in range(m.nmesh) if m.mesh(k).name.startswith(scene.HAND)) == [
+        scene.HAND + n for n in ("finger_0", "finger_1", "hand_0", "hand_1", "hand_2", "hand_3", "hand_4", "hand_c")
+    ]
+
+
+@pytest.mark.skipif(not HAVE_MUJOCO, reason="needs MuJoCo")
+def test_the_fingers_open_and_close_over_the_pandas_travel(tmp_path) -> None:
+    """Each finger slides 0 to 0.04 m, the Panda's travel, and the two move together; open, the fingertip pads are 8 cm
+    apart, centred on the tool point (the floating body's origin) across the tool axis and along it."""
+    import mujoco
+    import numpy as np
+
+    from robouse.backends.chemlab import scene
+
+    m = scene.scene_model(scene.read_urdf(_cabinet(tmp_path)), SCENE_CFG)
+    d = mujoco.MjData(m)
+    j1, j2 = (m.joint(scene.HAND + n) for n in ("finger_joint1", "finger_joint2"))
+    assert list(m.jnt_range[j1.id]) == pytest.approx([0, scene.FINGER_OPEN]) == list(m.jnt_range[j2.id])
+    assert scene.FINGER_OPEN == 0.04
+    act = m.actuator(scene.HAND + "actuator8").id
+    pads = [
+        g
+        for g in range(m.ngeom)
+        if m.geom_type[g] == mujoco.mjtGeom.mjGEOM_BOX
+        and m.geom_contype[g]
+        and m.body(m.geom_bodyid[g]).name.startswith(scene.HAND)
+    ]
+    for ctrl, q in (
+        (scene.GRIP_OPEN_CTRL, 0.04),
+        (0.0, 0.0),
+        (scene.GRIP_OPEN_CTRL / 2, 0.02),
+        (scene.GRIP_OPEN_CTRL, 0.04),
+    ):
+        d.ctrl[act] = ctrl
+        for _ in range(400):
+            mujoco.mj_step(m, d)
+        q1, q2 = d.qpos[m.jnt_qposadr[j1.id]], d.qpos[m.jnt_qposadr[j2.id]]
+        assert q1 == pytest.approx(q, abs=1e-3) and q2 == pytest.approx(q, abs=1e-3), (ctrl, q1, q2)
+        local = np.vstack([_hand_frame(m, d, _geom_points(m, d, g)) for g in pads])
+        inner = np.abs(local[:, 1]).min()  # the pads' faces nearest the tool point, across the closing direction
+        assert 2 * inner == pytest.approx(2 * q, abs=1.5e-3)
+        assert local[:, 0].mean() == pytest.approx(0, abs=1e-3) and local[:, 1].mean() == pytest.approx(0, abs=1e-3)
+        big = [g for g in pads if m.geom_size[g][0] > 0.008]  # each finger's large pad is centred on the tool point
+        assert [_hand_frame(m, d, d.geom_xpos[g])[2] for g in big] == pytest.approx([0, 0], abs=1e-3)
+
+
+@pytest.mark.skipif(not HAVE_MUJOCO, reason="needs MuJoCo")
+def test_the_hand_is_the_size_the_tasks_give(tmp_path) -> None:
+    """scene.HAND_SIZE, which the task instructions state, measured on the model (to 1 mm)."""
+    import mujoco
+    import numpy as np
+
+    from robouse.backends.chemlab import scene
+
+    m = scene.scene_model(scene.read_urdf(_cabinet(tmp_path)), SCENE_CFG)
+    d = mujoco.MjData(m)
+    mujoco.mj_forward(m, d)  # the fingers at 0, closed
+
+    def collider(body: str, kind) -> np.ndarray:
+        b = m.body(scene.HAND + body).id
+        gs = [g for g in range(m.ngeom) if m.geom_bodyid[g] == b and m.geom_contype[g] and m.geom_type[g] == kind]
+        return np.vstack([_hand_frame(m, d, _geom_points(m, d, g)) for g in gs])
+
+    hand = collider("hand", mujoco.mjtGeom.mjGEOM_MESH)
+    finger = collider("left_finger", mujoco.mjtGeom.mjGEOM_MESH)
+    near = hand[hand[:, 2] < hand[:, 2].min() + 0.018]  # the hand's body where the fingers leave it
+    root = finger[finger[:, 2] > hand[:, 2].min() - 0.004]
+    got = {
+        "gap": 2 * scene.FINGER_OPEN,
+        "finger_width": np.ptp(finger[:, 0]),
+        "finger_thickness": np.ptp(root[:, 1]),
+        "finger_out": hand[:, 2].min() - finger[:, 2].min(),
+        "tip": -finger[:, 2].min(),
+        "palm": hand[:, 2].min(),
+        "hand_length": np.ptp(hand[:, 1]),
+        "hand_width": np.ptp(near[:, 0]),
+        "hand_width_max": np.ptp(hand[:, 0]),
+    }
+    assert got == pytest.approx(scene.HAND_SIZE, abs=1e-3)
+
+
 def _fake_runtime():
     """A runtime with a sash that creeps down to 0.5 when it is let go above it."""
 
