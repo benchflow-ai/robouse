@@ -1,6 +1,6 @@
 # CLIs
 
-`robouse` runs tasks, trials and runs; `robo` is the agent's only way to act. The help below is the output of `robouse 0.6.0`.
+`robouse` runs tasks, trials and runs; `robo` is the agent's only way to act. The help below is the output of `robouse 0.6.1`.
 
 ```console
 $ robouse --help

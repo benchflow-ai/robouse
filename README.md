@@ -112,6 +112,11 @@ The agent reads the task, looks with `robo observe`, moves with `robo move-to` a
 
 Models from other providers (`--model provider/model`, such as `glm/glm-5.3`, `gemini/gemini-4-argon` or `openrouter/elorian/glimpse`) go through a per-trial model gateway with a spend cap. It needs Python 3.12 or newer and `pip install 'robouse[llm]'`. [Run agents and VLAs](https://robouse.ai/docs/run-agents/) covers every harness and model.
 
+## New in 0.6.1
+
+- **NVIDIA's Flora** on trial recordings: `robouse flora export` writes the input files of NVIDIA's Flora scripts for finished trials, and `robouse flora import` reads back an outcome score, a label for every half second and captions ([Annotate trials with Flora](https://robouse.ai/docs/flora/)). The models are under NVIDIA's license and run on your own GPU machine; Robo Use neither includes nor downloads them.
+- **Kinex's install is read-only to the agent**, and Kinex's Python keeps its bytecode in the trial's own folder, so no trial can leave code that a later trial runs.
+
 ## New in 0.6.0
 
 - **NVIDIA's [ASPIRE](https://research.nvidia.com/labs/gear/aspire/)** as a harness. The agent practises on other seeds of its task and keeps verified skills in a library. Then one frozen program runs on the scored episode, which stays locked until then.
