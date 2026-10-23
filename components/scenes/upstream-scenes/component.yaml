@@ -15,6 +15,7 @@ suites:
 - dexhand
 - dexjoco
 - dmcontrol
+- embodied-playground
 - gpu-genesis
 - gpu-isaaclab
 - gpu-maniskill

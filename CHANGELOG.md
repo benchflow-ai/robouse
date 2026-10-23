@@ -4,9 +4,20 @@ Notable changes to the `robouse` package, newest first. Versions follow [semanti
 
 ## Unreleased
 
+### Security
+
+- The sandbox denies Embodied Playground's simulation package where `ROBOUSE_EMBODIED_PLAYGROUND_SOURCE` puts it, on macOS and Linux, as it denies Robo Use's cache, its default place: the embodied-playground worker imports it.
+
 ### Added
 
+- The `embodied-playground` suite: 6 of the 34 Launch tasks of Embodied Playground's EP-100 benchmark (HKU, Sharpa, Tsinghua, Stanford, UNC, MIT; arXiv 2610.27039), each in the benchmark's four conditions (24 task folders), at its Level 0. Two Franka Pandas operate a passive spring launcher to clear targets; the agent sees the robots' joints and one camera, acts with Embodied Playground's 16 absolute joint targets and gripper commands, and has no skills. The simulation is Embodied Playground's own MuJoCo package, unmodified, which `robouse fetch-assets --embodied-playground` downloads from a pinned commit (107 files, about 35 MB, each checked by SHA-256) and which runs in its own virtualenv with Embodied Playground's pins (`ROBOUSE_EMBODIED_PLAYGROUND_PYTHON`); success is its own rule, the first time it holds. Each condition has a reference solution, a scripted pull-and-release of the launcher found by simulation and replayed through `robo act`. Reference solution 24/24, no-op 0/24. The other 28 Launch tasks have no reference solution yet, and EP-100's other suites need Isaac Sim (an NVIDIA RTX GPU) or ManiSkill's Vulkan renderer ([Embodied Playground](docs/suites/embodied-playground.md)).
+- `robouse doctor` says whether the embodied-playground virtualenv and download are there.
 - ROBOTIS's HX5-D20 hand in the `dexhand` suite, with two tasks, `hx5-lift-ball` and `hx5-press-buttons` (the LEAP Hand tasks' scenes; reference solution 2/2, no-op 0/2). The HX5-D20 is one of ROBOTIS's open-source HX Friends designs: 20 joints, each a DYNAMIXEL XM335 position servo, from ROBOTIS's own MuJoCo model (robotis_hand, Apache-2.0), attached unchanged. `robouse fetch-assets --all` (or `--robot robotis_hx5_d20`) downloads it from a pinned commit of ROBOTIS's repository (14 files, about 7 MB, each checked by SHA-256; `assets/robotis/hx5_d20.json`). The lift's reference solution grasps with the ball off the palm's centre line, since this hand's thumb opposes from beside the heel of the palm (`grasp_dx`, `grasp_dy` and `grasp_dz` in a lift task).
+
+### Changed
+
+- The `chemlab` suite's gripper is the Franka Hand of MuJoCo Menagerie's Franka Emika Panda instead of a gripper made of boxes: Menagerie's meshes, materials, inertias and collision geometry, with the fingertip pads, the fingers' coupled slide joints (0.04 m each) and the hand's actuator at the real hand's force, from the pinned Menagerie files robouse already uses. It floats on the same welded body, with the tool point between the fingertip pads, and turns about its tool axis as before; actions and observations are unchanged, except that fully open the fingers are 8 cm apart, not 10. Each task's instruction gives the hand's size. The balance task starts with the top door open rather than the right one, which a hand pointing down cannot push shut by its grip without its body meeting the glass; the reference solutions of the balance, oven, moisture analyzer and shaker tasks keep the hand's body clear of the instruments. Reference solution 7/7, no-op 0/7. `robouse doctor` also checks that the hand's model is there.
+- The `chemlab` scenes look like a lab rather than a default simulator: a lab bench with a dark epoxy-resin top on a light cabinet, a plain light floor and a light grey sky instead of a black one and a checkerboard, and a key light with shadows, a fill and a rim light. Only what is drawn changed; collision and physics are the same.
 
 ## 0.6.1 (2026-10-23)
 

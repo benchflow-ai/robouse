@@ -12,6 +12,7 @@ composable: false
 suites:
 - capx
 - capx-libero
+- embodied-playground
 - gpu-maniskill
 - kitchen
 - libero

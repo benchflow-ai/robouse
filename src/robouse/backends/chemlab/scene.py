@@ -1,5 +1,5 @@
-"""ChemLab-Assets instruments as MuJoCo scenes: the instrument's URDF converted to MJCF, standing on a bench, with the
-floating two-finger gripper of the tabletop suites.
+"""ChemLab-Assets instruments as MuJoCo scenes: the instrument's URDF converted to MJCF, standing on a bench, with a
+floating Franka Hand (the Franka Emika Panda's two-finger hand, from MuJoCo Menagerie).
 
 Conversion (URDF -> MJCF), done in memory at every episode start from the downloaded files, never written to disk:
 - every link becomes a body and every joint a MuJoCo joint (revolute -> hinge with its limits, continuous -> unlimited
@@ -13,6 +13,13 @@ Conversion (URDF -> MJCF), done in memory at every episode start from the downlo
 - the URDF has no joint dynamics, so every moving joint gets damping, friction and armature (instruments.py), push
   keys a return spring, and every link gravity compensation: sashes are counterweighted and lids and doors are held
   by gas springs or their hinges' friction, so a part stays where it is let go.
+
+The hand is Menagerie's own model, read from the pinned Menagerie files robouse already uses for the Panda (a checkout's
+assets/menagerie, or `robouse fetch-assets`): the hand body and its two fingers with their meshes, materials, inertias,
+collision geometry (the hand's and the fingers' meshes and each finger's five fingertip pads), slide joints (0 to
+0.04 m per finger), the tendon and joint equality that couple the fingers, and the hand's actuator. It floats: it is
+fixed to a free body welded to a mocap target, turned so that its fingers point along the body's -z, with the tool point
+(between the fingertip pads) at the body's origin.
 
 Frame: the asset frame, unchanged: metres, +x right, +y toward the back of the instrument, +z up; the instrument's
 front faces -y and its footprint is centred on the origin, with its bottom on the bench top at z = 0.
@@ -33,7 +40,6 @@ PART = 'contype="2" conaffinity="1" group="3"'  # group 3: not drawn (the visual
 MOVING = 'contype="1" conaffinity="6"'
 VISUAL = 'contype="0" conaffinity="0" group="2"'
 
-FINGER_OPEN = 0.05  # per-finger travel; fully open gap = 0.10 m
 DECAL_M = 0.0015  # collision proxies thinner than this are decals (labels, prints, display glass): not colliders
 SUBSTEPS = 10  # 10 x 2 ms = one 20 ms control step
 SETTLE_SUBSTEPS = 150
@@ -406,60 +412,159 @@ def _look(pos, target) -> str:
     return f'pos="{_f(*p)}" xyaxes="{_f(*xc, *yc)}"'
 
 
-def gripper_xml(home, approach: str) -> str:
-    """The tabletop suites' floating gripper (a free body welded to a mocap target), with the tool point between the
-    fingertips at the body origin and the fingers along local -z. Its palm is as narrow as the fingers (2.4 cm across
-    the closing direction, where the tabletop gripper's is 4.4 cm), so the palm does not reach past the fingers
-    toward a door or a panel the fingers work next to."""
-    q = hand_quat(approach, 0.0)
-    fcol = "0.25 0.25 0.28 1"
-    fr = 'friction="1.5 0.02 0.002" condim="4" solref="0.01 1"'
-    return (
-        f'<body name="mocap" mocap="true" pos="{_f(*home)}" quat="{_f(*q)}"/>'
-        f'<body name="hand" pos="{_f(*home)}" quat="{_f(*q)}" gravcomp="1"><freejoint name="hand_free"/>'
-        f'<geom name="palm" type="box" pos="0 0 0.074" size="0.012 0.065 0.012" rgba="0.18 0.18 0.2 1" mass="0.25" {MOVING}/>'
-        f'<geom name="wrist" type="cylinder" pos="0 0 0.16" size="0.02 0.075" rgba="0.55 0.56 0.6 1" mass="0.05" contype="0" conaffinity="0"/>'
-        f'<site name="tcp" pos="0 0 0" size="0.004" rgba="1 0 0 0"/>'
-        f'<body name="finger_l" gravcomp="1"><joint name="fl" type="slide" axis="0 1 0" range="0 {FINGER_OPEN}" damping="30" armature="0.01"/>'
-        f'<geom name="finger_l" type="box" pos="0 0.006 0.026" size="0.012 0.006 0.036" rgba="{fcol}" mass="0.03" {fr} {MOVING}/></body>'
-        f'<body name="finger_r" gravcomp="1"><joint name="fr" type="slide" axis="0 -1 0" range="0 {FINGER_OPEN}" damping="30" armature="0.01"/>'
-        f'<geom name="finger_r" type="box" pos="0 -0.006 0.026" size="0.012 0.006 0.036" rgba="{fcol}" mass="0.03" {fr} {MOVING}/></body>'
-        "</body>"
-    )
+# The gripper: the Franka Hand of MuJoCo Menagerie's Franka Emika Panda, floating.
+HAND_MODEL = "franka_emika_panda/panda.xml"  # in the Menagerie folder (robouse.assets); only its hand subtree is used
+HAND = "franka/"  # the prefix of every element taken from it
+FINGER_OPEN = 0.04  # the Panda's travel per finger (slide joints from 0 to 0.04 m): fully open, the pads are 8 cm apart
+GRIP_OPEN_CTRL = 255.0  # the Menagerie hand actuator's control when fully open (0: closed)
+# Menagerie's hand actuator pulls the fingers' tendon with 100 N/m, 2 to 4 N near closure: too weak to turn a knob by
+# friction. Its gain, stiffness and damping are scaled by 20, as the roboharm suite's are, so that a closed grasp squeezes
+# with about 20 to 70 N, the range of the real Franka Hand (70 N continuous, 140 N at most).
+GRIP_SCALE = 20.0
+GRIP_FORCE_N = 140.0
+# The fingers' contact with the instrument (their meshes and pads): the friction, torsional friction and stiffness the
+# suite's tasks were built with. The hand body keeps Menagerie's defaults.
+FINGER_CONTACT = {"friction": (1.5, 0.02, 0.002), "condim": 4, "solref": (0.01, 1.0)}
+# The hand's size as the task instructions give it, in metres (tests/test_chemlab.py measures each on the model). The
+# closing direction is the hand's local y, the tool axis its local -z.
+HAND_SIZE = {
+    "gap": 0.08,  # between the fingertip pads, fully open
+    "finger_width": 0.021,  # a finger across the closing direction
+    "finger_thickness": 0.024,  # a finger along the closing direction, where it leaves the hand
+    "finger_out": 0.046,  # how far the fingers reach out of the hand
+    "tip": 0.0094,  # how far the fingertips reach beyond the tool point
+    "palm": 0.037,  # how far behind the tool point the hand's body begins
+    "hand_length": 0.204,  # the hand's body along the closing direction
+    "hand_width": 0.038,  # the hand's body across the closing direction, where the fingers leave it
+    "hand_width_max": 0.063,  # and at its widest, 9.5 to 11.5 cm behind the tool point
+}
+
+
+def _menagerie_hand():
+    """Menagerie's Panda as a spec with only the meshes its hand subtree uses (the arm's are never loaded)."""
+    import mujoco
+
+    from ...assets import asset_root  # a checkout's assets/menagerie, $ROBOUSE_MENAGERIE_ASSETS, or the fetch cache
+    from ..menagerie.sim.models import _delete
+
+    panda = mujoco.MjSpec.from_file(str(asset_root() / HAND_MODEL))
+    used = {g.meshname for g in panda.body("hand").find_all(mujoco.mjtObj.mjOBJ_GEOM) if g.meshname}
+    for mesh in list(panda.meshes):
+        if (mesh.name or Path(mesh.file).stem) not in used:  # a mesh without a name is named after its file
+            _delete(panda, mesh)
+    return panda
+
+
+def tool_offset(panda) -> float:
+    """How far the tool point is from the hand's flange along its fingers: the centre of the fingertip pads (the fingers'
+    origin plus the large pad's offset on them), 0.1029 m in Menagerie's model."""
+    return float(panda.body("left_finger").pos[2] + panda.find_default("fingertip_pad_collision_1").geom.pos[2])
+
+
+def attach_hand(spec) -> None:
+    """Fix Menagerie's Franka Hand to the scene's floating body `hand`, turned about its closing axis (y) so that its
+    fingers point along the body's -z (Menagerie's hand points them along +z), with the fingertip pads' centre at the
+    body's origin, and set it up for the scene: every part gravity-compensated, its collision geoms in the gripper's
+    collision class, the fingers' contact as the suite's, the actuator's force as the real hand's, and no contact
+    between the two fingers."""
+    panda = _menagerie_hand()
+    hand = panda.body("hand")
+    hand.pos, hand.quat = [0.0, 0.0, 0.0], [1.0, 0.0, 0.0, 0.0]  # its place on the arm's last link does not apply
+    frame = spec.body("hand").add_frame(pos=[0.0, 0.0, tool_offset(panda)], quat=[0.0, 0.0, 1.0, 0.0])
+    frame.attach_body(hand, HAND, "")
+    fingers = {HAND + "left_finger", HAND + "right_finger"}
+    for b in spec.bodies:
+        if not b.name.startswith(HAND):
+            continue
+        b.gravcomp = 1.0
+        for g in b.geoms:
+            if g.contype == 0 and g.conaffinity == 0:  # a visual mesh
+                continue
+            g.contype, g.conaffinity = 1, 6  # MOVING: the instrument's parts (2) and the bench and floor (4)
+            if b.name in fingers:
+                g.friction, g.condim, g.solref = (
+                    FINGER_CONTACT["friction"],
+                    FINGER_CONTACT["condim"],
+                    FINGER_CONTACT["solref"],
+                )
+    act = spec.actuator(HAND + "actuator8")
+    act.gainprm[0] *= GRIP_SCALE
+    act.biasprm[1] *= GRIP_SCALE
+    act.biasprm[2] *= GRIP_SCALE
+    act.forcerange = [-GRIP_FORCE_N, GRIP_FORCE_N]
+    spec.add_exclude(bodyname1=HAND + "left_finger", bodyname2=HAND + "right_finger")
 
 
 def scene_xml(urdf: Urdf, cfg: dict) -> str:
-    """The whole scene for one task. `cfg`: joints, default_joint and colliders (instrument_xml), bench_half and
-    bench_height, the gripper's approach and home, cameras {name: (position, target, fovy)}."""
+    """The scene for one task without the hand: the bench, the instrument, the cameras, and the gripper's floating body
+    (`hand`, at the tool point, with the `tcp` site) welded to its mocap target. `cfg`: joints, default_joint and
+    colliders (instrument_xml), bench_half and bench_height, the gripper's approach and home, cameras
+    {name: (position, target, fovy)}. scene_model() attaches the hand and compiles it.
+
+    The look: a light grey gradient sky, a plain light grey floor and a lab bench (bench_look), lit by a key light that
+    casts shadows, a fill and a rim light, with a dim headlight. The floor and the bench collide through boxes and a
+    plane that are not drawn (group 3); what is drawn of them collides with nothing.
+
+    The floating body has a token mass at the tool point: without one its centre of mass is undefined, and MuJoCo would
+    size the weld's softness from a point far from the hand, which made the weld pull a tenth as hard."""
     assets, tree = instrument_xml(urdf, cfg.get("joints", {}), cfg.get("default_joint", {}), cfg.get("colliders", ()))
     bx, by = cfg.get("bench_half", (1.0, 0.6))
     bench_h = float(cfg.get("bench_height", 0.9))
     home = cfg.get("home", (0.0, -0.6, 0.3))
+    q = hand_quat(cfg.get("approach", "down"), 0.0)
     cams = "".join(f'<camera name="{n}" {_look(p, t)} fovy="{_f(fov)}"/>' for n, (p, t, fov) in cfg["cameras"].items())
     return f"""<mujoco model="robouse-chemlab">
   <compiler angle="radian" autolimits="true" balanceinertia="true"/>
   <option timestep="0.002" cone="elliptic" impratio="10" integrator="implicitfast"><flag multiccd="enable"/></option>
-  <visual><global offwidth="1280" offheight="1280"/><quality shadowsize="4096"/><map znear="0.01" zfar="40"/>
-    <headlight ambient="0.38 0.38 0.38" diffuse="0.45 0.45 0.45" specular="0.05 0.05 0.05"/></visual>
+  <visual><global offwidth="1280" offheight="1280"/><quality shadowsize="8192"/><map znear="0.01" zfar="60"/>
+    <headlight ambient="0.25 0.25 0.26" diffuse="0.1 0.1 0.1" specular="0 0 0"/></visual>
   <asset>
-    <texture name="tfloor" type="2d" builtin="checker" rgb1="0.80 0.82 0.84" rgb2="0.72 0.74 0.76" width="256" height="256"/>
-    <material name="floor" texture="tfloor" texrepeat="8 8"/>
-    <material name="bench" rgba="0.86 0.86 0.84 1"/>
+    <texture name="sky" type="skybox" builtin="gradient" rgb1="0.80 0.81 0.83" rgb2="0.95 0.95 0.96" width="512" height="3072"/>
+    <material name="floor" rgba="0.80 0.805 0.815 1" specular="0.03" shininess="0.05"/>
+    <material name="benchtop" rgba="0.19 0.195 0.2 1" specular="0.45" shininess="0.7" reflectance="0.04"/>
+    <material name="cabinet" rgba="0.83 0.84 0.85 1" specular="0.05" shininess="0.1"/>
+    <material name="plinth" rgba="0.26 0.27 0.28 1" specular="0.03" shininess="0.05"/>
     {assets}
   </asset>
   <worldbody>
-    <light pos="0.4 -1.6 2.6" dir="-0.15 0.5 -1" diffuse="0.5 0.5 0.5" castshadow="true"/>
-    <light pos="-1.2 -0.8 2.0" dir="0.4 0.3 -1" diffuse="0.25 0.25 0.25" castshadow="false"/>
-    <geom name="floor" type="plane" pos="0 0 {-bench_h}" size="6 6 0.1" material="floor" {STATIC}/>
-    <geom name="bench" type="box" pos="0 0 {-bench_h / 2}" size="{_f(bx, by, bench_h / 2)}" material="bench" {STATIC}/>
+    <light name="key" directional="true" dir="0.45 0.75 -1" diffuse="0.55 0.55 0.53" specular="0.12 0.12 0.12" castshadow="true"/>
+    <light name="fill" directional="true" dir="-0.7 0.35 -0.55" diffuse="0.2 0.2 0.21" specular="0 0 0" castshadow="false"/>
+    <light name="rim" directional="true" dir="0.1 -0.85 -0.5" diffuse="0.12 0.12 0.12" specular="0 0 0" castshadow="false"/>
+    <geom name="floor" type="plane" pos="0 0 {-bench_h}" size="6 6 0.1" group="3" {STATIC}/>
+    <geom name="floor_look" type="plane" pos="0 0 {-bench_h}" size="40 40 1" material="floor" {VISUAL}/>
+    <geom name="bench" type="box" pos="0 0 {-bench_h / 2}" size="{_f(bx, by, bench_h / 2)}" group="3" {STATIC}/>
+    {bench_look(bx, by, bench_h)}
     {tree}
-    {gripper_xml(home, cfg.get("approach", "down"))}
+    <body name="mocap" mocap="true" pos="{_f(*home)}" quat="{_f(*q)}"/>
+    <body name="hand" pos="{_f(*home)}" quat="{_f(*q)}" gravcomp="1"><freejoint name="hand_free"/>
+      <inertial pos="0 0 0" mass="0.001" diaginertia="1e-7 1e-7 1e-7"/>
+      <site name="tcp" pos="0 0 0" size="0.004" rgba="1 0 0 0"/></body>
     {cams}
   </worldbody>
-  <contact><exclude body1="finger_l" body2="finger_r"/></contact>
   <equality><weld body1="mocap" body2="hand" solref="0.01 1"/></equality>
-  <actuator>
-    <position name="a_fl" joint="fl" kp="300" ctrlrange="0 {FINGER_OPEN}" forcerange="-15 15"/>
-    <position name="a_fr" joint="fr" kp="300" ctrlrange="0 {FINGER_OPEN}" forcerange="-15 15"/>
-  </actuator>
 </mujoco>"""
+
+
+def bench_look(bx: float, by: float, height: float) -> str:
+    """How the bench looks, drawn over its collision box (which is not drawn): a lab bench, a dark epoxy-resin top 3 cm
+    thick overhanging the cabinet by 2 cm, on a light cabinet with a dark recessed plinth. Visual only: these geoms
+    collide with nothing, and the top's upper face is the collision box's, at z = 0."""
+    top, over, kick, inset = 0.03, 0.02, 0.1, 0.04
+    body = (height - top - kick) / 2
+    return (
+        f'<geom name="bench_top" type="box" pos="0 0 {_f(-top / 2)}" size="{_f(bx + over, by + over, top / 2)}" '
+        f'material="benchtop" {VISUAL}/>'
+        f'<geom name="bench_cabinet" type="box" pos="0 0 {_f(-top - body)}" size="{_f(bx, by, body)}" '
+        f'material="cabinet" {VISUAL}/>'
+        f'<geom name="bench_plinth" type="box" pos="0 0 {_f(-height + kick / 2)}" '
+        f'size="{_f(bx - inset, by - inset, kick / 2)}" material="plinth" {VISUAL}/>'
+    )
+
+
+def scene_model(urdf: Urdf, cfg: dict):
+    """The compiled scene for one task: scene_xml() with the Franka Hand attached to its floating body."""
+    import mujoco
+
+    spec = mujoco.MjSpec.from_string(scene_xml(urdf, cfg))
+    attach_hand(spec)
+    return spec.compile()

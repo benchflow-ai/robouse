@@ -25,6 +25,8 @@ ENV: dict[str, str] = {
     "never see it",
     "ROBOUSE_CHEMLAB_ASSETS": "ChemLab-Assets instrument files for the chemlab suite, from `robouse fetch-assets "
     "--chemlab` (default <cache>/chemlab); agents never see it",
+    "ROBOUSE_EMBODIED_PLAYGROUND_SOURCE": "Embodied Playground's MuJoCo package for the embodied-playground suite, "
+    "from `robouse fetch-assets --embodied-playground` (default <cache>/embodied-playground); agents never see it",
     "ROBOUSE_PRICING": "JSON price table for trial cost and the spend cap, used instead of the packaged pricing.json "
     "(not added to it)",
     # episode server
@@ -80,6 +82,8 @@ ENV: dict[str, str] = {
     "ROBOUSE_CAPX_LIBERO_PYTHON": "Python of the CaP-X LIBERO virtualenv (default <cache>/capx-libero-venv/bin/python)",
     "ROBOUSE_YAM_PYTHON": "Python of the dual-YAM virtualenv (MuJoCo 3.3.5+ and Dream Labs' scene; default "
     "<cache>/yam-venv/bin/python)",
+    "ROBOUSE_EMBODIED_PLAYGROUND_PYTHON": "Python of the Embodied Playground virtualenv (Python 3.11, MuJoCo 3.3.7; "
+    "default <cache>/embodied-playground-venv/bin/python)",
     **{
         f"ROBOUSE_{b}_QUIET": f"0 shows the {b.lower()} worker's stderr (default 1)"
         for b in (
@@ -94,6 +98,7 @@ ENV: dict[str, str] = {
             "CAPX",
             "CAPX_LIBERO",
             "YAM",
+            "EMBODIED_PLAYGROUND",
         )
     },
     "ROBOUSE_MANISKILL_DEBUG": "1: the ManiSkill worker logs each request",
@@ -190,6 +195,7 @@ PUBLIC = frozenset(
         "ROBOUSE_CONFIG_DIR",
         "ROBOUSE_MENAGERIE_ASSETS",
         "ROBOUSE_CHEMLAB_ASSETS",
+        "ROBOUSE_EMBODIED_PLAYGROUND_SOURCE",
         "ROBOUSE_PRICING",
         "ROBOUSE_RECORD_SIZE",
         "ROBOUSE_SANDBOX",
@@ -207,6 +213,7 @@ PUBLIC = frozenset(
         "ROBOUSE_CAPX_PYTHON",
         "ROBOUSE_CAPX_LIBERO_PYTHON",
         "ROBOUSE_YAM_PYTHON",
+        "ROBOUSE_EMBODIED_PLAYGROUND_PYTHON",
         "ROBOUSE_VLA_URL",
         "ROBOUSE_VLA_TOKEN",
         "ROBOUSE_VLA_POLICY_CONFIG",
@@ -279,13 +286,14 @@ def remote_endpoints(name: str) -> Path | None:
 
 
 # Folders and files that move part of robouse's cache elsewhere and that the episode server loads in later trials:
-# robot models, generated textures, the chemlab suite's instrument runtimes (Python modules it imports) and the
-# HumanoidBench walking policy (a torch file, which it unpickles). The cache is denied to agents as a whole, so that no
-# trial can change what a later one loads; so is a moved part
+# robot models, generated textures, the chemlab suite's instrument runtimes and Embodied Playground's simulation package
+# (Python modules they import) and the HumanoidBench walking policy (a torch file, which it unpickles). The cache is
+# denied to agents as a whole, so that no trial can change what a later one loads; so is a moved part
 MOVED_CACHE = (
     "ROBOUSE_MENAGERIE_ASSETS",
     "ROBOUSE_ROBOHARM_TEX",
     "ROBOUSE_CHEMLAB_ASSETS",
+    "ROBOUSE_EMBODIED_PLAYGROUND_SOURCE",
     "ROBOUSE_HUMANOIDBENCH_POLICY",
 )
 

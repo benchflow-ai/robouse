@@ -29,7 +29,7 @@
 
 Robo Use turns robot benchmarks into tasks for coding agents. The agent gets the task as its prompt, a fresh workspace and a robot it can reach only through the `robo` command. An episode server owns the simulator: it applies each action, counts every step against the task's budget, records the video and, after `robo done`, judges the final physical state. What the agent says it did does not count.
 
-- **792 tasks in 34 suites** ship in the package: rule puzzles on a table, Meta-World, LIBERO and LIBERO-PRO, robosuite, RoboCasa, Gymnasium-Robotics, dm_control, MyoSuite, HumanoidBench, and mobile manipulators, quadrupeds, humanoids, dexterous hands and drones built on MuJoCo Menagerie robots.
+- **816 tasks in 35 suites** ship in the package: rule puzzles on a table, Meta-World, LIBERO and LIBERO-PRO, robosuite, RoboCasa, Gymnasium-Robotics, dm_control, MyoSuite, HumanoidBench, and mobile manipulators, quadrupeds, humanoids, dexterous hands and drones built on MuJoCo Menagerie robots.
 - **Any program that runs shell commands can be the policy.** Harnesses ship for Claude Code, Codex, Gemini CLI, mini-swe-agent, dimcode, Kinex, Show-Harness and NVIDIA's ASPIRE, with clients for VLA policies, Dream Labs' Dream-1 and TypeSafe's Jev.
 - **Every task is checked both ways:** its reference solution scores 1 and a no-op control scores 0.
 - **Every trial is a folder** with the video, the agent's trajectory, every `robo` request with its response, and the reward. The server signs its verdict with a key the agent never sees.

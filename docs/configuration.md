@@ -8,6 +8,7 @@ Robo Use reads its settings from environment variables; the ones you set are lis
 | `ROBOUSE_CONFIG_DIR` | private settings such as remote worker endpoints (default ~/.config/robouse); agents never see it |
 | `ROBOUSE_MENAGERIE_ASSETS` | MuJoCo Menagerie robot models (default: the checkout's assets/menagerie, else <cache>/menagerie); agents never see it |
 | `ROBOUSE_CHEMLAB_ASSETS` | ChemLab-Assets instrument files for the chemlab suite, from `robouse fetch-assets --chemlab` (default <cache>/chemlab); agents never see it |
+| `ROBOUSE_EMBODIED_PLAYGROUND_SOURCE` | Embodied Playground's MuJoCo package for the embodied-playground suite, from `robouse fetch-assets --embodied-playground` (default <cache>/embodied-playground); agents never see it |
 | `ROBOUSE_PRICING` | JSON price table for trial cost and the spend cap, used instead of the packaged pricing.json (not added to it) |
 | `ROBOUSE_RECORD_SIZE` | episode video size WIDTHxHEIGHT (default: the backend's native size) |
 | `ROBOUSE_AGENT_IMAGES` | 0: the model gets no image input in this run, whatever it takes (its gateway replaces every image part; recorded as image_input: false). Default: from the model registry |
@@ -25,6 +26,7 @@ Robo Use reads its settings from environment variables; the ones you set are lis
 | `ROBOUSE_CAPX_PYTHON` | Python of the CaP-X virtualenv (default <cache>/capx-venv/bin/python) |
 | `ROBOUSE_CAPX_LIBERO_PYTHON` | Python of the CaP-X LIBERO virtualenv (default <cache>/capx-libero-venv/bin/python) |
 | `ROBOUSE_YAM_PYTHON` | Python of the dual-YAM virtualenv (MuJoCo 3.3.5+ and Dream Labs' scene; default <cache>/yam-venv/bin/python) |
+| `ROBOUSE_EMBODIED_PLAYGROUND_PYTHON` | Python of the Embodied Playground virtualenv (Python 3.11, MuJoCo 3.3.7; default <cache>/embodied-playground-venv/bin/python) |
 | `ROBOUSE_VLA_URL` | policy server for the `vla` harness |
 | `ROBOUSE_VLA_TOKEN` | bearer token for the policy server |
 | `ROBOUSE_VLA_POLICY_CONFIG` | JSON file with overrides for the `vla` preset |

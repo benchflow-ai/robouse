@@ -24,6 +24,7 @@ BACKENDS: dict[str, tuple[str, str]] = {
     "dmcontrol": ("dmcontrol", "DMControlBackend"),  # simulator worker
     "driving": ("driving", "DrivingBackend"),  # MetaDrive; simulator worker
     "drone": ("drone", "DroneBackend"),
+    "embodied_playground": ("embodied_playground", "EmbodiedPlaygroundBackend"),  # Launcher tasks; simulator worker
     "gpu": ("gpu", "GpuBackend"),  # ManiSkill3, Genesis, MuJoCo Playground, Isaac Lab; remote GPU workers
     "gymrobotics": ("gymrobotics", "GymRoboticsBackend"),
     "humanoid": ("humanoid", "HumanoidBackend"),

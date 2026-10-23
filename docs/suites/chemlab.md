@@ -1,8 +1,8 @@
 # chemlab suite: ChemLab-Assets laboratory instruments
 
-7 tasks on 6 chemistry laboratory instruments from [ChemLab-Assets](https://github.com/mbzuai-nlp/ChemLab-Assets) (Zirui Song, Jiadong Zhang, Jiahao Zhang, Xiaosong Ma, Xiaojun Chang and Xiuying Chen, MBZUAI; release 1.3.0, 2026-10-17). Each task operates one part of an instrument to a target state from the instrument's contract: raise a fume hood's sash to its working stop, close an analytical balance's draft shield until the balance reads STABLE, set a hotplate's temperature and its stirring speed with its knobs, close a drying oven's door so that it heats again, open a moisture analyzer's lid and an incubated shaker's hood. A floating two-finger gripper does the work in MuJoCo, and the instrument's own behaviour runtime from the release runs alongside, driven by the scene.
+7 tasks on 6 chemistry laboratory instruments from [ChemLab-Assets](https://github.com/mbzuai-nlp/ChemLab-Assets) (Zirui Song, Jiadong Zhang, Jiahao Zhang, Xiaosong Ma, Xiaojun Chang and Xiuying Chen, MBZUAI; release 1.3.0, 2026-10-17). Each task operates one part of an instrument to a target state from the instrument's contract: raise a fume hood's sash to its working stop, close an analytical balance's draft shield until the balance reads STABLE, set a hotplate's temperature and its stirring speed with its knobs, close a drying oven's door so that it heats again, open a moisture analyzer's lid and an incubated shaker's hood. A floating Franka Hand, the Franka Emika Panda's two-finger gripper as MuJoCo Menagerie models it, does the work in MuJoCo, and the instrument's own behaviour runtime from the release runs alongside, driven by the scene.
 
-- Backend: `src/robouse/backends/chemlab/`: `scene.py` (URDF to MJCF, the bench, the gripper), `runtime.py` (the behaviour runtimes), `instruments.py` (the six instruments), `tasks.py` (the seven tasks and their checks), `backend.py`, `oracle.py` (reference solutions), `assets.py` (the download).
+- Backend: `src/robouse/backends/chemlab/`: `scene.py` (URDF to MJCF, the bench, the Franka Hand), `runtime.py` (the behaviour runtimes), `instruments.py` (the six instruments), `tasks.py` (the seven tasks and their checks), `backend.py`, `oracle.py` (reference solutions), `assets.py` (the download).
 - Generator: `python adapters/chemlab/generate.py` writes `tasks/chemlab/<task>/` from `tasks.py`.
 - Pinned files: `assets/chemlab/provenance.json`, written by `python tools/assets/pin_chemlab.py`.
 - Not in the package and not on the hub: it runs from a checkout (see [Package or hub](#package-or-hub)).
@@ -37,13 +37,13 @@ robouse run-many --tasks tasks/chemlab --harness oracle --out runs/chemlab-oracl
 
 | Task | Instrument | Part, start | Target (from the contract) | Also checked | Budget | Reference solution |
 |---|---|---|---|---|---|---|
-| `chemlab-fume-hood-sash` | CHEM-199 Esco Frontier Acela EFA-5UDUVW-9 fume hood | sash, 150 mm open | opening 447 to 467 mm: the 457 mm sash stop (`sash_stop_m`) | the airflow monitor raises no alarm (runtime `monitor.alarm`) | 900 | 278 steps |
-| `chemlab-balance-draft-shield` | CHEM-001 METTLER TOLEDO XPR204E analytical balance | right door 80 mm open | all three doors open no more than 1.1 mm (the runtime counts a door as open above 1 % of its 109 mm) | the balance reads STABLE (runtime `balance.status`) | 600 | 234 steps |
-| `chemlab-hotplate-temperature` | CHEM-008 IKA Plate RCT digital hotplate stirrer | temperature knob at its stop (0 degC) | set temperature 97.5 to 102.5 degC (runtime `heating.set_k`, from the knob through the contract's binding) | | 600 | 203 steps |
-| `chemlab-hotplate-stirring` | the same | speed knob at its stop (0 rpm) | set speed 490 to 510 rpm (runtime `stirring.set_rad_s`) | | 600 | 203 steps |
-| `chemlab-drying-oven-door` | CHEM-011 BINDER FD 56 drying oven at 105 degC | door open 100 degrees | door within 0.05 rad of shut: the door switch angle (`door_switch_rad`) | the fan runs again (runtime `fan.running`) | 900 | 450 steps |
+| `chemlab-fume-hood-sash` | CHEM-199 Esco Frontier Acela EFA-5UDUVW-9 fume hood | sash, 150 mm open | opening 447 to 467 mm: the 457 mm sash stop (`sash_stop_m`) | the airflow monitor raises no alarm (runtime `monitor.alarm`) | 900 | 237 steps |
+| `chemlab-balance-draft-shield` | CHEM-001 METTLER TOLEDO XPR204E analytical balance | top door 80 mm open | all three doors open no more than 1.1 mm (the runtime counts a door as open above 1 % of its 109 mm) | the balance reads STABLE (runtime `balance.status`) | 600 | 233 steps |
+| `chemlab-hotplate-temperature` | CHEM-008 IKA Plate RCT digital hotplate stirrer | temperature knob at its stop (0 degC) | set temperature 97.5 to 102.5 degC (runtime `heating.set_k`, from the knob through the contract's binding) | | 600 | 197 steps |
+| `chemlab-hotplate-stirring` | the same | speed knob at its stop (0 rpm) | set speed 490 to 510 rpm (runtime `stirring.set_rad_s`) | | 600 | 195 steps |
+| `chemlab-drying-oven-door` | CHEM-011 BINDER FD 56 drying oven at 105 degC | door open 100 degrees | door within 0.05 rad of shut: the door switch angle (`door_switch_rad`) | the fan runs again (runtime `fan.running`) | 900 | 432 steps |
 | `chemlab-moisture-analyzer-lid` | CHEM-002 METTLER TOLEDO HX204 halogen moisture analyzer | lid closed | lid lifted at least 100 mm of 108.5 mm: the runtime loads a sample only from 100 mm (`sample.configure`) | | 500 | 174 steps |
-| `chemlab-shaker-hood` | CHEM-009 IKA KS 4000 i control incubated shaker | hood closed | hood open at least 1.4 rad: the runtime lets the platform be loaded only from 1.4 rad (`load.configure`) | | 900 | 538 steps |
+| `chemlab-shaker-hood` | CHEM-009 IKA KS 4000 i control incubated shaker | hood closed | hood open at least 1.4 rad: the runtime lets the platform be loaded only from 1.4 rad (`load.configure`) | | 900 | 702 steps |
 
 In every task the gripper must also have let go: it touches none of the operated parts when the episode is judged, 10 still steps after `robo done`. The episode server judges from the joint state and, in the tasks that say so, from the runtime's evaluator view; the agent never sees the evaluator view.
 
@@ -56,10 +56,14 @@ How the runtime gives the tasks their meaning:
 
 ## The robot
 
-The tabletop suites' floating two-finger gripper (a free body welded to a mocap target, 10 cm maximum gap), with two changes:
+The Franka Hand, the Franka Emika Panda's two-finger gripper, as MuJoCo Menagerie models it (`franka_emika_panda`, from the pinned Menagerie files robouse uses for the Panda: a checkout's `assets/menagerie/`, or `robouse fetch-assets`). It is Menagerie's hand and two fingers with their meshes, materials, inertias and collision geometry (the hand's and the fingers' meshes and each finger's five fingertip pads), the fingers' slide joints (0 to 0.04 m each, so 8 cm apart fully open), the tendon and joint equality that move them together, and the hand's actuator; the arm's meshes are not loaded. It floats as the tabletop suites' gripper does, fixed to a free body welded to a mocap target, with the tool point (between the fingertip pads) at the body's origin. Changes from Menagerie's model:
 
-- It also turns about its own tool axis ("twist", up to two turns either way), so it can turn knobs: the action is `[dx, dy, dz, dtwist, grip]`, with dtwist at 5 degrees per unit per step. `robo move-to` and `robo grip` work as in the tabletop suites and do not turn it.
-- Its palm is as narrow as its fingers (2.4 cm across the closing direction, where the tabletop gripper's is 4.4 cm). The wider palm reached past the fingers and hit the balance's glass door when the fingers pushed the door's grip, and the oven door when they pushed its face.
+- The actuator's gain, stiffness and damping are 20 times Menagerie's, as in the roboharm suite. Menagerie's squeezes with 2 to 4 N near closure, too little to turn a knob by friction; a closed grasp now squeezes with about 20 to 70 N, the real hand's range (70 N continuous).
+- The fingers' contact with the instrument has the friction (1.5, with torsional friction) and stiffness the tasks were built with, and the two fingers do not collide with each other. Every part is gravity-compensated, and the free body carries a token 1 g at the tool point, from which MuJoCo sizes the weld.
+
+It also turns about its own tool axis ("twist", up to two turns either way), so it can turn knobs: the action is `[dx, dy, dz, dtwist, grip]`, with dtwist at 5 degrees per unit per step. `robo move-to` and `robo grip` work as in the tabletop suites and do not turn it.
+
+The hand's body is wider than its fingers: 3.8 cm across the closing direction where the fingers leave it and 6.3 cm at its widest (9.5 to 11.5 cm behind the tool point), against 2.1 cm for a finger, and 20.4 cm long along the closing direction; it begins 3.7 cm behind the tool point. Each task's instruction gives these sizes (`scene.HAND_SIZE`, which the tests measure on the model). The body reaches past the fingers toward a door or a panel they work next to, so the reference solutions keep it clear: the oven door is pushed with the fingers on its top 4 cm and the hand above its edge, the moisture analyzer's lid with the fingers on the top of its face and the hand above the lid, and the shaker's hood is held by its handle only up to 42 degrees (the hand keeps its orientation while the hood turns, so further up the hood's front window comes into the lower finger), then let go and pushed on by its handle.
 
 Its tool axis is fixed per task: straight down (balance, hotplate, oven, moisture analyzer), or horizontally into the instrument (fume hood, shaker), so that its fingers close one above the other around a horizontal handle bar. Steps are 20 ms (10 physics steps of 2 ms), as in the tabletop suites.
 
@@ -75,7 +79,7 @@ URDF to MuJoCo, done in memory at every episode start from the downloaded files:
 - The fume hood's sash proxy is one box that leaves out the handle; a 24 mm capsule along the sash's bottom edge adds the handle bar the contract's `sash_handle` port describes.
 
 Scene and runtime:
-- The instrument stands on a bench (or base cabinet) in its own frame; cameras `front` and `side` are placed per instrument.
+- The instrument stands on a bench (or base cabinet) in its own frame; cameras `front` and `side` are placed per instrument. The bench is drawn as a lab bench, a dark epoxy-resin top on a light cabinet with a dark plinth, over its collision box, which is not drawn; the floor is a plain light grey, the sky a light grey gradient, and a key light with shadows, a fill light and a rim light light the scene. All of that is visual only: the collision geometry is the same box and floor.
 - The runtime is driven as the contract's scene bindings (`extensions["matterix.bindings"]`, `model_bindings`) say: joint position to state slot with the binding's scale and offset, set through the bound capability (`sash.set`, `scene.set_door`, `heating.set_temperature`, `stirring.set_speed`, `door.set`, `lid.set_position`, `hood.set_angle`), whenever the joint moves by more than a small tolerance, and whenever the gripper takes hold of the part or lets go. Values are clamped to the range the capability accepts, since a joint pressed slightly past its limit would otherwise be refused. Where the runtime moves a part on its own (the creeping sash), the runtime leads it until the gripper holds it again or it comes to rest: the backend drives the joint after it with a PD force and sends no calls for that part meanwhile, since setting the lagging joint back each step held the creep to 0.6 mm/s. The runtime's clock advances by each control step.
 - Setup per runtime: the release's example plant (22 degC, sea level), power on, and for the FD 56 a 105 degC setpoint; the balance's filter warms up for 10 s before the episode starts, the fume hood's airflow for 30 s and the oven for 120 s.
 - The balance's runtime (`basic40_runtime_measure.py`) is loaded as a member of a package made of the release's `scripts/` folder, so its relative import of `balance_runtime.py` resolves there, and it gets an empty scene callback, since the scene leads the doors. Some runtimes import their helpers as `asset_runtime`, which is pointed at the same download.
@@ -83,7 +87,7 @@ Scene and runtime:
 Start states and parts chosen:
 - The sash starts 150 mm open: closed, its handle bar sits 5 mm above the airfoil sill, too close for a finger to pass under it.
 - The oven door task closes the door, a push along its arc. Opening it would mean holding its handle while the door turns about a vertical axis, which a parallel gripper with a fixed tool axis does only as long as the handle can turn between its fingers: a round bar along the hinge (the shaker's handle) can, the FD 56's block handle cannot.
-- The balance task closes the open door by pushing the back of its grip toward the front, with the closed fingers beside the glass.
+- The balance task starts with the top door open 80 mm and closes it by the ridge across its top, the closed fingers' tips on its glass. A side door would have to be pushed by its grip, low on the door's outer face; with the hand pointing down, the hand's body, wider than the fingers, meets the side glass or the shield's frame above the grip before a finger reaches it.
 
 ## Instruments considered and left out
 
@@ -94,25 +98,25 @@ Start states and parts chosen:
 
 ## Validation
 
-2026-10-20 on a Linux x86_64 machine with 32 cores (Ubuntu 24.04, Python 3.12, MuJoCo 3.3.0, OSMesa): a fresh clone at commit 54ac912, a fresh virtualenv (`pip install -e '.[sim]'`) and a fresh home folder, so the download started from nothing. `robouse fetch-assets --chemlab` printed the licence and downloaded the 493 files with their hashes checked (`493 file(s) downloaded; ChemLab-Assets 1.3.0 (revision 4ca4a42dab2c)`), and `robouse run --task tasks/chemlab/chemlab-fume-hood-sash --harness oracle --out runs/chemlab` returned reward 1.0 (done, 278 steps, 13.6 s). Then `robouse tasks check` on every task:
+With the Franka Hand, 2026-10-22, on a Linux x86_64 machine with 32 cores (Ubuntu 24.04, Python 3.12, MuJoCo 3.3.0, OSMesa): a fresh clone of the change (commit 65f5ed1), a fresh virtualenv (`pip install -e '.[sim]'`), and the ChemLab-Assets files `robouse fetch-assets --chemlab` had downloaded before (the same pinned revision; the runtimes' hashes are checked at every episode start). `robouse tasks check` on every task:
 
 | Task | Reference solution | No-op control |
 |---|---|---|
-| `chemlab-balance-draft-shield` | 1.0 (done, 234 steps) | 0.0 (done) |
-| `chemlab-drying-oven-door` | 1.0 (done, 450 steps) | 0.0 (done) |
-| `chemlab-fume-hood-sash` | 1.0 (done, 278 steps) | 0.0 (done) |
-| `chemlab-hotplate-stirring` | 1.0 (done, 203 steps) | 0.0 (done) |
-| `chemlab-hotplate-temperature` | 1.0 (done, 203 steps) | 0.0 (done) |
+| `chemlab-balance-draft-shield` | 1.0 (done, 233 steps) | 0.0 (done) |
+| `chemlab-drying-oven-door` | 1.0 (done, 432 steps) | 0.0 (done) |
+| `chemlab-fume-hood-sash` | 1.0 (done, 237 steps) | 0.0 (done) |
+| `chemlab-hotplate-stirring` | 1.0 (done, 195 steps) | 0.0 (done) |
+| `chemlab-hotplate-temperature` | 1.0 (done, 197 steps) | 0.0 (done) |
 | `chemlab-moisture-analyzer-lid` | 1.0 (done, 174 steps) | 0.0 (done) |
-| `chemlab-shaker-hood` | 1.0 (done, 538 steps) | 0.0 (done) |
+| `chemlab-shaker-hood` | 1.0 (done, 702 steps) | 0.0 (done) |
 
-Each check ended `valid`. The suites page's table is generated from these runs (`tools/docs/suites_reference.py --keep`, against the built wheel).
+Each check ended `valid`, and `robouse run` with the `oracle` and `noop` harnesses gave the same rewards and steps. On the same commit, `tests/test_chemlab.py` (every reference solution and no-op control in process, when the files are there; it skips those tests without them) and `tests/test_counts.py` passed, on that machine and on macOS.
 
-`tests/test_chemlab.py` runs every reference solution and no-op control in process when the files are there, and skips those tests without them.
+The first validation, 2026-10-20 with the earlier gripper (commit 54ac912), started from a fresh home folder, so the download started from nothing: `robouse fetch-assets --chemlab` printed the licence and downloaded the 493 files with their hashes checked (`493 file(s) downloaded; ChemLab-Assets 1.3.0 (revision 4ca4a42dab2c)`), and every task's reference solution scored 1.0 and its no-op control 0.0. The suites page's table is generated from such runs (`tools/docs/suites_reference.py --keep`, against the built wheel).
 
 ## Runs with a model
 
-2026-10-21: Claude Code 2.1.304 with `claude-opus-5-5` (`--harness claude-code --model claude-opus-5-5`) ran each of the 7 tasks once, with Robo Use 0.6.0 (a clean clone at the release's commit) and ChemLab-Assets 1.3.0 from `robouse fetch-assets --chemlab`, on Linux x86_64 without the sandbox (`ROBOUSE_SANDBOX=0`), with each task's default budget, after each task's reference solution had scored 1 and its no-op control 0 on the same commit. All 7 scored 1:
+2026-10-21, with the earlier gripper (before the Franka Hand; the balance task then started with its right door open): Claude Code 2.1.304 with `claude-opus-5-5` (`--harness claude-code --model claude-opus-5-5`) ran each of the 7 tasks once, with Robo Use 0.6.0 (a clean clone at the release's commit) and ChemLab-Assets 1.3.0 from `robouse fetch-assets --chemlab`, on Linux x86_64 without the sandbox (`ROBOUSE_SANDBOX=0`), with each task's default budget, after each task's reference solution had scored 1 and its no-op control 0 on the same commit. All 7 scored 1:
 
 | Task | Reward | Steps | Wall time |
 |---|---|---|---|

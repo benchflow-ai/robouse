@@ -22,7 +22,8 @@ commands:
     fetch-assets  download the MuJoCo Menagerie robot models (menagerie,
                   roboharm, drone; --robot or --all for the embodiment suites
                   and composed tasks; --chemlab for the chemlab suite's
-                  instruments)
+                  instruments; --embodied-playground for that suite's
+                  simulation package)
     report        metrics with 95% confidence intervals over run folders,
                   grouped by trial attributes
     flora         score and caption trial recordings with NVIDIA's Flora
@@ -329,19 +330,26 @@ options:
 ```console
 $ robouse fetch-assets --help
 usage: robouse fetch-assets [-h] [--dest DEST] [--robot ROBOT] [--all]
-                            [--chemlab]
+                            [--chemlab] [--embodied-playground]
 
 options:
-  -h, --help     show this help message and exit
-  --dest DEST    target folder (default: <cache>/menagerie, or
-                 $ROBOUSE_MENAGERIE_ASSETS; with --chemlab, <cache>/chemlab,
-                 or $ROBOUSE_CHEMLAB_ASSETS)
-  --robot ROBOT  only this Menagerie robot folder (repeatable), e.g.
-                 unitree_go2
-  --all          every robot the bundled suites use (about 400 MB)
-  --chemlab      instead, the ChemLab-Assets instrument files the chemlab
-                 suite uses (about 11 MB; models, contracts and data under CC
-                 BY-NC 4.0, for non-commercial use only)
+  -h, --help            show this help message and exit
+  --dest DEST           target folder (default: <cache>/menagerie, or
+                        $ROBOUSE_MENAGERIE_ASSETS; with --chemlab,
+                        <cache>/chemlab, or $ROBOUSE_CHEMLAB_ASSETS; with
+                        --embodied-playground, <cache>/embodied-playground, or
+                        $ROBOUSE_EMBODIED_PLAYGROUND_SOURCE)
+  --robot ROBOT         only this Menagerie robot folder (repeatable), e.g.
+                        unitree_go2
+  --all                 every robot the bundled suites use (about 400 MB)
+  --chemlab             instead, the ChemLab-Assets instrument files the
+                        chemlab suite uses (about 11 MB; models, contracts and
+                        data under CC BY-NC 4.0, for non-commercial use only)
+  --embodied-playground
+                        instead, Embodied Playground's MuJoCo package, which
+                        the embodied-playground suite runs on (about 35 MB;
+                        code Apache-2.0, its own non-code assets CC BY 4.0,
+                        the Panda model Apache-2.0)
 ```
 
 ## `robouse report`
