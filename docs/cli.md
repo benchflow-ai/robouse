@@ -22,8 +22,8 @@ commands:
     fetch-assets  download the MuJoCo Menagerie robot models (menagerie,
                   roboharm, drone; --robot or --all for the embodiment suites
                   and composed tasks; --chemlab for the chemlab suite's
-                  instruments; --embodied-playground for that suite's
-                  simulation package)
+                  instruments; --embodied-playground or --robosimstudio for
+                  those suites' simulation packages)
     report        metrics with 95% confidence intervals over run folders,
                   grouped by trial attributes
     flora         score and caption trial recordings with NVIDIA's Flora
@@ -331,6 +331,7 @@ options:
 $ robouse fetch-assets --help
 usage: robouse fetch-assets [-h] [--dest DEST] [--robot ROBOT] [--all]
                             [--chemlab] [--embodied-playground]
+                            [--robosimstudio]
 
 options:
   -h, --help            show this help message and exit
@@ -338,7 +339,9 @@ options:
                         $ROBOUSE_MENAGERIE_ASSETS; with --chemlab,
                         <cache>/chemlab, or $ROBOUSE_CHEMLAB_ASSETS; with
                         --embodied-playground, <cache>/embodied-playground, or
-                        $ROBOUSE_EMBODIED_PLAYGROUND_SOURCE)
+                        $ROBOUSE_EMBODIED_PLAYGROUND_SOURCE; with
+                        --robosimstudio, <cache>/robosimstudio, or
+                        $ROBOUSE_ROBOSIMSTUDIO_SOURCE)
   --robot ROBOT         only this Menagerie robot folder (repeatable), e.g.
                         unitree_go2
   --all                 every robot the bundled suites use (about 400 MB)
@@ -350,6 +353,9 @@ options:
                         the embodied-playground suite runs on (about 35 MB;
                         code Apache-2.0, its own non-code assets CC BY 4.0,
                         the Panda model Apache-2.0)
+  --robosimstudio       instead, pinned RoboSimStudio source and robot models
+                        (about 65 MB; code Apache-2.0, robot assets retain
+                        their MIT/BSD/Apache terms)
 ```
 
 ## `robouse report`

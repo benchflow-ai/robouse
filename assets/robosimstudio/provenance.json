@@ -1,0 +1,3242 @@
+{
+  "repo": "robosimstudio/robosimstudio",
+  "revision": "eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f",
+  "license": "Apache-2.0 AND MIT AND BSD-2-Clause AND BSD-3-Clause",
+  "note": "Code and models are downloaded at run time, with their original licence files; no third-party source or models are bundled. See the downloaded NOTICE for each asset and source.",
+  "files": [
+    {
+      "path": ".python-version",
+      "sha256": "7b55f8e67b5623c4bef3fa691288da9437d79d3aba156de48d481db32ac7d16d",
+      "bytes": 5,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/.python-version"
+    },
+    {
+      "path": "CITATION.cff",
+      "sha256": "def04306091431f0554ec472ee671fb344a46e2e1f0dabe6a700d8fe4da638e6",
+      "bytes": 1960,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/CITATION.cff"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "243b5de614a38e490ec5de01fce7bb73d84cd0bb1f8f32b0bca12cd1b58714a1",
+      "bytes": 11343,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/LICENSE"
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "4697a48218530b709d6ba8141f440ff80fb61fffc322c5b64d8bd80d5d3e03e2",
+      "bytes": 2653,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/NOTICE"
+    },
+    {
+      "path": "README.md",
+      "sha256": "49f382f0b2b80d63c38ede3b38f122551db0457da4383a5682f823ff82d66a7d",
+      "bytes": 3322,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/README.md"
+    },
+    {
+      "path": "assets/PROVENANCE.md",
+      "sha256": "e6b88ffaa9d27e1a1400eea81a5f480407c518e16afe37ac419c5e2a9cce2f0b",
+      "bytes": 13810,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/PROVENANCE.md"
+    },
+    {
+      "path": "assets/embodiments/panda/LICENSE",
+      "sha256": "177978cbece0a4c454c2aaec5b3f145b39270814874c43109da9e829c39d9cba",
+      "bytes": 1474,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/LICENSE"
+    },
+    {
+      "path": "assets/embodiments/panda/LICENSE.example-robot-data",
+      "sha256": "69d6aaa72d964c5eac9dfac36dd0955f2f62562cf7de9d879e80788c35b7363e",
+      "bytes": 1611,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/LICENSE.example-robot-data"
+    },
+    {
+      "path": "assets/embodiments/panda/README.md",
+      "sha256": "cda60833de5928d8af59c569728cd7382744ed515e38d4b434bd296907532a07",
+      "bytes": 5111,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/README.md"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/finger.stl",
+      "sha256": "2d07a740392f3b9b0816f65d64fff9927d3d57c897870fc4b6ff9c56fff3a0c8",
+      "bytes": 1684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/finger.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/finger_vis.stl",
+      "sha256": "e49613148a74f1ba9b5793813078e5becf15833e0296073dc1c523508be35ae4",
+      "bytes": 31284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/finger_vis.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/hand.stl",
+      "sha256": "94493e94f30fe940f2c8ca2f155c3bbe67bbff406d3edf5e261670d2f0f6e2ed",
+      "bytes": 10084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/hand.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/hand_vis.stl",
+      "sha256": "fdeb1a924b8d0f1f997f47d6d8af102c7290a1d5144145efdc39501dc13f0fa1",
+      "bytes": 353984,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/hand_vis.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0.stl",
+      "sha256": "dfc6d94330de8ddb005b311bfdba9f3b8e1aa7c256b71592ee7ff32cb9a9a5aa",
+      "bytes": 10084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_0.obj",
+      "sha256": "6c4415add409c161a92dc7cccbecf6819a3a92aba3b0cf043cd513b58aa23257",
+      "bytes": 369249,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_0.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_1.obj",
+      "sha256": "ac248e0725c1eb29a0dd6490fc8d349dc57c5c3f51f15752266d4cc55753e1ee",
+      "bytes": 125712,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_1.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_10.obj",
+      "sha256": "b4b1a66f689dededc8c45cc2fc01aa3bdf8f2cf689ee83eb3db0f9400af9883f",
+      "bytes": 419789,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_10.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_11.obj",
+      "sha256": "3f22c57436629d8f1d06650f105a822cb3b85f071f3c268210561abf2812b809",
+      "bytes": 25564,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_11.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_2.obj",
+      "sha256": "e112cdf4c9071ae6c277ae9c92b165060d02bc8b954da7df24e67aaf11deede0",
+      "bytes": 752808,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_2.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_3.obj",
+      "sha256": "ba273f526f3b3d4e8489ddd89813f5d109f0e289ca993550c9a06beca5a83416",
+      "bytes": 59762,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_3.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_4.obj",
+      "sha256": "df932880c83025fdef4a8366926679c924adb395c3313aa445c151387c5a12b3",
+      "bytes": 263526,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_4.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_5.obj",
+      "sha256": "ae616a8d11339861af3b83d6bf1d0d1038c61984a7ddae5af93ffb96cc32a122",
+      "bytes": 22068,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_5.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_6.obj",
+      "sha256": "d9b40045d90e0202640437e66dc9b02c5c449b9169f97d70099dfc35a88f2eb4",
+      "bytes": 4640,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_6.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_7.obj",
+      "sha256": "c61618cad1396e6a134ba8b32ec754fc67bd576d411417142f1a36f4003c7017",
+      "bytes": 35031,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_7.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_8.obj",
+      "sha256": "82b9aedf8ff51ebde219529fa366c079311f5528203276cd1eedfcba90574d52",
+      "bytes": 3724190,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_8.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link0_vis_9.obj",
+      "sha256": "00b9daacb7c18b0ab071b089515b9e87a8785abafb36cf63355e3b8afdce8022",
+      "bytes": 128999,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link0_vis_9.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link1.stl",
+      "sha256": "d24e332dffccf260b91d05dde17c5998bb9559d37da8608a8ee5213d9661f603",
+      "bytes": 625884,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link1.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link1_vis.obj",
+      "sha256": "912779814d93a7d2c6f0413f6eb5042291b08e11b3dae769019aaa0ddb64e23f",
+      "bytes": 3779935,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link1_vis.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link2.stl",
+      "sha256": "370f7605a0fae3529db169ded50f52f171024aa792d4d773bc84197301f6a039",
+      "bytes": 15084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link2.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link2_vis.obj",
+      "sha256": "96c6ea002e2c6474ac1473014e3f0df1f90b7aa2beb5c6182671fda890a3cb74",
+      "bytes": 3818503,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link2_vis.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link3.stl",
+      "sha256": "0a8d638b9349c6c0eefc4e888636ac4838c4b27170f18a51699321118af709c1",
+      "bytes": 15084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link3.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link3_vis_0.obj",
+      "sha256": "b2119dee4b4a5e3a5bdac57b7fa04d379da8af502860496946a90c1b904db590",
+      "bytes": 3598907,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link3_vis_0.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link3_vis_1.obj",
+      "sha256": "ebfed3850a693ac1a1b97a418742ec98355f7008de1e14037cdbdbc75a0d5fb9",
+      "bytes": 83763,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link3_vis_1.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link3_vis_2.obj",
+      "sha256": "81e20d3187dcafcc4ce8bca69c74d6ad985491d263939a93b6aac8b478a4cc86",
+      "bytes": 100940,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link3_vis_2.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link3_vis_3.obj",
+      "sha256": "53abcab5d93f13797f34450929dfe8c0ddbcd72266130611487d10be23cd736a",
+      "bytes": 588399,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link3_vis_3.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link4.stl",
+      "sha256": "0180ebb5772ec9840cb049750cffb29a9ddc90311752a16ea34757782ef9e48d",
+      "bytes": 15084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link4.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link4_vis_0.obj",
+      "sha256": "591f8533b4020ebbaafc4a4cb62c7e0988f204879dd1cbd30a78c3bc197f380b",
+      "bytes": 102621,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link4_vis_0.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link4_vis_1.obj",
+      "sha256": "3c1a7e83814a54522b91dc069e2448b6f0ca10149869fd68713e97e9f1dd5d05",
+      "bytes": 3711222,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link4_vis_1.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link4_vis_2.obj",
+      "sha256": "931bdb58e44e8b328842708e00ef80c0e8e48f47949804b7c8b10dc8e9d8dbf2",
+      "bytes": 583535,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link4_vis_2.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link4_vis_3.obj",
+      "sha256": "dd8ab577710fbe454ca463f0d69edf36f717d2868355288a76b77f586a384aa9",
+      "bytes": 82772,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link4_vis_3.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link5.stl",
+      "sha256": "dd17e688c7870e722283525879643d53a74c0024d328b0e14b034b54c8b6c31a",
+      "bytes": 15084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link5.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link5_vis_0.obj",
+      "sha256": "65417fb042a34286b6aa5fee2e0a7ff60a567f1296738f985b666cd319fb3d7a",
+      "bytes": 933412,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link5_vis_0.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link5_vis_1.obj",
+      "sha256": "f61bc98778d9e22a422ac2a339603d606b8e6af7727d8629a442cc04419a2789",
+      "bytes": 47149,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link5_vis_1.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link5_vis_2.obj",
+      "sha256": "ebca16efc559c30fa812168764d0b4b353049965bdc6cbbf25708a945948b2b4",
+      "bytes": 4664101,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link5_vis_2.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6.stl",
+      "sha256": "20b768e99a0e0440b5754dcca108016434e57937cc356acd9c352ccd3cb27f77",
+      "bytes": 10084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6.stl"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_0.obj",
+      "sha256": "e66366f5bdd2a04b75d17abd251019bf59b57f3f74dcfdbefa870c437121b790",
+      "bytes": 187087,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_0.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_1.obj",
+      "sha256": "05fa8ccb4bc50585862c374a2c1e2a072c6422b6e3088404767d5bb7fc714500",
+      "bytes": 24011,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_1.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_10.obj",
+      "sha256": "a846ef010d109e6e66bfd67f995263c4cef5e2e0a56560c3ce6831e0abc8c07b",
+      "bytes": 475755,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_10.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_11.obj",
+      "sha256": "ffd2103606b3288c98c3c3f29cccb3e202dc12d92d58225e4fbf5ef023a8c28f",
+      "bytes": 31950,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_11.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_12.obj",
+      "sha256": "bc34f87c700531402a64cde7f7f9f25c4f5351ce6ec96f3b078e75a55b70bd42",
+      "bytes": 4345,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_12.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_13.obj",
+      "sha256": "a476a77077eeec8bdb0db07163dd20f8213e2106c6d88ac554346293434bd479",
+      "bytes": 4464,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_13.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_14.obj",
+      "sha256": "289cbb1e35b09f158dcaf7025d815d76f935e2d5ca956bb03d25c5f10748af51",
+      "bytes": 549206,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_14.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_15.obj",
+      "sha256": "f66985ec70db62eec18669848e53c1509ac4e68d6b97a58874fedc180c1cd85c",
+      "bytes": 843617,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_15.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_16.obj",
+      "sha256": "45af20fc788566fdc76053167264685792f20f22c683dfd0cc382d8c8bbb640a",
+      "bytes": 4406563,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_16.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_2.obj",
+      "sha256": "a7aaca55658be11af36f2388a1c674d6ce09973dd8b9f87c30bf00bb245b55e8",
+      "bytes": 10567,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_2.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_3.obj",
+      "sha256": "ad289bd24071568198d907b001ae659676637b6c868212ad1d49177a2352bb7b",
+      "bytes": 16467,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_3.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_4.obj",
+      "sha256": "606af8cc5fe30b63a2a28c0c78b423c780ca3b73cc88356570a92145941ffde8",
+      "bytes": 18942,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_4.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_5.obj",
+      "sha256": "06d573ce2e042a4ffbf080e79ae1cdc84e3a63e4d1bf72272d81410789bb61d6",
+      "bytes": 16175,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_5.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_6.obj",
+      "sha256": "4382b6e12dc5dbcc1ca3fdc595dd82e73e1dc4a6b8ceca545bfdd0338ca12d21",
+      "bytes": 17405,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_6.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_7.obj",
+      "sha256": "2777f33115993dec3af8eb6d614af6165ae2836ffd1ea4e41849ed32c5a60326",
+      "bytes": 2543,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_7.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_8.obj",
+      "sha256": "aef37fabd21f209461bdb9ed6873ebc3ded6807bb01ec88cf1a002499ae629d2",
+      "bytes": 6524,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_8.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link6_vis_9.obj",
+      "sha256": "c1a7246819060a248d61291ae3a9a629f7e11d866090f32729e6e434eda7cefd",
+      "bytes": 16869,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link6_vis_9.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_0.obj",
+      "sha256": "2d35397b9d9289e3cfaa9de5cf689185b5d3b0bba7b204efffbc8443ea9c615d",
+      "bytes": 1885189,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_0.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_1.obj",
+      "sha256": "32ca565d7e3923a9b10a536043845d28911756de976f51c84e426aea3cc719ab",
+      "bytes": 167733,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_1.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_2.obj",
+      "sha256": "da959a052900a8d03914b03bf0cd79662a49c2462e1737cc177591be33be5951",
+      "bytes": 289135,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_2.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_3.obj",
+      "sha256": "6af51159175526f823c37a59fc22e78ebad90809662d30e154da8cbabf355bd2",
+      "bytes": 169848,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_3.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_4.obj",
+      "sha256": "b72d69f2da72512b48c0c418a7169b023d5bcddb12e894fe97bf8eeee57e5090",
+      "bytes": 117537,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_4.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_5.obj",
+      "sha256": "d91d2892366a36f82f5bfc7e0fe60b360faf5ace94f8ba1ef38b15d6d9c4ffac",
+      "bytes": 313356,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_5.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_6.obj",
+      "sha256": "6f8e94925a34c5e0fecae66c11460d7c4ff70dcf448a5da6de14e1badf0e71da",
+      "bytes": 137916,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_6.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/assets/link7_vis_7.obj",
+      "sha256": "36957666d65f3bee84661c5d8276711b4958aae10c9a5192c0fdfd5a8b7f7770",
+      "bytes": 1089226,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/assets/link7_vis_7.obj"
+    },
+    {
+      "path": "assets/embodiments/panda/panda_kinematics.urdf",
+      "sha256": "bcb205f638a4005a265e5f47c8f93f04d5dca3970a34dc12c75254cc89074522",
+      "bytes": 8757,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/panda_kinematics.urdf"
+    },
+    {
+      "path": "assets/embodiments/panda/panda_nohand_standalone.xml",
+      "sha256": "0756d0a1234e5c2d96b740227e1327dca37c030de1bcd3f8c34f9d2fa6957688",
+      "bytes": 24371,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/panda_nohand_standalone.xml"
+    },
+    {
+      "path": "assets/embodiments/panda/panda_standalone.xml",
+      "sha256": "9169e0345c06b27b52c5690d534fb834dab51a271aa880ab3d10eafa111cd236",
+      "bytes": 29060,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/panda/panda_standalone.xml"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/2f85.xml",
+      "sha256": "36338ea38bc79fde049159ad77c73419e44d6020da118a00b35861bea6fd6779",
+      "bytes": 10545,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/2f85.xml"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/LICENSE",
+      "sha256": "3d5edd18d1e22a17666e9bb84270171ed5ac90b192d24e0177fd171708ea2316",
+      "bytes": 1297,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/LICENSE"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/README.md",
+      "sha256": "4a82b5ffa4701f2d450e71fc49faefe92f6857d1c2cf5d47500b560c4f4ab819",
+      "bytes": 1590,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/README.md"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/base.stl",
+      "sha256": "1c7b9f2bd92d705fc4e897c94e905973a3c05f406845e942229433deb7041453",
+      "bytes": 1712484,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/base.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/base_mount.stl",
+      "sha256": "87971dfdd6e5311b5a723e7b73c4701ebf5c2364df671500f30dfc1c53c8e61a",
+      "bytes": 1091784,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/base_mount.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/coupler.stl",
+      "sha256": "d5ee95e62f8415bf5b6e503c831a958f5fc1990bf9b2865329ec38a28932727c",
+      "bytes": 89084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/coupler.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/driver.stl",
+      "sha256": "bbd6e868b1778bead60d2516c7ede581d7ad4e431744b1828757d6ea5129c112",
+      "bytes": 67084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/driver.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/follower.stl",
+      "sha256": "633793332c081641ce200df27a40643cc293b29956e3cb5cb29cb811c33ef1c7",
+      "bytes": 110484,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/follower.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/pad.stl",
+      "sha256": "4af1fa8d9bb285abecbf5dfc88e74cb30f059a7a074c2030dc35e9ee4316019d",
+      "bytes": 15084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/pad.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/silicone_pad.stl",
+      "sha256": "ca20c0fa61e6d3ce7b04bed25360e048e31dfd88ace04187aa6d9e8f4ca3fd0f",
+      "bytes": 15084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/silicone_pad.stl"
+    },
+    {
+      "path": "assets/embodiments/robotiq_2f85/assets/spring_link.stl",
+      "sha256": "4fb74a8a0d76c0e471cf19fd48bc676fd5b19123798e7a39eb6aa56869354283",
+      "bytes": 84884,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/robotiq_2f85/assets/spring_link.stl"
+    },
+    {
+      "path": "assets/embodiments/suction/suction_cup.xml",
+      "sha256": "0ccd20afc0349ddb8baa2c9416c826daa34d31c1d44636dd0163030591d8896b",
+      "bytes": 1314,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/suction/suction_cup.xml"
+    },
+    {
+      "path": "assets/embodiments/yam/LICENSE",
+      "sha256": "1296f601b312777d3aaaf3c36a9999f489a0e0d1dc5a341fedeccf25918366f1",
+      "bytes": 11370,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/LICENSE"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/LICENSE",
+      "sha256": "7cd0a0224a287ebd6c45703eb6623d264c7810f8958d65de8f99e87ccd9f4891",
+      "bytes": 1073,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/LICENSE"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/d405.stl",
+      "sha256": "8a9a84dd9c9a67687e5ad0b37a7ed334dbfea6b0f995fef28524cc8da5f21ed2",
+      "bytes": 1242284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/d405.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2.stl",
+      "sha256": "5ac61c0313ed00c38655e41681af1b8b307cf8d5ef57209a75f215cea02df754",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__10.stl",
+      "sha256": "b879cc07f547b7a2ac52e428dd206e80a0d4b0e805cb56b9a8230df04a690923",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__10.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__11.stl",
+      "sha256": "af220d2a51e8444392aef36e2fe4a6f69aed22bc292a7f38e54da3b4f5253434",
+      "bytes": 248584,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__11.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__12.stl",
+      "sha256": "e79614869bd2283f70fafa150ce748d5b6c03377a651448c6fe9893a22f6d1de",
+      "bytes": 68084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__12.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__13.stl",
+      "sha256": "32b62f14f00ea82bfc79b935f7dac32c7cb276a3abc0aae8362cbba3fb1326de",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__13.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__14.stl",
+      "sha256": "72d2178789dd5e0358c2caf9dad90b8881e505f4c52a8d6d18c71b5e93e8c84b",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__14.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__15.stl",
+      "sha256": "ca8788184d54f30c18482cb9b48dffb010a93dbc029054b6cc515083a740d324",
+      "bytes": 183684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__15.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__16.stl",
+      "sha256": "18bb99691eed524393e8f3a0ff29e79d97ab75689bc92144bbdfafa2cc79d37b",
+      "bytes": 183684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__16.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__17.stl",
+      "sha256": "6513dbd192d2bf3a4f7016231f1ba5eca93916c9ebfdc334e9b435ca1d302ff6",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__17.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__2.stl",
+      "sha256": "30dab41f14bae95d737abca3c934eb5d570ab107dff0b40952fbdfb9d07eab79",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__2.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__3.stl",
+      "sha256": "9fd96f5ad387fe7dd96eaa65e386637800e2f5637b6167fbad4ecb37d8598f47",
+      "bytes": 80684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__3.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__4.stl",
+      "sha256": "33c0e7ef538e2c4473efa9c4ef2a8441b6094b65090b4dec71abe82001d974df",
+      "bytes": 80684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__4.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__5.stl",
+      "sha256": "09f08e7dead2d6363618471adadb1b94af39e8056676670f3fd21ec06c197b20",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__5.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__6.stl",
+      "sha256": "888b5919d10dbfb59b964c3cafc2ddbdac3b5426e20dd13bcaf4baedd5ee15c9",
+      "bytes": 86284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__6.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__7.stl",
+      "sha256": "2d64b18f1e70b0460eb53335d340b7c879976a3093ec67b07bcb7245e371a91d",
+      "bytes": 52084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__7.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__8.stl",
+      "sha256": "db3708da6b14daf3fc9a1909a8325b68f65ff69146cdd20b69a9ddc4ce51f50d",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__8.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/i2rt_yam/assets/model2__9.stl",
+      "sha256": "74969d09b8b7f75cc984c5c7e5526d2941c6724f48b3efa1fa8730cc7820f4f5",
+      "bytes": 52084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/i2rt_yam/assets/model2__9.stl"
+    },
+    {
+      "path": "assets/embodiments/yam/yam_bimanual_arm.urdf",
+      "sha256": "ec555b3f3611099f3419356431232a833e528204c8bd052eb0a70c6450e294db",
+      "bytes": 2098,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/yam_bimanual_arm.urdf"
+    },
+    {
+      "path": "assets/embodiments/yam/yam_bimanual_arms.xml",
+      "sha256": "50bfa4630552f3bfea8430673e7c432e7e661e4eff0808dde6716523bb26dc15",
+      "bytes": 24788,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam/yam_bimanual_arms.xml"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/LICENSE",
+      "sha256": "7cd0a0224a287ebd6c45703eb6623d264c7810f8958d65de8f99e87ccd9f4891",
+      "bytes": 1073,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/LICENSE"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/base.stl",
+      "sha256": "7d57efce4cd31db5e461e1bc83362943a7dbe0e8e101cdb94c29de0a72f3ff0f",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/base.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/gripper.stl",
+      "sha256": "d949c401186197d842ca8f9b23bfcbf24bed8461b421df06093c65e4ead21f5d",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/gripper.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/link1.stl",
+      "sha256": "2283bab1300cfdd1a04aaf09503093d7d6d19bf2144abf3429d563b596920903",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/link1.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/link2.stl",
+      "sha256": "4fd4df2916be71391c6c6ea6ffbdb3c270ce67c71c2bb7d42d44736c0be2af98",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/link2.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/link3.stl",
+      "sha256": "5b51658509771514738d0f2271df5f271cd8ae0b6a4bf3787d8463d5ab582593",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/link3.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/link4.stl",
+      "sha256": "f6e980b8064a1396b17e87065de50286abf616f94b55e1ccff92e889218de220",
+      "bytes": 232084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/link4.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/link5.stl",
+      "sha256": "b32ece2e963cd028d68290a904223826070be52ce8f0988e3ad36bf75be3582f",
+      "bytes": 70484,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/link5.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/tip_left.stl",
+      "sha256": "03d94f53d7b5e9e1871ea6f3925c68d7a2f894b08e0c575fa0b9ed4024684ff7",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/tip_left.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/assets/tip_right.stl",
+      "sha256": "8f620aae9c15e00e2ea4e5bf5e9a49e7edb2d23128b8955cfacc0da8da45c72f",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/assets/tip_right.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/yam_i2rt_arm.urdf",
+      "sha256": "e8ea471e2c615f6e3f712bb83c786bd82637b8b115e874e1a2261bd021b3bb52",
+      "bytes": 1906,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/yam_i2rt_arm.urdf"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/yam_i2rt_arms.xml",
+      "sha256": "6146bec6973fb9b450c233b9297c76d0951182aee4883d673573127ea951bf4c",
+      "bytes": 14227,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/yam_i2rt_arms.xml"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt/yam_i2rt_bimanual.xml",
+      "sha256": "e96c763f6360363a985ec3ea4f5ea3828849d4824d0d449139cbc7fe010139ba",
+      "bytes": 14244,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt/yam_i2rt_bimanual.xml"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/LICENSE",
+      "sha256": "7cd0a0224a287ebd6c45703eb6623d264c7810f8958d65de8f99e87ccd9f4891",
+      "bytes": 1073,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/LICENSE"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/base.stl",
+      "sha256": "7d57efce4cd31db5e461e1bc83362943a7dbe0e8e101cdb94c29de0a72f3ff0f",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/base.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/d405.stl",
+      "sha256": "8a9a84dd9c9a67687e5ad0b37a7ed334dbfea6b0f995fef28524cc8da5f21ed2",
+      "bytes": 1242284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/d405.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/link1.stl",
+      "sha256": "2283bab1300cfdd1a04aaf09503093d7d6d19bf2144abf3429d563b596920903",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/link1.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/link2.stl",
+      "sha256": "4fd4df2916be71391c6c6ea6ffbdb3c270ce67c71c2bb7d42d44736c0be2af98",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/link2.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/link3.stl",
+      "sha256": "5b51658509771514738d0f2271df5f271cd8ae0b6a4bf3787d8463d5ab582593",
+      "bytes": 400084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/link3.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/link4.stl",
+      "sha256": "f6e980b8064a1396b17e87065de50286abf616f94b55e1ccff92e889218de220",
+      "bytes": 232084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/link4.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/link5.stl",
+      "sha256": "b32ece2e963cd028d68290a904223826070be52ce8f0988e3ad36bf75be3582f",
+      "bytes": 70484,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/link5.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/model2__12.stl",
+      "sha256": "e79614869bd2283f70fafa150ce748d5b6c03377a651448c6fe9893a22f6d1de",
+      "bytes": 68084,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/model2__12.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/model2__13.stl",
+      "sha256": "32b62f14f00ea82bfc79b935f7dac32c7cb276a3abc0aae8362cbba3fb1326de",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/model2__13.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/model2__14.stl",
+      "sha256": "72d2178789dd5e0358c2caf9dad90b8881e505f4c52a8d6d18c71b5e93e8c84b",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/model2__14.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/model2__15.stl",
+      "sha256": "ca8788184d54f30c18482cb9b48dffb010a93dbc029054b6cc515083a740d324",
+      "bytes": 183684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/model2__15.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/model2__16.stl",
+      "sha256": "18bb99691eed524393e8f3a0ff29e79d97ab75689bc92144bbdfafa2cc79d37b",
+      "bytes": 183684,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/model2__16.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/assets/model2__17.stl",
+      "sha256": "6513dbd192d2bf3a4f7016231f1ba5eca93916c9ebfdc334e9b435ca1d302ff6",
+      "bytes": 524284,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/assets/model2__17.stl"
+    },
+    {
+      "path": "assets/embodiments/yam_i2rt_arena/yam_i2rt_arena_narrow_arms.xml",
+      "sha256": "3bdb266a2e9089d5820cb693a46f48e9066cee4fa4cfc8f652f71c661c5c74f9",
+      "bytes": 24083,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/assets/embodiments/yam_i2rt_arena/yam_i2rt_arena_narrow_arms.xml"
+    },
+    {
+      "path": "examples/06_tasks/06_bag_scored.py",
+      "sha256": "307d6d9036b17b0575f14f24cac48fed40dbf8687af9f906890ec4958326086b",
+      "bytes": 1649,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/examples/06_tasks/06_bag_scored.py"
+    },
+    {
+      "path": "examples/06_tasks/07_band_scored.py",
+      "sha256": "3f8133c3f815267da53ea4f240e750ea86266e5eae7811da691198bf083e126b",
+      "bytes": 3647,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/examples/06_tasks/07_band_scored.py"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "4b0c8c40c7df0e60aab1f85193c5e9e1abb7aac20a687f2ef2564c06b6e9974b",
+      "bytes": 12748,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/pyproject.toml"
+    },
+    {
+      "path": "robosimstudio/__init__.py",
+      "sha256": "864fee5f12defd2dfc0dc83a69ede36c7a53944573cdf24b5857ac335f7451d7",
+      "bytes": 14872,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/__init__.py"
+    },
+    {
+      "path": "robosimstudio/_version.py",
+      "sha256": "543b0fd4509ba2fae24c3922c8626f3767975513e87662baece72e7fa2e8c5d0",
+      "bytes": 110,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/_version.py"
+    },
+    {
+      "path": "robosimstudio/arms.py",
+      "sha256": "5f724543201ae1af0b8ffb8848aee228121e9fc0f0050ddf60835755d753c0ac",
+      "bytes": 5497,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/arms.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/__init__.py",
+      "sha256": "02c66100d12dbc0d793e1869982deaa9b4b3a63283dd321f10cce05ab98d5ccd",
+      "bytes": 6210,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/__init__.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/interface.py",
+      "sha256": "405102bbb89b37542c8754fa84c3ab02097f4eddc4d6fb929c961b1b9b0ae9b3",
+      "bytes": 13238,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/interface.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/lower.py",
+      "sha256": "03a892b5a878369ff9596fa4199b22ab403530dec7ce55bd3fbbf5aba939ff9d",
+      "bytes": 8418,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/lower.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/materials.py",
+      "sha256": "c367fc5014e0c46c2296e088c58e4cd5af9a657019a584f03323344d318b9d4d",
+      "bytes": 11231,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/materials.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/record.py",
+      "sha256": "50fc8d7f79756b370e28eb105711b233af62f4e84429b7f05ea2847589444ff6",
+      "bytes": 15058,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/record.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/registry.py",
+      "sha256": "b0800c51916c23952cffb36bd10d4b2627c63703faf3d9400b53e3d89e5e088b",
+      "bytes": 11152,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/registry.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/__init__.py",
+      "sha256": "02a36c521f708007efd22e4c341f7e030460fca3a4aedad8172d782ddbaefea8",
+      "bytes": 3871,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/__init__.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/atom.py",
+      "sha256": "0aaa69beb9e208a5cd04e60f4adaa1f5514ddd2763643f16f1a94b704aab48ea",
+      "bytes": 11710,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/atom.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/atoms.py",
+      "sha256": "2c206083dd91ead8989b1cb5f2d5f0ce63f6a405d9796623910e9e3e3f4003d7",
+      "bytes": 20055,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/atoms.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/features.py",
+      "sha256": "a18757831f46d9e7f7dfddb3eed1e09e13643eab131608402ef3bd0970025c88",
+      "bytes": 8471,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/features.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/handlers.py",
+      "sha256": "1529dd01687eb3221bc0e0853381a6b7e090886a1936b6d2f10d99cc585ac50e",
+      "bytes": 12781,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/handlers.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/kinds.py",
+      "sha256": "8bc91e3503aa1aa6eed490bfce5eb6cfc8668d73c19ea4135d7dec113059c5de",
+      "bytes": 6808,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/kinds.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/library.py",
+      "sha256": "3532bdeeb6c4f860edcb01cc7f2d8a56c4fe8ea2827e0429c3136957d89dae1b",
+      "bytes": 14552,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/library.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/published.py",
+      "sha256": "530935848283b7fa1ad34bf7573775b0ef1702c2930bae87bf0fb5e4f858cdd0",
+      "bytes": 4997,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/published.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/resolve.py",
+      "sha256": "194b85167066ce482c5cb1ab12c224b3d5091f24a8d220e459728728e70baa0d",
+      "bytes": 2853,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/resolve.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/selectors.py",
+      "sha256": "5624f1a7928b78298a5e5df3907b2b0bed2ae7de27ccefb3d691904fd2dcd2de",
+      "bytes": 16319,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/selectors.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/snapshot.py",
+      "sha256": "37913a3e23f1c0648d301dd4561919e4670b0dfd96da81125d3ad32138671d89",
+      "bytes": 6521,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/snapshot.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/states.py",
+      "sha256": "ecfb22a6eda6dfcb072a0b60467893863b0827f4cdf6b55d2b60665db97ca33b",
+      "bytes": 4756,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/states.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/semantics/substrates.py",
+      "sha256": "eb7c19bf5d0d7bd3c060c1a0e2318cfbc56c46da0b8264e32016fb05656f9977",
+      "bytes": 6602,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/semantics/substrates.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/sim.py",
+      "sha256": "935c77c2cc295f0c49aa4dcbbfe47a8a472eea5b1ad523a34347b44a9b54e976",
+      "bytes": 1104,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/sim.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/vocabulary/__init__.py",
+      "sha256": "9a72607be13c78a124857f4bd2120082c610eba322b4e7b52ca601b63caef1df",
+      "bytes": 1590,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/vocabulary/__init__.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/vocabulary/coverage.py",
+      "sha256": "18bf12db40123a2c5b0f394c46150c8e808f59cb71edaab56793e83df26011ef",
+      "bytes": 7448,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/vocabulary/coverage.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/vocabulary/measures.py",
+      "sha256": "0746cd7b54546335cbf7577235910d8868b9026400d95eeaeb12c1761e09720a",
+      "bytes": 13604,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/vocabulary/measures.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/vocabulary/motion.py",
+      "sha256": "c24823927e34202443beffbe5c26fe4411380166d9620d6f30d0c929839b53e4",
+      "bytes": 3424,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/vocabulary/motion.py"
+    },
+    {
+      "path": "robosimstudio/assetlib/vocabulary/regions.py",
+      "sha256": "18d17c38ab7b8a976364dfccc0cdc31b2d87e62e0ed872eebc4625512a0684e5",
+      "bytes": 3874,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/assetlib/vocabulary/regions.py"
+    },
+    {
+      "path": "robosimstudio/core/__init__.py",
+      "sha256": "3dbac0fcd4e7cb753f5fb74cf62009ab7d598a8a6a35066ce9ac008fbcd07f4b",
+      "bytes": 3111,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/__init__.py"
+    },
+    {
+      "path": "robosimstudio/core/builder.py",
+      "sha256": "10eb5221994a9b941b81b3b4c97e77228236d42bd9fa57b1f90ed11b818be531",
+      "bytes": 8285,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/builder.py"
+    },
+    {
+      "path": "robosimstudio/core/bus.py",
+      "sha256": "2ddaef7cab2b75bf775a69f201e6eda60820a015f7890754186f779981e86475",
+      "bytes": 12797,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/bus.py"
+    },
+    {
+      "path": "robosimstudio/core/cameras.py",
+      "sha256": "d29aa842fb387959d67a198b45bb57bc0462d161420e803921a86a749df9791a",
+      "bytes": 11237,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/cameras.py"
+    },
+    {
+      "path": "robosimstudio/core/draggers.py",
+      "sha256": "4b088913c8bce467e3307a56e7af000d3cfdcf78ac2ea1e01871024c7a2c09e4",
+      "bytes": 20382,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/draggers.py"
+    },
+    {
+      "path": "robosimstudio/core/env.py",
+      "sha256": "7677292de692a24ef337bf947e76646a1739bdbcad0c2d75c1932d4161e05ecb",
+      "bytes": 18515,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/env.py"
+    },
+    {
+      "path": "robosimstudio/core/lifecycle.py",
+      "sha256": "88c7b2f4e809078e9185b7947a5cd03ca08f55f84c2aeafb2a3cb96f0cd7afcb",
+      "bytes": 7053,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/lifecycle.py"
+    },
+    {
+      "path": "robosimstudio/core/math.py",
+      "sha256": "7e2c74886b539144d7bc55711289edc2757a1cf0332593342720400cb2efd5f6",
+      "bytes": 12034,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/math.py"
+    },
+    {
+      "path": "robosimstudio/core/mjdata.py",
+      "sha256": "336d9c4b883c7b59493c13b37e67463850a8e8b696a2ca47746bd60d60187f3b",
+      "bytes": 17021,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/mjdata.py"
+    },
+    {
+      "path": "robosimstudio/core/pipeline.py",
+      "sha256": "0f58dfd5e39cc7a937feda97694a0c21a65b06a01b097f27102036e7db649e55",
+      "bytes": 5870,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/pipeline.py"
+    },
+    {
+      "path": "robosimstudio/core/probes/__init__.py",
+      "sha256": "231794d8de1debb5c0d6250b99c69039386dcfdcd9fa27f2c0a6617f77e5d4f4",
+      "bytes": 626,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/probes/__init__.py"
+    },
+    {
+      "path": "robosimstudio/core/probes/clearance.py",
+      "sha256": "ae89dc862bc998ec77ec53309fa6dabbc097ace6e3ce02e672d79929ce8135d2",
+      "bytes": 15735,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/probes/clearance.py"
+    },
+    {
+      "path": "robosimstudio/core/probes/contact.py",
+      "sha256": "52263235546f6d2b52a8d54a8fb69319349f358ff2bd7982bb2e3c909bbe5751",
+      "bytes": 19869,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/probes/contact.py"
+    },
+    {
+      "path": "robosimstudio/core/probes/particle.py",
+      "sha256": "6048cb3444c2d9d750b890b53d6ebb926376b7c10df5443a0a687e233f8ec8a7",
+      "bytes": 17485,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/probes/particle.py"
+    },
+    {
+      "path": "robosimstudio/core/profile.py",
+      "sha256": "88d7a9d6fb0ea7c4e97f395764e6985cf34350d289e534e9c3db28a7ed42961e",
+      "bytes": 21608,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/profile.py"
+    },
+    {
+      "path": "robosimstudio/core/readback.py",
+      "sha256": "64c17901709281d1c45929d94df1489352ca85b512c10c8af77f4ca8b3427b3d",
+      "bytes": 13968,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/readback.py"
+    },
+    {
+      "path": "robosimstudio/core/render/__init__.py",
+      "sha256": "1e60dec7b1874a3de2acc46ea68d13f7c3241b9ae7f82f6865e5d79630f1c783",
+      "bytes": 1173,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/__init__.py"
+    },
+    {
+      "path": "robosimstudio/core/render/base.py",
+      "sha256": "baa1f24c720607ecc6f3f417da017f1c48eb4ad1b89bef346e2e62d0c7b8534d",
+      "bytes": 5756,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/base.py"
+    },
+    {
+      "path": "robosimstudio/core/render/finish.py",
+      "sha256": "d3ef3a4ac01b4d9da9e86973b1865b229cc78f7086afe1cefa13e5972fa73b08",
+      "bytes": 10597,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/finish.py"
+    },
+    {
+      "path": "robosimstudio/core/render/live.py",
+      "sha256": "677c051fa699a6d55ecf1668e7521db10e3e03a1c92a4bdfd2b7f1117df35c47",
+      "bytes": 6693,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/live.py"
+    },
+    {
+      "path": "robosimstudio/core/render/look.py",
+      "sha256": "0f29dcaa582f7145ce295fe3ea1eafa52a69e578ea121045d38d08cdc3aa89ab",
+      "bytes": 6400,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/look.py"
+    },
+    {
+      "path": "robosimstudio/core/render/offline.py",
+      "sha256": "9075167ea6e539676cd4a836eba583125bad056680ff4edef653375c04b0c949",
+      "bytes": 9512,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/offline.py"
+    },
+    {
+      "path": "robosimstudio/core/render/palette.py",
+      "sha256": "2755574187a58c02b9c9ec605cfc86eea7eb9621bfa704175f3865d3161a57c7",
+      "bytes": 19482,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/palette.py"
+    },
+    {
+      "path": "robosimstudio/core/render/particles.py",
+      "sha256": "90322ff12eda31e15c644041fd57c21be88aaadf84e70ef38c9b8b7c9c9bae55",
+      "bytes": 11450,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/particles.py"
+    },
+    {
+      "path": "robosimstudio/core/render/room.py",
+      "sha256": "1ce3b6b308bb379746c9a08aa5805990708fac949bc8068a5ecd808b4ff1c183",
+      "bytes": 35297,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/room.py"
+    },
+    {
+      "path": "robosimstudio/core/render/scenery.py",
+      "sha256": "95ed11dfbbc90e1ed2c85c0cf5f273ac835d69d7db03551927943d6b6a7290d2",
+      "bytes": 5220,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/scenery.py"
+    },
+    {
+      "path": "robosimstudio/core/render/spec.py",
+      "sha256": "227d6cfb0659337d3c73544dd6f7e130d1aee223928f67598f9fa3acc63a7c21",
+      "bytes": 7083,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/spec.py"
+    },
+    {
+      "path": "robosimstudio/core/render/uv.py",
+      "sha256": "992f362dc3ecddd0d6e739294fcc2548c22eaf26bdb3c22b261674fdc3dabfb0",
+      "bytes": 2983,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/uv.py"
+    },
+    {
+      "path": "robosimstudio/core/render/video.py",
+      "sha256": "4ad6183e93dcef725aeffcf30082e7022bd5201363c5275c24a50bf80e3f8f07",
+      "bytes": 16928,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/video.py"
+    },
+    {
+      "path": "robosimstudio/core/render/visual.py",
+      "sha256": "fe4611360a6114282b03b2d0e16ae4d49926bd57d81b01edb9ea971cf71cafcd",
+      "bytes": 20980,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/render/visual.py"
+    },
+    {
+      "path": "robosimstudio/core/schedule.py",
+      "sha256": "1b5d611950c588d32cbc6aa6dab2fd7fcf3e104508648b33848ae7434ae7629e",
+      "bytes": 24290,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/schedule.py"
+    },
+    {
+      "path": "robosimstudio/core/shell.py",
+      "sha256": "7f5b40cf8741e2cc8f2ccdb9f63047bc295cb7dcd1a8004df047e70e07f1afbc",
+      "bytes": 15519,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/shell.py"
+    },
+    {
+      "path": "robosimstudio/core/streams.py",
+      "sha256": "f80e574ebf0dbb9db697b142d11ba2aa8b2eb9e344107d252f27f6f3e75c70b8",
+      "bytes": 6431,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/streams.py"
+    },
+    {
+      "path": "robosimstudio/core/suction.py",
+      "sha256": "6f1488d1b10133e54d07f7692e0f390dc1e8e220c2f43d2394966774a70daee6",
+      "bytes": 26853,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/suction.py"
+    },
+    {
+      "path": "robosimstudio/core/tuning.py",
+      "sha256": "8802aea2d8e862abdc4be82dcc82fe7971d3ae4b44eb723cbe134c64e1d5b886",
+      "bytes": 22926,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/tuning.py"
+    },
+    {
+      "path": "robosimstudio/core/worlds.py",
+      "sha256": "5c68e29a86c2fef9c87d13fca37133b50641d68613c152756b75b74b2d5d2841",
+      "bytes": 12532,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/core/worlds.py"
+    },
+    {
+      "path": "robosimstudio/domains/__init__.py",
+      "sha256": "fa7e4f21e50714c4243c8158ea74cce80e99e0c001bd20046a7d4cc21759cb46",
+      "bytes": 3434,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/__init__.py"
+    },
+    {
+      "path": "robosimstudio/domains/articulated/__init__.py",
+      "sha256": "2c00a7ebbb3641480cd8635de4f0f857f44e36a6f7cf30d500965d1260b946c9",
+      "bytes": 868,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/articulated/__init__.py"
+    },
+    {
+      "path": "robosimstudio/domains/articulated/measures.py",
+      "sha256": "7890067398baa2799580d03f1f47973e9bf99962dc56ef504123f68bf106c085",
+      "bytes": 1187,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/articulated/measures.py"
+    },
+    {
+      "path": "robosimstudio/domains/capabilities.py",
+      "sha256": "442f8484c44bbe184947a0443f20d408d1dcb34a80597cb3c30e73007916c56d",
+      "bytes": 15497,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/capabilities.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/__init__.py",
+      "sha256": "4f317f5ae981d0542ea3cbd92e325c9aa91991a457eec1c63d2c791a7d190d49",
+      "bytes": 1545,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/__init__.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/declare.py",
+      "sha256": "7a873c7a15624dc4fc2f97e5e3b249afb54e90972715d6d7a7a3367f254b1d19",
+      "bytes": 8379,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/declare.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/entity.py",
+      "sha256": "c555e7db483b665b985ea10785cc2c6cff752c80dd26072bc0d70de66dec5a1b",
+      "bytes": 63906,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/entity.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/make.py",
+      "sha256": "b24e9fcfec9a7afe6a3088142b6993ded87c830bf320d8031309d2b440589fe5",
+      "bytes": 3554,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/make.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/measures/__init__.py",
+      "sha256": "e05d35319fea1b23b6ca1f281964e7d8e06b6043663454a4c1861e80fcf1ea11",
+      "bytes": 932,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/measures/__init__.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/measures/geometry.py",
+      "sha256": "43e1fbc84daaf88912a4c9a821b417eb2dd9b745aa369030f5c221386b230ef6",
+      "bytes": 19208,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/measures/geometry.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/measures/insertion.py",
+      "sha256": "f24be96a6de577da81a01a9d2bad6acd41323ef1089823cd035ed34032e09b8e",
+      "bytes": 7220,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/measures/insertion.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/measures/jaws.py",
+      "sha256": "cc3eedd7ebf65b4281bc76b2af079cd6cef095b59850cfd367fd44923c86c2b6",
+      "bytes": 12991,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/measures/jaws.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/measures/placement.py",
+      "sha256": "93db25309fd1901aea000f0bb688a65304656bc58932bf1bb5da24415aae59ea",
+      "bytes": 13111,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/measures/placement.py"
+    },
+    {
+      "path": "robosimstudio/domains/rigid/measures/regions.py",
+      "sha256": "8b4f6650dd1fd7611b3c4b6445f58cc16fbbf73878f4840348978ebb2ee8a5b3",
+      "bytes": 1899,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/rigid/measures/regions.py"
+    },
+    {
+      "path": "robosimstudio/domains/selection.py",
+      "sha256": "72e7613370cc4ee66c0b539c1630eacf1390512c2e79bb9b72d6e2977a031a5b",
+      "bytes": 3415,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/selection.py"
+    },
+    {
+      "path": "robosimstudio/domains/static/__init__.py",
+      "sha256": "5ef593ebe3113c760f1eac405fbb5ceae28c0d36c694390d64891caccdd0af53",
+      "bytes": 1667,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/static/__init__.py"
+    },
+    {
+      "path": "robosimstudio/domains/static/entity.py",
+      "sha256": "b0a2510e675f24b743b6d35efbb73ed6b7b1d5ee37e055c8dc12e25c0297e896",
+      "bytes": 25940,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/static/entity.py"
+    },
+    {
+      "path": "robosimstudio/domains/static/make.py",
+      "sha256": "5adc485bc50eda28a0246049801c7e1c65738531e64b795fb5efa75f0bb4be4a",
+      "bytes": 3047,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/static/make.py"
+    },
+    {
+      "path": "robosimstudio/domains/static/posts.py",
+      "sha256": "f2155bec258a5de4c87027a2138473b136ddddf6e4cf25e3faa6c15a40c2f190",
+      "bytes": 4619,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/static/posts.py"
+    },
+    {
+      "path": "robosimstudio/domains/static/welded.py",
+      "sha256": "0c67931cdb837f4748bb2643851ac2cace8bb7eb3d0c6d333ccd5bb0443a11b4",
+      "bytes": 10488,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/domains/static/welded.py"
+    },
+    {
+      "path": "robosimstudio/engines/__init__.py",
+      "sha256": "7ef07ce719e683c05f23089aaa5ed99e0a7831eb7a8df420cade7154c2b0117f",
+      "bytes": 2960,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/__init__.py"
+    },
+    {
+      "path": "robosimstudio/engines/contract.py",
+      "sha256": "274e7fdd8342f9b4e9568b3d9e5850318f7cdfe915710eb3ff9907c8dc1ad71f",
+      "bytes": 4082,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/contract.py"
+    },
+    {
+      "path": "robosimstudio/engines/cosim.py",
+      "sha256": "a98d7a5bfef019c27b81ba294d97041d320013ee3b3367ef5c98a26ef13921c4",
+      "bytes": 12776,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/cosim.py"
+    },
+    {
+      "path": "robosimstudio/engines/feedback.py",
+      "sha256": "2d1f84ba5a6a1e5945582bf66d4b632034afde2b139867bc8faf49e209664c6b",
+      "bytes": 7447,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/feedback.py"
+    },
+    {
+      "path": "robosimstudio/engines/genesis/__init__.py",
+      "sha256": "b962c65cec91675bb2c848875f3ff87675b42b24a44867e30384fdaa07ee7dc1",
+      "bytes": 1746,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/genesis/__init__.py"
+    },
+    {
+      "path": "robosimstudio/engines/genesis/bridge.py",
+      "sha256": "e4071ba697c8071d1b70c45462a60a23837c513c496dc01b9f9d1166cae4169b",
+      "bytes": 35505,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/genesis/bridge.py"
+    },
+    {
+      "path": "robosimstudio/engines/genesis/runtime.py",
+      "sha256": "508266da51b3e952ddb5a22e889bf7c82899e9a25bddc94c6b4daffb2d6b6d47",
+      "bytes": 8505,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/genesis/runtime.py"
+    },
+    {
+      "path": "robosimstudio/engines/genesis/solver.py",
+      "sha256": "297e642e0fb659bbec54d536594e9d29bfd834d480e42babd3c4d925d2215cd4",
+      "bytes": 6368,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/genesis/solver.py"
+    },
+    {
+      "path": "robosimstudio/engines/genesis/sph.py",
+      "sha256": "12aac135d0d34e37be30a898e78c18254a98d42367cb795a262edc95c9ac390a",
+      "bytes": 33789,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/genesis/sph.py"
+    },
+    {
+      "path": "robosimstudio/engines/geometry.py",
+      "sha256": "696d705d0456216547f7a80bdff0db5e3fc0f7b376dc02dd7e47e4d91084eea7",
+      "bytes": 19185,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/geometry.py"
+    },
+    {
+      "path": "robosimstudio/engines/host.py",
+      "sha256": "20539d7caa6993b23c004055697dc7ac35917332100619d9e8cf51c657d8c603",
+      "bytes": 6287,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/host.py"
+    },
+    {
+      "path": "robosimstudio/engines/newton/__init__.py",
+      "sha256": "caa1b33835aa88d70a5bb89fb46f28ca63fe49aa4faf091e36a25a7a6b78445b",
+      "bytes": 15336,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/newton/__init__.py"
+    },
+    {
+      "path": "robosimstudio/engines/newton/mpm.py",
+      "sha256": "6ef65f63aa3122f800e9869e90c73cf880930582a04c6842e98cbf6cf53004d9",
+      "bytes": 24621,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/newton/mpm.py"
+    },
+    {
+      "path": "robosimstudio/engines/pose.py",
+      "sha256": "db89806e5808a620176327abeaea0bb1ad437372cb31c744fbee8215478bd9bc",
+      "bytes": 5495,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/pose.py"
+    },
+    {
+      "path": "robosimstudio/engines/superdex/__init__.py",
+      "sha256": "71546bba835cc15005531074799f23941688d050de6cd39af49677eb71f78fba",
+      "bytes": 1156,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/superdex/__init__.py"
+    },
+    {
+      "path": "robosimstudio/engines/superdex/bridge.py",
+      "sha256": "5be142dc8ce6c3f66e5a594e58cb39cd05660343632425d4f9fdf2b91230f9de",
+      "bytes": 84947,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/superdex/bridge.py"
+    },
+    {
+      "path": "robosimstudio/engines/superdex/mirror.py",
+      "sha256": "ed07c509e3f26e0f50d66b9e68b10f7cf08859c4e434c59bd5659a8dcfccd3e6",
+      "bytes": 12966,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/superdex/mirror.py"
+    },
+    {
+      "path": "robosimstudio/engines/superdex/solver.py",
+      "sha256": "243b9fef3ffb545884a0630e3ca6029cde42716b1f77fe53354a4ff96985d4d3",
+      "bytes": 5890,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/engines/superdex/solver.py"
+    },
+    {
+      "path": "robosimstudio/machine.py",
+      "sha256": "2917a67b630b7a2c3d3c257d8d55959905336dec2f392d70a36d5376dcbfc054",
+      "bytes": 12928,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/machine.py"
+    },
+    {
+      "path": "robosimstudio/paths.py",
+      "sha256": "c811d6a2e212fa9bb0d31c4603e9f679b5eeb2d87ee2aab9acdeaabb92f37d30",
+      "bytes": 6415,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/paths.py"
+    },
+    {
+      "path": "robosimstudio/record/__init__.py",
+      "sha256": "d499393b795f3ccda2058cb5748c1486f01ede1718f70acb100f24ffc4a67e0a",
+      "bytes": 501,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/__init__.py"
+    },
+    {
+      "path": "robosimstudio/record/capture.py",
+      "sha256": "1ec63770c01cdb959cfbb4bbdf79d08b850d0121e6776a36f1fa8c8744f380fa",
+      "bytes": 19959,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/capture.py"
+    },
+    {
+      "path": "robosimstudio/record/collect.py",
+      "sha256": "9fba344b76dcbaee97f0ce19e9bdc6cb9a9724c1b816497094a75f4238a65a72",
+      "bytes": 22172,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/collect.py"
+    },
+    {
+      "path": "robosimstudio/record/fleet.py",
+      "sha256": "7e8ab144d655a343aa2f608e46eea03d830fba18ae6925c15519bad395803644",
+      "bytes": 23496,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/fleet.py"
+    },
+    {
+      "path": "robosimstudio/record/recorder.py",
+      "sha256": "b6722483922235bc65b415cf1c3bef12d4542b189c642c92b0c62a14b9c0da9c",
+      "bytes": 27023,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/recorder.py"
+    },
+    {
+      "path": "robosimstudio/record/store.py",
+      "sha256": "324e32ac57fba7bdfb494367c11baa0c971a5520c508f1dd22fae1c141616ab9",
+      "bytes": 10801,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/store.py"
+    },
+    {
+      "path": "robosimstudio/record/trace.py",
+      "sha256": "0ba566e5cf4233a7d57f7ee15cd0fc06f69ec7c49137192dfc4572f95709da80",
+      "bytes": 18132,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/record/trace.py"
+    },
+    {
+      "path": "robosimstudio/registry.py",
+      "sha256": "23022a31e583f0354508feb7fed8f2532add1eea251db7a0b9feec57d349382b",
+      "bytes": 14523,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/registry.py"
+    },
+    {
+      "path": "robosimstudio/robots/__init__.py",
+      "sha256": "eeeb2d439cb3a9999554eb336fa8679b11a78dfe1a0ff4b02a882717eefe35c5",
+      "bytes": 1205,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/__init__.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/__init__.py",
+      "sha256": "6b23472818da8387258454a2c6d4f661ad838802127a7cea616e3b33992fa077",
+      "bytes": 2547,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/__init__.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/panda.py",
+      "sha256": "89bd5462dbf693e859f79e9740c670f9a3deff7b91613873399e4e1579b65701",
+      "bytes": 10987,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/panda.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/yam_bimanual.py",
+      "sha256": "dd1920b7acbd8a8f59c43a75f4785c8b01168cd44295a26d359c38c3e2ea66ef",
+      "bytes": 4956,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/yam_bimanual.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/yam_bimanual_suction.py",
+      "sha256": "9903ef8420f01dc4943ab4ffac36983b5ade03f6c89ec21b5c43942b53f5d1e5",
+      "bytes": 2914,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/yam_bimanual_suction.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/yam_i2rt.py",
+      "sha256": "34d79c4f1d9e937e2e396bcc3d00941589d37af2db759901177735173901c98b",
+      "bytes": 10510,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/yam_i2rt.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/yam_i2rt_arena.py",
+      "sha256": "0bc660785d11b209714085641a0fe8b493543ac99fc53731bb6807c2f0510039",
+      "bytes": 5526,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/yam_i2rt_arena.py"
+    },
+    {
+      "path": "robosimstudio/robots/embodiments/yam_look.py",
+      "sha256": "2039100a5b0c8956fd6606909c23adab3d07139782f98df9b340c07fadf60fc3",
+      "bytes": 6184,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/embodiments/yam_look.py"
+    },
+    {
+      "path": "robosimstudio/robots/entity.py",
+      "sha256": "da3a74f8787655d321dd6a277247d8c90f5f70428cf5d822e7fad3aa4f35e491",
+      "bytes": 79385,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/entity.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/__init__.py",
+      "sha256": "472076b55ce7a3a772491031a038326001a1b8abc0f6a925b4c2e13d02c94b66",
+      "bytes": 1010,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/__init__.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/franka_hand.py",
+      "sha256": "afeaf5183c9d4ec2980aa6a6e7240097f669a83fd938e282ce930fbbe3eabdfb",
+      "bytes": 5778,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/franka_hand.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/linear_4310.py",
+      "sha256": "c9d2f333df5078d8f0683713624be184bd7292aed3e2ad45fa195fc4f08570d8",
+      "bytes": 7067,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/linear_4310.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/robotiq_2f85_menagerie.py",
+      "sha256": "7df65495ade09d7e7b6f5cbbef711fccae3de132108664aee020bfba01c19c19",
+      "bytes": 9014,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/robotiq_2f85_menagerie.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/robotiq_2f85_panda.py",
+      "sha256": "3b28e8c22f1213dbe4fbf8892f198f87ba1db3ea85b7387c078eaeffabcd1dc7",
+      "bytes": 6506,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/robotiq_2f85_panda.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/suction.py",
+      "sha256": "d15e9b9cd6f5acee0e5ef5828011b92abc6d8a50d0677e04bdc035d8ce6c3f26",
+      "bytes": 2845,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/suction.py"
+    },
+    {
+      "path": "robosimstudio/robots/grippers/yam_linear_arena.py",
+      "sha256": "bb3aee9c3822ead26e4b42f4e4f7ebdada0ccd386ea467ae32722620ed4b317f",
+      "bytes": 6472,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/grippers/yam_linear_arena.py"
+    },
+    {
+      "path": "robosimstudio/robots/registry.py",
+      "sha256": "85440c6557873b2d768d66925ea93464e8d495a5e26db88191633eba871a55e2",
+      "bytes": 7034,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/registry.py"
+    },
+    {
+      "path": "robosimstudio/robots/teleop/__init__.py",
+      "sha256": "c022e97d3fb8b67f5e6239f17ac69aef1abe5fdbe7f5a30f6d97c03d1ea8d0f7",
+      "bytes": 948,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/teleop/__init__.py"
+    },
+    {
+      "path": "robosimstudio/robots/teleop/follower.py",
+      "sha256": "5efdeb4379e035dc972eed8765b05893062dbd6b45ffcb9df015f68f36d1df5b",
+      "bytes": 11285,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/teleop/follower.py"
+    },
+    {
+      "path": "robosimstudio/robots/teleop/force_feedback.py",
+      "sha256": "cfa92448a8d2aea0a95681c70663519936f7fb9a77dc9fd4230a9b7dbab40ced",
+      "bytes": 87773,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/teleop/force_feedback.py"
+    },
+    {
+      "path": "robosimstudio/robots/teleop/lerobot_controller.py",
+      "sha256": "f96b849680291980a86f8513913d6702b26802219a155525fe5eca1ad05d4689",
+      "bytes": 24155,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/teleop/lerobot_controller.py"
+    },
+    {
+      "path": "robosimstudio/robots/teleop/simulated.py",
+      "sha256": "5b40a137939dbd44ec02d6b53700534423228769f2e29401759a75950909db75",
+      "bytes": 12274,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/robots/teleop/simulated.py"
+    },
+    {
+      "path": "robosimstudio/roots.py",
+      "sha256": "e16444f45eee039790b4595d5ec493c8f7f17db755c2398402edf84801382536",
+      "bytes": 21369,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/roots.py"
+    },
+    {
+      "path": "robosimstudio/scene/__init__.py",
+      "sha256": "459a12838ef5db94e8bdfb7efd7466fe1cdf6b7295271b9d369dcb6988841dc3",
+      "bytes": 2518,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/__init__.py"
+    },
+    {
+      "path": "robosimstudio/scene/assets.py",
+      "sha256": "ad759558388183e81a5b8107d356298bf49348d609dd61115032bca832036049",
+      "bytes": 11340,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/assets.py"
+    },
+    {
+      "path": "robosimstudio/scene/build/__init__.py",
+      "sha256": "afdffa1508096cf80aaf6c3e506521ce4e2112be0b3fd77a5b075699bf33b648",
+      "bytes": 2104,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/build/__init__.py"
+    },
+    {
+      "path": "robosimstudio/scene/build/bodies.py",
+      "sha256": "b57fca4bfef741a2faddfaea0f40c945e5eb41e1df50e908bfe7feebc40dcbfe",
+      "bytes": 5274,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/build/bodies.py"
+    },
+    {
+      "path": "robosimstudio/scene/build/colliders.py",
+      "sha256": "99e0e3a76ce7b985b459b785c982377ac3e03e93d30d2c83484f00161ea97371",
+      "bytes": 15032,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/build/colliders.py"
+    },
+    {
+      "path": "robosimstudio/scene/build/imports.py",
+      "sha256": "ae9738b58c425d9ed18362e1149e48c1934a2bb40091c28987059d9cb17c823b",
+      "bytes": 29259,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/build/imports.py"
+    },
+    {
+      "path": "robosimstudio/scene/builtin/__init__.py",
+      "sha256": "e87018c1127a25af179b3c93ee2fc2448c139e8cac8dbbf1dd5f5c69df46c6d9",
+      "bytes": 1341,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/builtin/__init__.py"
+    },
+    {
+      "path": "robosimstudio/scene/builtin/benches.py",
+      "sha256": "1ac46d9564ac0c69e181ab1c742e1362a378f0f525b7649ff5ede177fcc2ee08",
+      "bytes": 5145,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/builtin/benches.py"
+    },
+    {
+      "path": "robosimstudio/scene/builtin/void.py",
+      "sha256": "83601b74bd01309f9d59004d1c2b93895f52c0eea8e32bba922a1bd0fae239cd",
+      "bytes": 1332,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/builtin/void.py"
+    },
+    {
+      "path": "robosimstudio/scene/compiler.py",
+      "sha256": "13bd8f714d357632b2b4822ea009b1409f5aa355eaff6aa4a2f84c6a8ad984b2",
+      "bytes": 75186,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/compiler.py"
+    },
+    {
+      "path": "robosimstudio/scene/entity.py",
+      "sha256": "5ba134716c7d055eec53a6f605af733bb80c80e5add384b0764c11fe07a4e1c0",
+      "bytes": 34633,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/entity.py"
+    },
+    {
+      "path": "robosimstudio/scene/frames.py",
+      "sha256": "079647b270b1299686073d6713bf9a5b4a1a90b527b2ef497922b41a2a9b8e68",
+      "bytes": 3044,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/frames.py"
+    },
+    {
+      "path": "robosimstudio/scene/handles.py",
+      "sha256": "7bfaa248cdabe198264b2c42766ef27b8ba7bbbaf69980a55e8498216ec996f7",
+      "bytes": 27762,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/handles.py"
+    },
+    {
+      "path": "robosimstudio/scene/ik_model.py",
+      "sha256": "1acb0282c5f0242ce603811db0893326a38b7b368972141a6474cdc8b8901387",
+      "bytes": 11899,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/ik_model.py"
+    },
+    {
+      "path": "robosimstudio/scene/parking.py",
+      "sha256": "ee57bfc5f6fe31fbcdc2a1ba7bb0868f4e1207ca5d6a40eb28e8301552103090",
+      "bytes": 12427,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/parking.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/__init__.py",
+      "sha256": "dcf258f37aacb28b45ea236f8cf9ed1b67b8c534f79a15e2ab8cbef8aafd8003",
+      "bytes": 2574,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/__init__.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/backends.py",
+      "sha256": "078dd2e1f6cc9e196ecddf064be291b82a1032cdd0eab3457c049b97837de256",
+      "bytes": 5357,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/backends.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/compose.py",
+      "sha256": "a606ef3fb71f8257d483e2fb3f6de54d2e6cb18e1d65901665f8f98f45c9b7b5",
+      "bytes": 44680,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/compose.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/couplers.py",
+      "sha256": "417cf5cdc261d991877ea25f13460e45ba29d7bbf5cc6312c791938c4c01d6a4",
+      "bytes": 30890,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/couplers.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/devices.py",
+      "sha256": "fe6318a4c7abb1c2a4d4a30cc09dd86c00335aaa68b4d8294ee8026c6344719e",
+      "bytes": 20315,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/devices.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/errors.py",
+      "sha256": "85522c12c8b00e52288de245d7ef0210ddb9911b7fb11210dc4e9483d363ab82",
+      "bytes": 944,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/errors.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/interactions.py",
+      "sha256": "3f86e5d85f8365f493eeb98fe94a952b8ff12908c578c409148d54befb44bb89",
+      "bytes": 12239,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/interactions.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/islands.py",
+      "sha256": "59712572131272eb38a1f2baecbf4938dc998f51a8df6d404a82a203fcceccd2",
+      "bytes": 14452,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/islands.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/kinematic.py",
+      "sha256": "d5c2cb966a31f999c5706721ec94e4bd12bb8abcc87e586db3304a7623963bdd",
+      "bytes": 3148,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/kinematic.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/routing.py",
+      "sha256": "b07f5b21a13784932f890ee0594ec5e974e436ef8f04e19afb67ad7a30461cf2",
+      "bytes": 11042,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/routing.py"
+    },
+    {
+      "path": "robosimstudio/scene/physics/world.py",
+      "sha256": "5e905a45bd4c8ba33975518a4b57b093cb84bd6368d74290b3dd0b54b76464d0",
+      "bytes": 2691,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/physics/world.py"
+    },
+    {
+      "path": "robosimstudio/scene/ref.py",
+      "sha256": "94fb5d3dae05322ac343152c3aa8bc6561fee882c242e31f3f802b6a2848cc47",
+      "bytes": 8407,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/ref.py"
+    },
+    {
+      "path": "robosimstudio/scene/registry.py",
+      "sha256": "4b67bfc6b0ba9bf206e9dde79a46f9c0d85f1255006856be807575b10343b362",
+      "bytes": 11807,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/registry.py"
+    },
+    {
+      "path": "robosimstudio/scene/request.py",
+      "sha256": "fbc59e9be37dde586057006c29ab00d3a8ccf36077e7672905ca83d6a28137dd",
+      "bytes": 9731,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/request.py"
+    },
+    {
+      "path": "robosimstudio/scene/snapshot.py",
+      "sha256": "12f1275f96b3a08eba2b69d275daa795fc9ee917e59bd08bd5526085f1a4565d",
+      "bytes": 12381,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/snapshot.py"
+    },
+    {
+      "path": "robosimstudio/scene/state.py",
+      "sha256": "e3f58f689f13bde36ea750a6a21639f5355c7aaf59d832935dd4fe1dffdc7fa4",
+      "bytes": 6333,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/state.py"
+    },
+    {
+      "path": "robosimstudio/scene/tuning.py",
+      "sha256": "6f269776970dfee02ac18ab0d213b3c7ad8af8e23203d8eb9ed194ab82a7007a",
+      "bytes": 11473,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/scene/tuning.py"
+    },
+    {
+      "path": "robosimstudio/sim/__init__.py",
+      "sha256": "1dc80a7e466bf2e67ee9a2d194745bf6c39b44464a1a7078f24f48c0df0e67df",
+      "bytes": 816,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/sim/__init__.py"
+    },
+    {
+      "path": "robosimstudio/sim/draw.py",
+      "sha256": "8b9f343823101edf5318f6c2e1654c6cec5ed5c5584a2182a1d56e82fab55bf5",
+      "bytes": 16726,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/sim/draw.py"
+    },
+    {
+      "path": "robosimstudio/sim/scene.py",
+      "sha256": "a0068c1dab37fba9979845c4c037310c8827c9242f1bb88f403765320b1db961",
+      "bytes": 20376,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/sim/scene.py"
+    },
+    {
+      "path": "robosimstudio/sim/sim.py",
+      "sha256": "b8797cde1927f287f069112814e7a65fe2ff5aa40f46a36ab736342995531e32",
+      "bytes": 55951,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/sim/sim.py"
+    },
+    {
+      "path": "robosimstudio/solvers/__init__.py",
+      "sha256": "2ede3b02cda4dfa48c6f5b696098ce71993baba22c5534b58edba96587998d9a",
+      "bytes": 3411,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/__init__.py"
+    },
+    {
+      "path": "robosimstudio/solvers/control/__init__.py",
+      "sha256": "6bd7a5d4ca72a726827392f4d74d75200d7e385ad7aea91c7d0199df627e8629",
+      "bytes": 420,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/control/__init__.py"
+    },
+    {
+      "path": "robosimstudio/solvers/control/action.py",
+      "sha256": "a9172653f050f672ce45d94f025d6d6f5fcd0380d9838c94596fec599b24a488",
+      "bytes": 33267,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/control/action.py"
+    },
+    {
+      "path": "robosimstudio/solvers/control/batched.py",
+      "sha256": "fe20a6ba76a8b1edd7fb77882bf7566e8a5cec811523963980726fd833abdf68",
+      "bytes": 24622,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/control/batched.py"
+    },
+    {
+      "path": "robosimstudio/solvers/grasp/__init__.py",
+      "sha256": "c0ddc4c567530b1acdea4d02ea5728ffaddef95622c3f0c1a5bace92eb1313fb",
+      "bytes": 443,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/grasp/__init__.py"
+    },
+    {
+      "path": "robosimstudio/solvers/grasp/antipodal.py",
+      "sha256": "c670431b7a8113ebd5489cb22c40ea69acbcb32c7e75670159982645973db000",
+      "bytes": 69312,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/grasp/antipodal.py"
+    },
+    {
+      "path": "robosimstudio/solvers/grasp/obb.py",
+      "sha256": "99690e423e42d91b70c0fe93a0a3618b5e4a38938feda9480dc3395d69b294a3",
+      "bytes": 9678,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/grasp/obb.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/__init__.py",
+      "sha256": "3252d62eb8aa81e4350e734809015425d250560eb546edf1a6665afd1f835ea9",
+      "bytes": 454,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/__init__.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/arm.py",
+      "sha256": "2231b06c0624fefd18ff1373c6dc1defaff2d8575931621342be49707ba8ae79",
+      "bytes": 6386,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/arm.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/arm_ik.py",
+      "sha256": "e0cf8709274cf10e8b4b53d3103f1ce1b7a5c19e87c0251d2b483d164381cd0f",
+      "bytes": 49314,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/arm_ik.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/batched.py",
+      "sha256": "eaf101cd09b54bafd5de1b4e28da29fe353fe61b69a38ad4f1a3804719a337b1",
+      "bytes": 17063,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/batched.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/dls.py",
+      "sha256": "8859776df7932a6a3c615803134b7f66368608ae69a33646aff9e09f7ef96e4b",
+      "bytes": 4182,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/dls.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/fleet_dls.py",
+      "sha256": "f964bef7417dbb42ecbab712d0e008932038a58716aa7fec3ccc5064abe822f4",
+      "bytes": 23196,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/fleet_dls.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/fleet_fk.py",
+      "sha256": "ef611cbdb0e40652c67310cae4b3ef6db3ddbb5026f4ea47b02f567ed6d2d2b2",
+      "bytes": 8204,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/fleet_fk.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/pyroki.py",
+      "sha256": "4f5a66555f2996b36c9ca4b2b9c561941fe8e1d3fe7ca2ddeed48c468562fcd1",
+      "bytes": 17589,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/pyroki.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/solver.py",
+      "sha256": "6fd402550580dbf1a547dc0f3395bfc3c88e7987cb56e02bc52c954fdc76d7a9",
+      "bytes": 9958,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/solver.py"
+    },
+    {
+      "path": "robosimstudio/solvers/ik/tool_frame.py",
+      "sha256": "434801297bd63c86bae800f567d30a79f252d978b89510a8f490a98171d2e527",
+      "bytes": 3603,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/ik/tool_frame.py"
+    },
+    {
+      "path": "robosimstudio/solvers/motion/__init__.py",
+      "sha256": "9c7ca0f5cebf91c3ee9be6641598b60f25fb329b340f4df60ee762773c88f718",
+      "bytes": 436,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/motion/__init__.py"
+    },
+    {
+      "path": "robosimstudio/solvers/motion/gripper.py",
+      "sha256": "9e9c4701e5deaae31fc95b27347f052af27599c5b7394f94f6320d5f105c7817",
+      "bytes": 12473,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/motion/gripper.py"
+    },
+    {
+      "path": "robosimstudio/solvers/motion/osc.py",
+      "sha256": "ad9272b5c876797cea8b4c7ee0390abd601ef521d70ef2b04af076e69ec8cd62",
+      "bytes": 27380,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/motion/osc.py"
+    },
+    {
+      "path": "robosimstudio/solvers/motion/path.py",
+      "sha256": "68d0cf29c3f2044d788d19d55d6b4d398adccdf8106b4d2993d14068ab46112e",
+      "bytes": 2221,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/motion/path.py"
+    },
+    {
+      "path": "robosimstudio/solvers/render/__init__.py",
+      "sha256": "cd2a8aa4e4fb08002e2e08d58f19aff8227370771a3b55581db6ec8576331875",
+      "bytes": 12509,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/render/__init__.py"
+    },
+    {
+      "path": "robosimstudio/solvers/render/gl.py",
+      "sha256": "d558167679f4cefbf8146aa1bcb23a6d63c95d25fc0fa67f1bc423f6fdb1e0b8",
+      "bytes": 24092,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/render/gl.py"
+    },
+    {
+      "path": "robosimstudio/solvers/render/rtx.py",
+      "sha256": "602fa51b82dad5fca7e28fa5f84da5ba20cd879e9bc3f854de10067d69c423fa",
+      "bytes": 75924,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/render/rtx.py"
+    },
+    {
+      "path": "robosimstudio/solvers/render/tiled.py",
+      "sha256": "4a43ee8e165e54832e953704588905fcef965d38ac033c004090eff7c2adccdd",
+      "bytes": 26327,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/solvers/render/tiled.py"
+    },
+    {
+      "path": "robosimstudio/specs/__init__.py",
+      "sha256": "24d212c5c10da38ea57f8e7bc67dfb664036ea2c9d6775929da23ce52b5abc1a",
+      "bytes": 6931,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/__init__.py"
+    },
+    {
+      "path": "robosimstudio/specs/arrangement.py",
+      "sha256": "d6e12e4cfbd2c98d422a7eb5598fc1a69feb2d1f983f5c4a23b2cdc6e9a5c44f",
+      "bytes": 25857,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/arrangement.py"
+    },
+    {
+      "path": "robosimstudio/specs/asset.py",
+      "sha256": "dc98159dc39b01be2a0836375883031dd474b26cbea4a214df2f18a0a5e26f62",
+      "bytes": 33550,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/asset.py"
+    },
+    {
+      "path": "robosimstudio/specs/base.py",
+      "sha256": "6fac948cb920c551452f4b3aa3b91c43bd8e037245fca31ec2a63848ca88b39c",
+      "bytes": 682,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/base.py"
+    },
+    {
+      "path": "robosimstudio/specs/cell.py",
+      "sha256": "bdf5862c51e3d5f01dbc763f6bc05174b74bfd1debd492a57825d3fee876ec47",
+      "bytes": 4116,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/cell.py"
+    },
+    {
+      "path": "robosimstudio/specs/declare.py",
+      "sha256": "84db202877e85cd69120b17784b886d5945430eaac21aa44e6cf3dd91e29e8d4",
+      "bytes": 9427,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/declare.py"
+    },
+    {
+      "path": "robosimstudio/specs/manifest.py",
+      "sha256": "225e3e14d6392940e56f6512b99f4b8d70f6d7fe21391b6654b7bbb15111a047",
+      "bytes": 10585,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/manifest.py"
+    },
+    {
+      "path": "robosimstudio/specs/params.py",
+      "sha256": "0528d9a1cdd75c2e0031076dd2a34efe055dd371b00756f00166aea73915d19a",
+      "bytes": 7038,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/params.py"
+    },
+    {
+      "path": "robosimstudio/specs/physics.py",
+      "sha256": "313542be85c064c07b9b822d9d7e2059ac0feb7c4a0ffa4fb9fb4fa6dbd3ca3d",
+      "bytes": 4758,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/physics.py"
+    },
+    {
+      "path": "robosimstudio/specs/registries.py",
+      "sha256": "4b6e4038ecfe894e3963a9854b96e7fb272029587182bcbe5914bdee42acd208",
+      "bytes": 37555,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/registries.py"
+    },
+    {
+      "path": "robosimstudio/specs/robot.py",
+      "sha256": "c9f39de29c61d5614fc3a01c0129dba8ff00aa22e56fd97ad7241255c2aca0ce",
+      "bytes": 49282,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/robot.py"
+    },
+    {
+      "path": "robosimstudio/specs/run.py",
+      "sha256": "a96b42b36d3b30818febfc949dad41b94a98a80ff74e535c5f31603d1421d350",
+      "bytes": 9038,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/run.py"
+    },
+    {
+      "path": "robosimstudio/specs/task.py",
+      "sha256": "311b01fd330dd2786cea4d0c87054aa62406e7d1e932b9237565c06a151ad142",
+      "bytes": 43727,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio/specs/task.py"
+    },
+    {
+      "path": "robosimstudio_bench/__init__.py",
+      "sha256": "464b48300e6d7fe21c5cd73af0e07c4c09874fed3fd3a4cddb261de8c945b088",
+      "bytes": 3282,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/envs/__init__.py",
+      "sha256": "f8c977659e006dc3e17f17b155244d0dfb477633a944c32bc2c567ab54e1d3c0",
+      "bytes": 1012,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/envs/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/envs/env.py",
+      "sha256": "ebb0e2e59ae4342aad1991aca591eb208802bca10e26d256e260db6c1e25e7cc",
+      "bytes": 26655,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/envs/env.py"
+    },
+    {
+      "path": "robosimstudio_bench/envs/fleet.py",
+      "sha256": "6ece0669c0a01393315281a31c7c18353219f60f48f8120b26686a67e99bf0dd",
+      "bytes": 84007,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/envs/fleet.py"
+    },
+    {
+      "path": "robosimstudio_bench/envs/world_view.py",
+      "sha256": "32c1d63bf146d15b0a8cf3927f9907724df9a0776a39fa9ebca412daad0cb0b5",
+      "bytes": 22004,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/envs/world_view.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/__init__.py",
+      "sha256": "b3e3b9b3b159024c4e2c58ab3650050da5a9c97d4d487bba29d9d494d9026338",
+      "bytes": 4329,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/bind.py",
+      "sha256": "440f6b99158d34e0df4af691c57744e8b3a6f8f6096ea15a1a1635c9f9e857ac",
+      "bytes": 44910,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/bind.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/catalog.py",
+      "sha256": "7f27daa97417464f30cb95a1f4bc8232486efac6e5a26da060af7fab01e8e149",
+      "bytes": 9559,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/catalog.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/combinators.py",
+      "sha256": "00cc27ed0cbd248a66166f66650b01b35ed3bab3733bfafd801a53824b1f5035",
+      "bytes": 24060,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/combinators.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/context.py",
+      "sha256": "22b80c7c75054e3712d66d0aef5e04715daf77961e5903ed1af8ac323e9ed5d4",
+      "bytes": 5338,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/context.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/evaluate.py",
+      "sha256": "2ad6e1aaec26b73fea1a512c8e18b23fce38560ec1f984253e41d2a78889210f",
+      "bytes": 6391,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/evaluate.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/gauntlet.py",
+      "sha256": "df6175c076da3d706f468351f1e212308b44737217b931edef1e20eacf68d472",
+      "bytes": 38763,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/gauntlet.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/goal.py",
+      "sha256": "9f233e0f0c226e55fc63c1c63dfd14d14182757d51b9a2e06c4ee1598ba2d1f8",
+      "bytes": 22777,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/goal.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/initial.py",
+      "sha256": "ec95837374042b3bed07448fb4a120368f1eaf538a7d21a3b4594adc9f99f8e7",
+      "bytes": 8941,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/initial.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/mint.py",
+      "sha256": "ab2a0f174a2043fc2251524f99c86219080254c6a7a0145ebe1aa17ef4966ffd",
+      "bytes": 16125,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/mint.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/query.py",
+      "sha256": "db27c61bf62ce5a7d5346acd3e586b1445b6ec0386768837ad6bfa111acb6d8d",
+      "bytes": 9936,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/query.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/reward.py",
+      "sha256": "a7881395d971249eb9fcb3c5ae50d38a50539c335957d5146c5650eb40104c45",
+      "bytes": 18930,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/reward.py"
+    },
+    {
+      "path": "robosimstudio_bench/goals/simcheck.py",
+      "sha256": "8d704f8370c1d741e281123d793ed19da8872b0484214076cc9a8dcabaebe058",
+      "bytes": 5524,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/goals/simcheck.py"
+    },
+    {
+      "path": "robosimstudio_bench/run/__init__.py",
+      "sha256": "08e2d5874dc6223c2a58359f2cd3b420b7b800ca2aafe472b1bbf79839269783",
+      "bytes": 486,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/run/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/run/fleet.py",
+      "sha256": "566e58e7288399e8e1c8ff373fc07186ddee19e3609e1e836a128cc978cb35ed",
+      "bytes": 53682,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/run/fleet.py"
+    },
+    {
+      "path": "robosimstudio_bench/run/jobs.py",
+      "sha256": "1171938b538c7c728fa78d5058e061e9b6f2db11f32985b3c3db812ad8703b5b",
+      "bytes": 2330,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/run/jobs.py"
+    },
+    {
+      "path": "robosimstudio_bench/run/pool.py",
+      "sha256": "6f50f5c2c40e9d4b7f8ba5efa220b3189c5d0cdcd0cb7cc7562699231b278847",
+      "bytes": 38420,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/run/pool.py"
+    },
+    {
+      "path": "robosimstudio_bench/run/runner.py",
+      "sha256": "77f6ae9f2fc7e0158ce78c75aa77ccdf6e39145a368d430a33959e6dbe9a2f3c",
+      "bytes": 13375,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/run/runner.py"
+    },
+    {
+      "path": "robosimstudio_bench/run/summary.py",
+      "sha256": "b76fbd6473f515490b3b080ee2483d3927e13a5d1091b5d5a00ce470b4fbdeb4",
+      "bytes": 6887,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/run/summary.py"
+    },
+    {
+      "path": "robosimstudio_bench/solutions/__init__.py",
+      "sha256": "70415de5666b79372305cb60383e3c5494225afea32952dfe6a2fd9b36857162",
+      "bytes": 1076,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/solutions/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/solutions/base.py",
+      "sha256": "92e7de91c3321101d12d4782718cded8f93d0b2239a7e65a98c80d455d984147",
+      "bytes": 7350,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/solutions/base.py"
+    },
+    {
+      "path": "robosimstudio_bench/solutions/declared.py",
+      "sha256": "dc91d0f4e5f2486c932860390ee4a552cb074e46dac0ed360f1734d4ceed26ac",
+      "bytes": 2535,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/solutions/declared.py"
+    },
+    {
+      "path": "robosimstudio_bench/solutions/fleet.py",
+      "sha256": "ee9b3a6877b9019cdab38589fe0057a1a0d458f5abd10da98887be87e8d3b97a",
+      "bytes": 8010,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/solutions/fleet.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/__init__.py",
+      "sha256": "50eee6decfc3650c38923e09dc2a032afe7b6292d279ebafafd6451ea2cce081",
+      "bytes": 4831,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/arrangements.py",
+      "sha256": "0144025e7ebbb42ba6601f408bd91743c7f8343dc2a5ffe65c763c5964250c42",
+      "bytes": 6237,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/arrangements.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/artifacts.py",
+      "sha256": "bc2049c581a96c5b513cf8f526cb7e9ca303fc56305e42268353c26b34bc6c8c",
+      "bytes": 4649,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/artifacts.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/contract.py",
+      "sha256": "2f28af9ccb7288dc559fba3b10863b9bb5fcd0ec947d375e76c6cc1028df02af",
+      "bytes": 7230,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/contract.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/discovery.py",
+      "sha256": "3c7e4097d566c80a95324b766ff0cfbc2b91d8bc4959329cb6d28e12b0a68d49",
+      "bytes": 16230,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/discovery.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/documents.py",
+      "sha256": "f952e0d1a1f581743c12104aeac47610f18d45de1616a107b3f4d37541df0ca2",
+      "bytes": 1768,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/documents.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/episodes.py",
+      "sha256": "c94d1a2f68cc5cdc5eb7a5b4a1323564392eaebdfa0742b254e4687a4e82ee54",
+      "bytes": 13398,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/episodes.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/lower.py",
+      "sha256": "98ca812b1dcb3b8095334f2c302b2d1a810da52724fdfe26dba28b90a0dadaef",
+      "bytes": 31081,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/lower.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/matrix.py",
+      "sha256": "3d2b946a74ee07279fca84e095b2442b34d31d064dec2c316dcaf735a0d41620",
+      "bytes": 11218,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/matrix.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/place.py",
+      "sha256": "08a096c4b96fe3db49f2f585b86f65d448157d05ce9ed8446f44d5dd6eef5bca",
+      "bytes": 10240,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/place.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/registry.py",
+      "sha256": "9fa7a2b87d7075adbfcde4655e0e7aa094964b8c59f0223306497535008d6b76",
+      "bytes": 4498,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/registry.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/staging.py",
+      "sha256": "b044d77e8c4318e34f45785ecdeb19b3e1457d1d0caec731414cb848faf0b157",
+      "bytes": 22099,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/staging.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskbuild/text.py",
+      "sha256": "539019219ab6537e3403cc1531e91872ab44c13ec8d5a20dee029747af76c60d",
+      "bytes": 3027,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskbuild/text.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/__init__.py",
+      "sha256": "08c8509779dacbb256485ba1e65ad29ed91dca7463087382a33d5b058545c260",
+      "bytes": 3078,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/__init__.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/ast.py",
+      "sha256": "0e18911ad6589e8d19e049b0ca0800e8addbe0c587c3edc36c979b22136b3953",
+      "bytes": 9830,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/ast.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/bindings.py",
+      "sha256": "186d2e031af618f1c6346066cf1a0fa9740c2646fda488d78c132031af8552bd",
+      "bytes": 9427,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/bindings.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/parse.py",
+      "sha256": "b33aedb525e9606814551ad4693d51c7e2d94936998d20c28c5f9c001bbe93de",
+      "bytes": 22120,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/parse.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/reader.py",
+      "sha256": "f66b7d5d402bc8fd77fd30ff85b5f05ad1e2f24dd090cc817c96862f9473a664",
+      "bytes": 8081,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/reader.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/sidecar.py",
+      "sha256": "210315b2b5a716f20730d2411489274b450d0cbd7257ea100f5fb11448d2625d",
+      "bytes": 2413,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/sidecar.py"
+    },
+    {
+      "path": "robosimstudio_bench/taskdoc/typecheck.py",
+      "sha256": "4d5d2bf839ffeace3de0b8f5b582a8012ce86a8f44e22409186f442da3cae20d",
+      "bytes": 15315,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_bench/taskdoc/typecheck.py"
+    },
+    {
+      "path": "robosimstudio_materials/__init__.py",
+      "sha256": "7819c5609679c410f5802de9bf5700686012f5090e144356642fcfc55e92faa6",
+      "bytes": 3194,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/bag.py",
+      "sha256": "82d9725588d63ecf68b8af37f36601defb1556608692693ea767588371164100",
+      "bytes": 29729,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/bag.py"
+    },
+    {
+      "path": "robosimstudio_materials/brush.py",
+      "sha256": "f0ef7aaeff5dae68764234ad5231d63ce95b81cd097106839fa3b2bcc004ae3e",
+      "bytes": 62486,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/brush.py"
+    },
+    {
+      "path": "robosimstudio_materials/cloth.py",
+      "sha256": "fff27c0da8e0a39339a980e7901c52a9fa51e2aecc8dba9d998a1b315edbf11f",
+      "bytes": 85568,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cloth.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/__init__.py",
+      "sha256": "cd615424f150f2a48fd6652220d466c1f923439242dcc9b59456bc91c83c3613",
+      "bytes": 6922,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/LICENSE",
+      "sha256": "f594faaf0ae7754e2af334eecfbebb12e80af0d3ffe3817f40c3cbf2e3d21753",
+      "bytes": 1077,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/LICENSE"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/__init__.py",
+      "sha256": "40fd7a7bb69859460efe0528f5e174bc6e6dfa34cc86f59f7f0be1e3bde3985d",
+      "bytes": 1298,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/cut/__init__.py",
+      "sha256": "5be230fa13a76b43315ce684e1e849c7104db7aa30af69f7d91144b4b665e2d3",
+      "bytes": 31,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/cut/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/cut/blade.py",
+      "sha256": "5f6ce33d461e758b92311564cff7e7eb7e0e3179d6962998b12e857e0c2e19d1",
+      "bytes": 6784,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/cut/blade.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/cut/cutter.py",
+      "sha256": "dae7dce62efedba535af847d41907bc8aa4aa33d94b03a06df65fdd28fca0870",
+      "bytes": 2872,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/cut/cutter.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/cut/delta.py",
+      "sha256": "d55fe94c33368c7590304b41dcee803fe25aa52099e370633ea50a6655fc0076",
+      "bytes": 3232,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/cut/delta.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/cut/topology2d.py",
+      "sha256": "61720a50974798d1a614b8abd6d7f29d5373793bf99de2ab1eb98087298e4eb6",
+      "bytes": 20019,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/cut/topology2d.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/cut/topology3d.py",
+      "sha256": "8b03229515d300d821149ef4de5484f7dc3d88c1a7c4552540c11f76af658353",
+      "bytes": 66440,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/cut/topology3d.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/embed/__init__.py",
+      "sha256": "84455d147cd0ca5533bc740cd1cf03ce0e808e48b1958cfba66bda98a203e254",
+      "bytes": 697,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/embed/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/embed/correction.py",
+      "sha256": "362d756c988489b80d8f6398d75ccb5c8b9d76fafc0161f148370d15ed3cdaa8",
+      "bytes": 2831,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/embed/correction.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/embed/mesh_split.py",
+      "sha256": "8b3ca43229c999e3a112fd830f9a684b454fe8db47975ba8d64a9eb59547c130",
+      "bytes": 6124,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/embed/mesh_split.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/embed/quadrature.py",
+      "sha256": "69f078e42aed0cf69b0cc09c786d8747d8be7c3207ca5d2f1bc39e7ff3dc96a2",
+      "bytes": 14412,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/embed/quadrature.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/geometry/__init__.py",
+      "sha256": "5be230fa13a76b43315ce684e1e849c7104db7aa30af69f7d91144b4b665e2d3",
+      "bytes": 31,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/geometry/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/geometry/polygon.py",
+      "sha256": "fe8df5479b79aed4a23c96b6933db0fe44c6eeebca21ce28789d7aba27ff4d0b",
+      "bytes": 8089,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/geometry/polygon.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/geometry/snapshot.py",
+      "sha256": "0a3a1c2059a9d1e220b2a9bbc492339f1bc644bd0d5b0ceaa8eb527cee169ba6",
+      "bytes": 13013,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/geometry/snapshot.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/io.py",
+      "sha256": "93cc0b504bc4a95aafb27e7a833c6d5719d2ea655b559b4cd7675e0aa5d6279d",
+      "bytes": 2166,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/io.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/pipeline.py",
+      "sha256": "42bd3868d87f76a30dd0d010f5967569b6fff7cb5d31c05657e6e383abed3752",
+      "bytes": 29926,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/pipeline.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/scene.py",
+      "sha256": "f145a9a39edf59df67c67b3666f0ebd5f258c02581c03dc004a8ca13ac3d4f0f",
+      "bytes": 16605,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/scene.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/sim/__init__.py",
+      "sha256": "28d319d06ca11ff5fb279e2e0cc5def2316028cc3f3f9f820b999e6f429b18ee",
+      "bytes": 219,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/sim/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/sim/assemble.py",
+      "sha256": "eac3a21a265cb671688207ad3cbb3e698f2b4b8af4b427a3eab673d7726caa6d",
+      "bytes": 9940,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/sim/assemble.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/sim/elastic.py",
+      "sha256": "8543ad06ec4777f162facfb46cbc1ae8bba5441472ffa225e5d1a3502aa99c67",
+      "bytes": 9256,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/sim/elastic.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/sim/gemm.py",
+      "sha256": "59c97aab6d2b69bfe2ef5bb9d7d71bec436dc22ec37244ecfd3ec1a8dd4c126e",
+      "bytes": 1079,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/sim/gemm.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/sim/stvk.py",
+      "sha256": "fc86598aaa75eb15e5562d0b235f80c59a276177f3f2922995fd39b3141a0c2a",
+      "bytes": 2291,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/sim/stvk.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/__init__.py",
+      "sha256": "5f12fd8cf1e1f4adade408768480e64c0e51cd7800b5bd0ca1dc9a3d5c622de2",
+      "bytes": 397,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/funcs2d.py",
+      "sha256": "319c35a88597e14547de827d0c49cd7916b65edfffbaf3dc40455f49db9abae4",
+      "bytes": 4764,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/funcs2d.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/funcs3d.py",
+      "sha256": "616d684c3fce8a271962b3e8637966c5b06480dbc26923bba6a195f78c3523b8",
+      "bytes": 12464,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/funcs3d.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/gpu_cage.py",
+      "sha256": "c4737475a1fad75f0be89f469a8e26ba7351ee408563f020d42517cbe8299eb3",
+      "bytes": 8522,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/gpu_cage.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/kernels.py",
+      "sha256": "58afa6112fef9d0ed704eeefde44f888da2697e8862de6549b54689e43d9d103",
+      "bytes": 14244,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/kernels.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/update.py",
+      "sha256": "243c5da7a1e51f4e6c52c030d6a653c4dc82b27a3dd5bd356c6bdfb9c5f055f1",
+      "bytes": 6706,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/update.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/cagecut/wos/walkset.py",
+      "sha256": "8f78b68ad8f1fa12f240003cb5799648adf15a49c60e2a17b9c8a0ad9e55dc10",
+      "bytes": 12709,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/cagecut/wos/walkset.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/declare.py",
+      "sha256": "874aa95a1e379fac97e2fd779f5669eb7bfd075c61e3da6f684fe544cf6a9f50",
+      "bytes": 2027,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/declare.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/entity.py",
+      "sha256": "5041cd5f42db477f25331937c58aeaabe68dc20d4ac06b78cee64c4cf13a8caa",
+      "bytes": 25200,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/entity.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/law.py",
+      "sha256": "08aa3972813e8523733ae503badb557d0006dce48e608e827e64a49378ecf7d7",
+      "bytes": 12897,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/law.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/measures.py",
+      "sha256": "bb35cbfe809eec69fef338e0755982a906a306232a9fff72a6138e188b15607c",
+      "bytes": 3780,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/measures.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/solver.py",
+      "sha256": "6eec4710a0898a5217a7ec78c7d9ad229489a41c6e6b56ae59d923d14126bb76",
+      "bytes": 2474,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/solver.py"
+    },
+    {
+      "path": "robosimstudio_materials/cutting/spec.py",
+      "sha256": "fa1b0dd2496bc094953d576d577c61e70d99dd3b62431cc2429c83e414c2dcc3",
+      "bytes": 13744,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/cutting/spec.py"
+    },
+    {
+      "path": "robosimstudio_materials/dough.py",
+      "sha256": "e127dd55b813f1268df703d23c3958a4848c4dde74d8fd78791e9ea5a95663cf",
+      "bytes": 17395,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/dough.py"
+    },
+    {
+      "path": "robosimstudio_materials/granular.py",
+      "sha256": "67cec29ef7e30575d03c29daa27414ae608e02beeec187daea5008c7c13aaf41",
+      "bytes": 3967,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/granular.py"
+    },
+    {
+      "path": "robosimstudio_materials/liquid.py",
+      "sha256": "b8712b52e0f1a9d547044ea845fa0bfa9bf327ff4768c75d2c2617c21d1b68ec",
+      "bytes": 10924,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/liquid.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/__init__.py",
+      "sha256": "294632cbbe5ab38faf60723eb974384f4626b1d303392231edcb9eb71c7d3c30",
+      "bytes": 2967,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/declare.py",
+      "sha256": "5b520de0a5a92f24751ad1085267e06cdabcae3f7dc4b5de6a87753a47d89942",
+      "bytes": 3933,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/declare.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/entity.py",
+      "sha256": "28ae447224a69ee59fa9e123c7f2f4731efb3062d9cae667ba05c0af3044edf4",
+      "bytes": 26629,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/entity.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/measures.py",
+      "sha256": "1ccbca8de21a496b06d15458e09c0a25798e415ad6a0e824aec7e190e867748c",
+      "bytes": 13297,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/measures.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/physics.py",
+      "sha256": "12d31cc6b28ebe7ad6f27809dd8879364ff1ab6a06203f7a388b655621799dfd",
+      "bytes": 10899,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/physics.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/presets.py",
+      "sha256": "e8300b84689bc7c24355e99cb74cee674dc780d0bc7d8a8e8d33e497266e8b6f",
+      "bytes": 9610,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/presets.py"
+    },
+    {
+      "path": "robosimstudio_materials/mpm/spec.py",
+      "sha256": "ab510d88149017e463698b814227a01d6681ac5e3ecc1bc9ab96bd2b05f415c8",
+      "bytes": 17828,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/mpm/spec.py"
+    },
+    {
+      "path": "robosimstudio_materials/paper.py",
+      "sha256": "a7857f3c26eb2a15be7fcbdfb071fd65ed2ec65db5718f5b9306fd0731370fe9",
+      "bytes": 35445,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/paper.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/__init__.py",
+      "sha256": "005a7531c2e1006f212064738420eba6215e7d94e160743bb689908b94fbdc43",
+      "bytes": 4615,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/__init__.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/actor.py",
+      "sha256": "13301e8c4ce88dc2465e9e430ae368bc98de50239365338362b1a2f1c7c64ef5",
+      "bytes": 18056,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/actor.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/band.py",
+      "sha256": "f062a9f7399921eb547a19536bf87c6b2729dbd00f6d9cd972ed601699ddb086",
+      "bytes": 12539,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/band.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/centerline.py",
+      "sha256": "d234c60c1605cf389cb16f5408c3550c0b2eb7aae7e97fdfc7a333b0c8508156",
+      "bytes": 6654,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/centerline.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/declare.py",
+      "sha256": "0070c00d5e6d4fabea580809ed6046f6154ed764f510705331327b6698fb32c7",
+      "bytes": 7854,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/declare.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/entity.py",
+      "sha256": "c1a1d80b0944106aeb939f01b63b82d09381d9b69aea714a3b446bae33cea3fb",
+      "bytes": 77693,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/entity.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/features.py",
+      "sha256": "69d64e06b9575182a7b6a6e06769959a555f3f05a34dbb078ea3386063d9ede1",
+      "bytes": 1798,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/features.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/knot.py",
+      "sha256": "cdb89df83d8a4c23a2f3d3bff0778e2c21ffd6748eebbec9f812e4df58fc56f3",
+      "bytes": 10287,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/knot.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/latch.py",
+      "sha256": "74a64f77a8c94722a70b41698bb9164dd365c02ff9ad3c4297b5f67364f55f97",
+      "bytes": 5327,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/latch.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/make.py",
+      "sha256": "a83110fd813c6495fcd364630e531b3bbb9535d7172f3b82941727bef55929ad",
+      "bytes": 1873,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/make.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/materials.py",
+      "sha256": "5d30279341711039e8fdbef8f1e8d98b7c56f19d7c140ab08b973995a2f53a29",
+      "bytes": 910,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/materials.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/measures.py",
+      "sha256": "aa7065fde5993484cbcf57ce6397c6b336c7eb471e4e32aec5897465a9f09fa0",
+      "bytes": 16435,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/measures.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/spec.py",
+      "sha256": "b57ef99194c82d59ba5e9ee92a67979dd7eca4e3637eb64b7ec4b5d2aab2072d",
+      "bytes": 22447,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/spec.py"
+    },
+    {
+      "path": "robosimstudio_materials/rod/superdex.py",
+      "sha256": "239a292a0577e03630f164e6106241d629e05c285a5cf8a76eded2b35dac7314",
+      "bytes": 18438,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/rod/superdex.py"
+    },
+    {
+      "path": "robosimstudio_materials/soft.py",
+      "sha256": "2f579031194532c85f2d4b76191ef2578e0131377305fbe368c223eeed202bc8",
+      "bytes": 29754,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/soft.py"
+    },
+    {
+      "path": "robosimstudio_materials/tape.py",
+      "sha256": "8e3ae05062c620bb33e40dd57d47083f00002ca6cf93f409ff5bebe80dbae116",
+      "bytes": 107144,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/tape.py"
+    },
+    {
+      "path": "robosimstudio_materials/water.py",
+      "sha256": "76e5d21c94de92063cc11cc05eef56f30d95c0cb6ba01e5a40c5e89893382463",
+      "bytes": 25588,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_materials/water.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/__init__.py",
+      "sha256": "aa712de34929249d38c67eec7743ccc845bd553c6a3c929ee462e609624d169c",
+      "bytes": 3225,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/__init__.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/connector.py",
+      "sha256": "62bae49e0dad482ca4b4d0356b0a520aaf4010ea990bed872054ef0516fd2968",
+      "bytes": 44159,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/connector.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/contract.py",
+      "sha256": "1a65f6cdf3fa15a31dbe07f8dd1c0c0a613ce16ca3c96e761e51739f9a66002b",
+      "bytes": 5625,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/contract.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/facade.py",
+      "sha256": "6697ab5b222f7aa92336ae60a945299a4a91f9a933ff63e1193528e9b486942d",
+      "bytes": 27571,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/facade.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/__init__.py",
+      "sha256": "be28a3fffcd5410fdcd59ca401736c9bbdf94561bbe9d5962aa1564f61f52853",
+      "bytes": 2424,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/__init__.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/barrier.py",
+      "sha256": "3a62e7d7f12f7078ad74f8b40e1ea3c1f0af4183e02e153c29f611059376c0ec",
+      "bytes": 26892,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/barrier.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/ik_backend.py",
+      "sha256": "55759604e293ef433a6b94bb7bf1792cbdfbd1fbbd3060f590a395546ed919f4",
+      "bytes": 24779,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/ik_backend.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/intents.py",
+      "sha256": "336d84e8b3d70083094c1a0e1a29d07f1cc6ed0f25490ec37ab9e5b8d90774ff",
+      "bytes": 18554,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/intents.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/obs_format.py",
+      "sha256": "19676436cd8420598a9796a5846a89429d83001d3c920ac5e0a082ed8891048d",
+      "bytes": 11356,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/obs_format.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/snapshots.py",
+      "sha256": "34ae38d9564f9b3f921d09f944bde5cd1893e6508cceb9ecc65bcab4ea6dc627",
+      "bytes": 5181,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/snapshots.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/solution.py",
+      "sha256": "d28f2b3dd8372ab1f9736383623284a4201cf572b4813ab9ab3a68beeab76e49",
+      "bytes": 39104,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/solution.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/stepper.py",
+      "sha256": "0c32993b880535f669d1e18da95985c1ba5adaa95f69ed41f2e3d36073f633d7",
+      "bytes": 40482,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/stepper.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/world_bus.py",
+      "sha256": "1da3a3d53631d4c3764db4071d77da3840d740c6f20bab352f44d40ecdb8fa0a",
+      "bytes": 18061,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/world_bus.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/fleet/world_facade.py",
+      "sha256": "9a8cd087172db789193a1cf3f6e02127168b9d727355c24b61eea0cc33f76b18",
+      "bytes": 18728,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/fleet/world_facade.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/geometry_tools.py",
+      "sha256": "87a37e1086f1ca0b468d27defb8add7868cfda370cf9df4b805d4da1210d04d7",
+      "bytes": 11966,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/geometry_tools.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/graph_solution.py",
+      "sha256": "e533a7e739806c5d1d1bd43223eed1236db60c7a2cb65c8ec1d2f9760a553f99",
+      "bytes": 32401,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/graph_solution.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/graphs.py",
+      "sha256": "0eeb25075d7e88d1bb596a0cec3441dfbd79bd195f3fdc2fa631527b70aad4c3",
+      "bytes": 18231,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/graphs.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/grasp_tools.py",
+      "sha256": "7a2711a52cb7e6c3f45b2e15745f4bc89fff1b23ee4cf42cec6048dcd6344e4d",
+      "bytes": 13066,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/grasp_tools.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/ik.py",
+      "sha256": "79d06313ef4ae34e98014873dfdc9b4aacc53c6c4223a77062b261c83d5b524a",
+      "bytes": 30091,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/ik.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/motion_tools.py",
+      "sha256": "ccc3b4fda69b9b3014b0a44432fd98ef1852723861c68dcbad8d032c4cf4b00c",
+      "bytes": 30801,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/motion_tools.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/nodes/route_perception.py",
+      "sha256": "257f1adff43085dc431179f85460c488c6c0b1338ca5db871d23255399673761",
+      "bytes": 1392,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/nodes/route_perception.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/perception_tools.py",
+      "sha256": "fc758752d90f3f048163873066313bb23eb577d1d1d8bd12ec57a30fb06e47c4",
+      "bytes": 22358,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/perception_tools.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/planners/__init__.py",
+      "sha256": "df916b77da8be9cbf7c17527098db4bdd3dc3ec6c859dfd9ac21a4484f0963aa",
+      "bytes": 144,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/planners/__init__.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/planners/curobo.py",
+      "sha256": "54611a6a2186a80c15227fa0d99a2cf1544ea98dcad838b13117dbc9eccad217",
+      "bytes": 106753,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/planners/curobo.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/refusal.py",
+      "sha256": "93b3c21e568f3da9fd8bc346671778249373f25a30445de8b9062cbb5b02ea15",
+      "bytes": 1589,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/refusal.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/robot_tools.py",
+      "sha256": "1b4845d6d90bd021f6dd1a50fe51b1c9f5a2b47b0439a6361b701c733ded574f",
+      "bytes": 37579,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/robot_tools.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/servo.py",
+      "sha256": "e7aae5b3266d154df315f91b2aafeebe14291ad73c9def6fbb8b9462cd610dc9",
+      "bytes": 42761,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/servo.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/sim_tools.py",
+      "sha256": "2478ea52ed3515b85097bb5cc8a114540de2cf5407315d194221805049a6636d",
+      "bytes": 75445,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/sim_tools.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/skills.py",
+      "sha256": "b7777c59f09694c9dba014bccb6ef132ba47b734484c4150262d625ef8032958",
+      "bytes": 13343,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/skills.py"
+    },
+    {
+      "path": "robosimstudio_policy_agent/types.py",
+      "sha256": "95ba00126e95db2c51af8b41cd8b49358d145334cd0bc9049159a6075ed15419",
+      "bytes": 1857,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_policy_agent/types.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/__init__.py",
+      "sha256": "9f9e2b8d4dc9eae6ef07da201074e30656c161e8061b9bfeff335d2ad5690bf8",
+      "bytes": 2201,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/__init__.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/__main__.py",
+      "sha256": "5e7966cd6a156b1274e2131b2b18e0cad616c441273758490c3f28c155535dc3",
+      "bytes": 219,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/__main__.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/checks.py",
+      "sha256": "1e0ad8ae61e01057ac78aa95a71ef78d980b598c7863cff84d3f9f30f43197b9",
+      "bytes": 43238,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/checks.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/compare.py",
+      "sha256": "688f7daad98e45175ef7c6c6e441f1a8dd6686914ec2e05dc13240c4ef7c9ed9",
+      "bytes": 19738,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/compare.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/ctl.py",
+      "sha256": "3dca44328e754a5d21c2dfbf0e25168942b45d8cd0bf0e9ad7a7ef3fd83861e1",
+      "bytes": 41313,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/ctl.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/frames.py",
+      "sha256": "59b0cc872a421ffc5ab41eeda406b2b5b462f1f168b84d81228984c81c80d4fb",
+      "bytes": 9955,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/frames.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/page.py",
+      "sha256": "9dfac8ce090baba5d737e2d70cc8ffb0d63269b55aa9e814585cf8dc7ad90f0a",
+      "bytes": 5408,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/page.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/scenefile.py",
+      "sha256": "993a1cfbb0639a554d35585e0d6db7aec81e5863b83057d5e476aed1d3b0ac8f",
+      "bytes": 15573,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/scenefile.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/serve.py",
+      "sha256": "32c330818b46b71797f64c629ae03901e8e1b9ee921b04e9e6671d4c3cb0dffa",
+      "bytes": 3549,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/serve.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/server.py",
+      "sha256": "dfb58b8120d2dafb9c548a1748b5d9af85f312abc4a1ed586faf9928ab6f4a40",
+      "bytes": 79203,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/server.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/stills.py",
+      "sha256": "f67ac18caa13ce2547da1b374d5e02934bfc61fff8dae69bad968961db26d959",
+      "bytes": 6047,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/stills.py"
+    },
+    {
+      "path": "robosimstudio_real2sim_agent/wire.py",
+      "sha256": "3e251e986a44216b91e113bc264a4d745e3123f9fe31803f2591fed695c75485",
+      "bytes": 9550,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_real2sim_agent/wire.py"
+    },
+    {
+      "path": "robosimstudio_studio/__init__.py",
+      "sha256": "546dcae0028b692006e16b442caf5576221a8a9ccf094c4f4fd19d2969e640c1",
+      "bytes": 3074,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/__init__.py"
+    },
+    {
+      "path": "robosimstudio_studio/bench_panels.py",
+      "sha256": "e96d79d16e7cd36b47e986440ece0f3075cb7234a8d88a06e9bcd220b53b6b1a",
+      "bytes": 39741,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/bench_panels.py"
+    },
+    {
+      "path": "robosimstudio_studio/bench_session.py",
+      "sha256": "a048db247d9553e568b17a58902e4b261c3e35e733712f84baa67f8eb2759a74",
+      "bytes": 22928,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/bench_session.py"
+    },
+    {
+      "path": "robosimstudio_studio/cameras.py",
+      "sha256": "eb09f3f8654f5581192e3e57b854b8e90dccd6b57c8864e9ded3d2228f5b2ac1",
+      "bytes": 38660,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/cameras.py"
+    },
+    {
+      "path": "robosimstudio_studio/controls.py",
+      "sha256": "da22413cd988d929c547a95c995bd763f4b57e6c298e130997679141498ca9b1",
+      "bytes": 21392,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/controls.py"
+    },
+    {
+      "path": "robosimstudio_studio/finish_gltf.py",
+      "sha256": "987b2b275bfff219903e4b45f26fbaeaf2f07c0838798bd1b89c849a8af54c47",
+      "bytes": 17256,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/finish_gltf.py"
+    },
+    {
+      "path": "robosimstudio_studio/fleet_session.py",
+      "sha256": "dc18876c03130c3b106428d6532e5bae1ae317b7900be15cfd65f75da76c672e",
+      "bytes": 16423,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/fleet_session.py"
+    },
+    {
+      "path": "robosimstudio_studio/fleet_view.py",
+      "sha256": "32e8cdd75b52b235ab65c7ac1c34b28f1e8e4597a6f3c5e979f294354a4667dc",
+      "bytes": 21283,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/fleet_view.py"
+    },
+    {
+      "path": "robosimstudio_studio/garments.py",
+      "sha256": "290a7275417183547001428a55b5a3877b8dac66778407ca9a393e8cabb32a4d",
+      "bytes": 69894,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/garments.py"
+    },
+    {
+      "path": "robosimstudio_studio/goal_panel.py",
+      "sha256": "58ab316d0aa7ed68bddc581d5f26e655ae9a2b42b5ae910ff3fe2ae8e18d17fa",
+      "bytes": 20072,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/goal_panel.py"
+    },
+    {
+      "path": "robosimstudio_studio/handles.py",
+      "sha256": "7dc6d579c12b68972de1298973e70c50c144605017a7c6cf3e3063d87fba9a64",
+      "bytes": 15719,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/handles.py"
+    },
+    {
+      "path": "robosimstudio_studio/inspector.py",
+      "sha256": "05bb9f411d4cb0af5e43489be423f69d5af191b8177772b1313ada42a349effc",
+      "bytes": 16681,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/inspector.py"
+    },
+    {
+      "path": "robosimstudio_studio/leader_arm.py",
+      "sha256": "b8d3d553ccafb56925bd8f11bfe66ee244358fc59099b9aad91421e1979230de",
+      "bytes": 10019,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/leader_arm.py"
+    },
+    {
+      "path": "robosimstudio_studio/lighting.py",
+      "sha256": "375479ee5c89c03d97c5d43eca10b8bc84af4353ae31378ff1ccc600f6b08141",
+      "bytes": 19042,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/lighting.py"
+    },
+    {
+      "path": "robosimstudio_studio/overlay.py",
+      "sha256": "402555620e04b5d7a6f1f722f12a7eb33d3a4b666c447d962c3aa1124dc818ab",
+      "bytes": 20100,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/overlay.py"
+    },
+    {
+      "path": "robosimstudio_studio/panels.py",
+      "sha256": "342803f68d3c7f7abbf8b323d728e1ec347ff41561f6fd6ec8d24945454369e4",
+      "bytes": 79396,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/panels.py"
+    },
+    {
+      "path": "robosimstudio_studio/pick.py",
+      "sha256": "770d507bd2f68968a10388a5f25be459f22b315d017c7e0cd798ab278da5251a",
+      "bytes": 10454,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/pick.py"
+    },
+    {
+      "path": "robosimstudio_studio/regions.py",
+      "sha256": "303a170d375efa532315170378dba45b6789c20dbbc64da10dd6265f37289465",
+      "bytes": 9641,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/regions.py"
+    },
+    {
+      "path": "robosimstudio_studio/render_view.py",
+      "sha256": "2c4ae2a7c38502e1a52408359d7969cd96201061f1efd5fd741436cd69605c95",
+      "bytes": 29345,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/render_view.py"
+    },
+    {
+      "path": "robosimstudio_studio/routine.py",
+      "sha256": "f9fdb18038b9cf45fa5e7fdffe017e40ccb75fd3f82de8a8adf95fbdb6330ecb",
+      "bytes": 8910,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/routine.py"
+    },
+    {
+      "path": "robosimstudio_studio/scene_panel.py",
+      "sha256": "3542d7863ed40e53715b127c1d9f9404857824da9e68eff9dcfe3ed4076f6cea",
+      "bytes": 2763,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/scene_panel.py"
+    },
+    {
+      "path": "robosimstudio_studio/scenery.py",
+      "sha256": "36b6958e7f72b338e64eca365fab9d9f3c5867cff42163b054b5d439fbc1d9a2",
+      "bytes": 4881,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/scenery.py"
+    },
+    {
+      "path": "robosimstudio_studio/seams.py",
+      "sha256": "cf01d300dc4eba5be8f575679e6eafe8165dad5477ac29d4c2ce68f3523d5f7c",
+      "bytes": 6169,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/seams.py"
+    },
+    {
+      "path": "robosimstudio_studio/selection.py",
+      "sha256": "2eb5dd94323b1033eb976efe89bfc34fb8c01ac3c1068652e16c28f72de1c9a0",
+      "bytes": 13186,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/selection.py"
+    },
+    {
+      "path": "robosimstudio_studio/session.py",
+      "sha256": "086e68cbf263a6f0c13e8dc990d07fea983da0abc78b90080fdb37f7b7910364",
+      "bytes": 110817,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/session.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/__init__.py",
+      "sha256": "7a381bc8b55185ad807ef686c332702c10a3959cda42c7f35f9af1b9a6f571be",
+      "bytes": 2131,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/__init__.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/apply.py",
+      "sha256": "8aca48d10d53ea3b6828ff9e07696fe1713417f6fbe0fdad4469d068054fb76b",
+      "bytes": 3859,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/apply.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/arrangement.py",
+      "sha256": "0cb3aebbd61e054813ee739fcdc1656a5f6763049c3058d34f40783ff8ce4be2",
+      "bytes": 12270,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/arrangement.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/binder.py",
+      "sha256": "e3ff22a17780bb9ebd8ea6ec2f17ded88871b81e4bdb99776c8507dd08e752ab",
+      "bytes": 12319,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/binder.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/metrics.py",
+      "sha256": "7862f858bd2afeac4fd62583f07352df6f19176fa649f512a7166f63e7e0d618",
+      "bytes": 11959,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/metrics.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/panels.py",
+      "sha256": "98333ba85ceac8bed15fdddcf739f1495295a8a7574d497340a2c0c862743ab1",
+      "bytes": 24925,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/panels.py"
+    },
+    {
+      "path": "robosimstudio_studio/tuning/tuner.py",
+      "sha256": "0bc011e37a7928e7e03bdac09a042f01f2d7c449c2d96f6943230bb4d6adbe83",
+      "bytes": 13153,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/robosimstudio_studio/tuning/tuner.py"
+    },
+    {
+      "path": "uv.lock",
+      "sha256": "2c5061b61a6ff5f442d87bac4a3ef32292ffae3b3b08cc82ac0c28de1829f69a",
+      "bytes": 1074312,
+      "url": "https://raw.githubusercontent.com/robosimstudio/robosimstudio/eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f/uv.lock"
+    }
+  ]
+}

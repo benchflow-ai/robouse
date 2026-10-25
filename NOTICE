@@ -137,4 +137,10 @@ Embodied Playground
   Original code: Apache License 2.0; original documentation and independently authored non-code assets: Creative Commons Attribution 4.0 (CC BY 4.0); third-party material under its own terms (its LICENSING.md and THIRD_PARTY_NOTICES.md; the Panda model in its MuJoCo package is MuJoCo Menagerie's, Apache License 2.0)
   Downloaded by `robouse fetch-assets --embodied-playground` for the embodied-playground suite: its MuJoCo package (source/agentbench/agentbench_mujoco) and the release's licence files, listed in assets/embodied-playground/provenance.json (repository, sdist; in the wheel as robouse/assets_provenance/embodied-playground.json). None of them is in the repository or the package. The task folders (tasks/embodied-playground/, wheel, sdist) quote each task's goal and carry its conditions' parameters from Embodied Playground's task catalog (docs/evaluation/tasks.json, CC BY 4.0); their reference plans are Robo Use's own.
 
+RoboSimStudio
+  https://github.com/robosimstudio/robosimstudio, commit eb3d46a839bf8d9b8df6e9c3f0205e141f5b3f7f
+  Copyright 2026 Kaiyuan Chen
+  Code: Apache License 2.0; robot assets and other third-party files retain the MIT, BSD and Apache terms in the downloaded NOTICE and licence files.
+  Downloaded by `robouse fetch-assets --robosimstudio`: source packages, robot assets, two scored examples and release files listed in assets/robosimstudio/provenance.json (repository and sdist; wheel: robouse/assets_provenance/robosimstudio.json). No upstream source or models are bundled. The generated task instructions describe the examples' goals and controls; reference controls are Robo Use's own.
+
 Robo Use's own RoboHarm suite (tasks/roboharm/) was written independently. It cites Robocurve's RoboHarm (https://github.com/robocurve/roboharm, CC BY-NC 4.0) for its design and contains none of its text, code or assets.

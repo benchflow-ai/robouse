@@ -25,6 +25,7 @@ WORKER_VENVS = {
     "robocasa": "robocasa",
     "yam": "yam",
     "embodied_playground": "embodied-playground",
+    "robosimstudio": "robosimstudio",
 }
 REMOTE = {"behavior", "gpu", "robodojo"}  # simulators on remote GPU workers
 UPSTREAM_PKGS = {
@@ -116,6 +117,13 @@ def run() -> int:
 
             ready = py.exists() and not ep_source.missing()
             hint = "" if not ep_source.missing() else "; package: robouse fetch-assets --embodied-playground"
+            print(f"  {_ok(ready)}{b} (worker virtualenv {py}{hint})")
+            continue
+        if b == "robosimstudio":
+            from ..backends.robosimstudio import source as rss_source
+
+            ready = py.exists() and not rss_source.missing()
+            hint = "" if not rss_source.missing() else "; package: robouse fetch-assets --robosimstudio"
             print(f"  {_ok(ready)}{b} (worker virtualenv {py}{hint})")
             continue
         print(f"  {_ok(py.exists())}{b} (worker virtualenv {py})")

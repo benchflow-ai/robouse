@@ -43,6 +43,7 @@ BACKENDS: dict[str, tuple[str, str]] = {
     "robocasa": ("robocasa", "RobocasaBackend"),  # simulator worker
     "robodojo": ("robodojo", "RoboDojoBackend"),  # RoboDojo on Isaac Sim; remote GPU worker
     "roboharm": ("roboharm", "RoboHarmBackend"),
+    "robosimstudio": ("robosimstudio", "RoboSimStudioBackend"),  # CPU deformable-material tasks; simulator worker
     "robosuite": ("robosuite", "RobosuiteBackend"),
     "tabletop": ("tabletop", "TabletopBackend"),
     "yam": ("yam", "YamBackend"),  # Dream Labs' dual-YAM scene; simulator worker

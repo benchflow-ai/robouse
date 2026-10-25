@@ -27,6 +27,8 @@ ENV: dict[str, str] = {
     "--chemlab` (default <cache>/chemlab); agents never see it",
     "ROBOUSE_EMBODIED_PLAYGROUND_SOURCE": "Embodied Playground's MuJoCo package for the embodied-playground suite, "
     "from `robouse fetch-assets --embodied-playground` (default <cache>/embodied-playground); agents never see it",
+    "ROBOUSE_ROBOSIMSTUDIO_SOURCE": "pinned RoboSimStudio source and robot models, from `robouse fetch-assets "
+    "--robosimstudio` (default <cache>/robosimstudio); agents never see it",
     "ROBOUSE_PRICING": "JSON price table for trial cost and the spend cap, used instead of the packaged pricing.json "
     "(not added to it)",
     # episode server
@@ -84,6 +86,8 @@ ENV: dict[str, str] = {
     "<cache>/yam-venv/bin/python)",
     "ROBOUSE_EMBODIED_PLAYGROUND_PYTHON": "Python of the Embodied Playground virtualenv (Python 3.11, MuJoCo 3.3.7; "
     "default <cache>/embodied-playground-venv/bin/python)",
+    "ROBOUSE_ROBOSIMSTUDIO_PYTHON": "Python of the RoboSimStudio CPU virtualenv (Python 3.12; default "
+    "<cache>/robosimstudio-venv/bin/python); its virtualenv is denied to agents",
     **{
         f"ROBOUSE_{b}_QUIET": f"0 shows the {b.lower()} worker's stderr (default 1)"
         for b in (
@@ -99,6 +103,7 @@ ENV: dict[str, str] = {
             "CAPX_LIBERO",
             "YAM",
             "EMBODIED_PLAYGROUND",
+            "ROBOSIMSTUDIO",
         )
     },
     "ROBOUSE_MANISKILL_DEBUG": "1: the ManiSkill worker logs each request",
@@ -196,6 +201,7 @@ PUBLIC = frozenset(
         "ROBOUSE_MENAGERIE_ASSETS",
         "ROBOUSE_CHEMLAB_ASSETS",
         "ROBOUSE_EMBODIED_PLAYGROUND_SOURCE",
+        "ROBOUSE_ROBOSIMSTUDIO_SOURCE",
         "ROBOUSE_PRICING",
         "ROBOUSE_RECORD_SIZE",
         "ROBOUSE_SANDBOX",
@@ -214,6 +220,7 @@ PUBLIC = frozenset(
         "ROBOUSE_CAPX_LIBERO_PYTHON",
         "ROBOUSE_YAM_PYTHON",
         "ROBOUSE_EMBODIED_PLAYGROUND_PYTHON",
+        "ROBOUSE_ROBOSIMSTUDIO_PYTHON",
         "ROBOUSE_VLA_URL",
         "ROBOUSE_VLA_TOKEN",
         "ROBOUSE_VLA_POLICY_CONFIG",
@@ -294,6 +301,7 @@ MOVED_CACHE = (
     "ROBOUSE_ROBOHARM_TEX",
     "ROBOUSE_CHEMLAB_ASSETS",
     "ROBOUSE_EMBODIED_PLAYGROUND_SOURCE",
+    "ROBOUSE_ROBOSIMSTUDIO_SOURCE",
     "ROBOUSE_HUMANOIDBENCH_POLICY",
 )
 
@@ -306,5 +314,11 @@ def sandbox_denied_paths() -> list[str]:
     paths = [config_dir(), operator_dir(), *_maintainer.private_dirs()]
     out = [str(p) for p in paths if p.exists()]
     out += [v for k in MOVED_CACHE if (v := env(k))]
+    # An explicitly moved worker virtualenv is executable simulator code too. Keep the venv's path before
+    # resolving its Python symlink, which usually points outside it to a shared system interpreter.
+    if worker_python := env("ROBOUSE_ROBOSIMSTUDIO_PYTHON"):
+        worker_env = Path(worker_python).expanduser().absolute().parent.parent
+        if (worker_env / "pyvenv.cfg").is_file():
+            out.append(str(worker_env))
     out += [p for p in env("ROBOUSE_SANDBOX_DENY").split(":") if p]
     return out
