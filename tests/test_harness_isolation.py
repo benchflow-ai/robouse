@@ -323,26 +323,40 @@ def test_path_entries_the_agent_cannot_reach_are_dropped(tmp_path, monkeypatch) 
 
 
 def test_the_robo_mcp_server_runs_on_a_python_the_agent_can_run(tmp_path, monkeypatch) -> None:
-    """The MCP server runs inside the agent's sandbox. Under `uvx` the first python3 on PATH is the runner's, in the uv
-    cache that the sandbox denies, so the server could not start: it takes the first python3 the agent can run. With
-    the sandbox off, PATH is taken as it is."""
+    """A runner in uvx's denied cache and a silent python3 on PATH do not affect the stdlib MCP server."""
     p = _home(tmp_path)
     _isolate(monkeypatch, p)
     uvx, system = p["home"] / ".cache" / "uv" / "archive-v0" / "abc" / "bin", tmp_path / "usr" / "bin"
     for d in (uvx, system):
         d.mkdir(parents=True)
-        (d / "python3").write_text("#!/bin/sh\n")
-        (d / "python3").chmod(0o755)
+    (uvx / "python3").symlink_to(sys.executable)
+    (system / "python3").write_text("#!/bin/sh\nexit 0\n")
+    (system / "python3").chmod(0o755)
     ws = tmp_path / "ws"
     (ws / ".robouse" / "bin").mkdir(parents=True)
     path = os.pathsep.join([str(ws / ".robouse" / "bin"), str(uvx), str(system)])
-    monkeypatch.delenv("ROBOUSE_SANDBOX", raising=False)
-    cfg = iface.stdio_config(ws, "/tmp/x.sock", {"PATH": path})
-    assert cfg["command"] == str(system / "python3") and cfg["args"] == [str(ws / ".robouse" / "bin" / "robo"), "mcp"]
+    monkeypatch.setattr(sys, "executable", str(uvx / "python3"))
     monkeypatch.setenv("PATH", path)
-    assert iface.robo_mcp_cmd(ws)[0] == str(system / "python3")  # dimcode's: this process's PATH
-    monkeypatch.setenv("ROBOUSE_SANDBOX", "0")
-    assert iface.stdio_config(ws, "/tmp/x.sock", {"PATH": path})["command"] == str(uvx / "python3")
+    import json
+    import subprocess
+
+    from robouse.runner.trial import AGENT_CLI, MCP_SERVER
+
+    (ws / ".robouse" / "bin" / "robo_cli.py").write_text(AGENT_CLI.read_text())
+    (ws / ".robouse" / "bin" / "robo_mcp.py").write_text(MCP_SERVER.read_text())
+    for setting in ("1", "0"):
+        monkeypatch.setenv("ROBOUSE_SANDBOX", setting)
+        cfg = iface.stdio_config(ws, "/tmp/x.sock", {"PATH": path})
+        assert ".cache/uv" not in cfg["command"] and cfg["command"] != str(system / "python3")
+        result = subprocess.run(
+            [cfg["command"], *cfg["args"]],
+            input='{"jsonrpc":"2.0","id":1,"method":"ping"}\n',
+            text=True,
+            capture_output=True,
+            timeout=20,
+        )
+        assert result.returncode == 0, result.stderr
+        assert json.loads(result.stdout) == {"jsonrpc": "2.0", "id": 1, "result": {}}
 
 
 PEEK = r"""robo done peek >/dev/null

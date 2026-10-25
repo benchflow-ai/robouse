@@ -4,6 +4,10 @@ Notable changes to the `robouse` package, newest first. Versions follow [semanti
 
 ## Unreleased
 
+### Fixed
+
+- On macOS with `/usr/bin/python3` first on `PATH`, the workspace's `robo` command, its MCP server and the `molmoact2` and `show-harness` clients keep their output under the sandbox: they run on the runner's base Python by absolute path, in isolated mode without site-packages. The `jev` client uses that base interpreter too, so it can start when the runner's virtualenv is in a denied package cache (`uvx`). The `vla` client defaults to the runner's Python, with numpy installed, instead of the first `python3` on `PATH`; `ROBOUSE_VLA_PYTHON` still selects another interpreter with numpy.
+
 ### Security
 
 - The sandbox denies Embodied Playground's simulation package where `ROBOUSE_EMBODIED_PLAYGROUND_SOURCE` puts it, on macOS and Linux, as it denies Robo Use's cache, its default place: the embodied-playground worker imports it.

@@ -131,7 +131,8 @@ ENV: dict[str, str] = {
     "ROBOUSE_VLA_URL": "policy server for the `vla` harness",
     "ROBOUSE_VLA_TOKEN": "bearer token for the policy server",
     "ROBOUSE_VLA_POLICY_CONFIG": "JSON file with overrides for the `vla` preset",
-    "ROBOUSE_VLA_PYTHON": "interpreter that runs the `vla` client (default python3)",
+    "ROBOUSE_VLA_PYTHON": "interpreter with numpy that runs the `vla` client (default: the runner's Python; isolated "
+    "mode, ignoring PYTHON* settings)",
     "ROBOUSE_VLA_CONFIG": "resolved `vla` preset, passed to the client (set by the runner)",
     "ROBOUSE_DREAM_PYTHON": "interpreter that runs the `dream` client, with Dream's client library installed "
     "(default <cache>/dream-venv/bin/python)",

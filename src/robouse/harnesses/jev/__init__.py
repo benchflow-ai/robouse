@@ -2,7 +2,7 @@
 
 `client.py` (copied into the trial workspace, standard library only) asks Jev a decision profile's questions about each
 observation through TypeSafe's System One API and executes the answers through `robo`; its docstring describes the
-loop. It runs inside the agent sandbox on the runner's own Python in isolated mode without site-packages (`-I -S`),
+loop. It runs inside the agent sandbox on the runner's base Python in isolated mode without site-packages (`-I -S`),
 which the sandbox lets agents read but not change: on macOS the first `python3` on PATH can be the Command Line Tools'
 /usr/bin/python3, whose output to the trial folder is lost under the sandbox. Jev answers typed questions and writes no code, so the harness runs
 only tasks it has a profile for: `nav`, Robo Use's nav suite, in the protocol of Dimensional's "Can Jev Nav?" study.
@@ -25,9 +25,10 @@ from __future__ import annotations
 
 import json
 import os
-import sys
 from pathlib import Path
 from typing import Any
+
+from ...lib.python_runtime import stdlib_python
 
 CLIENT = Path(__file__).with_name("client.py")
 PREFIX = "typesafe/"
@@ -106,4 +107,4 @@ def build(model: str, prompt: str, workspace: Path, task: Any, env: dict) -> Any
     env["ROBOUSE_TASK_LANGUAGE"] = _task_language(task)
     server = creds.get("TYPESAFE_BASE_URL", "https://api.typesafe.ai")
     notes = {"model": m, "model_id": model_id(m), "provider": "typesafe", "server": server, "profile": prof}
-    return Launch([sys.executable, "-I", "-S", str(client)], env, notes=notes)
+    return Launch([*stdlib_python(), str(client)], env, notes=notes)
