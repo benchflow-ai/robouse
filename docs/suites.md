@@ -36,7 +36,7 @@ img/suites/one-demo.webp | `one-demo` (a demonstration frame)
 ```
 
 <!-- suites-table -->
-robouse 0.6.1 bundles 816 tasks in 35 suites. "Needs" is what a suite needs beyond `pip install 'robouse[sim]'`, if anything. The last two columns count the tasks that scored 1 with the reference solution and with the no-op control.
+robouse 0.6.1 bundles 818 tasks in 36 suites. "Needs" is what a suite needs beyond `pip install 'robouse[sim]'`, if anything. The last two columns count the tasks that scored 1 with the reference solution and with the no-op control.
 
 | Suite | Tasks | Needs | Reference solution | No-op control |
 |---|---|---|---|---|
@@ -71,6 +71,7 @@ robouse 0.6.1 bundles 816 tasks in 35 suites. "Needs" is what a suite needs beyo
 | `robo-use-families`<br>Robo Use task families | 8 |  | 8/8 | 0/8 |
 | `robocasa`<br>RoboCasa kitchens | 24 | [the hub](run-a-suite.md#a-dataset) only | 24/24 | 0/24 |
 | `roboharm`<br>10 harm scenarios, 4 configurations | 80 | `robouse fetch-assets` | 80/80 | 0/80 |
+| `robosimstudio`<br>RoboSimStudio: open a bag, hook a rubber band (CPU, fixed layouts) | 2 | own virtualenv and `robouse fetch-assets --robosimstudio` (below) | 2/2 | 0/2 |
 | `robosuite`<br>robosuite 1.5, five arms | 21 | `[robosuite]` | 21/21 | 0/21 |
 | `safety`<br>Harmful requests and benign twins | 8 |  | 8/8 | 0/8 |
 | `vision`<br>Camera images, no coordinates | 55 | `[metaworld]` | 55/55 | 0/55 |
@@ -148,6 +149,18 @@ uv pip install \
   -p ~/.cache/robouse/embodied-playground-venv/bin/python \
   mujoco==3.3.7 gymnasium==1.2.1 numpy==1.26.4 scipy==1.15.3 Pillow==11.3.0
 ```
+
+RoboSimStudio's two CPU material tasks use a pinned source download and its own dependency lock:
+
+```sh
+robouse fetch-assets --robosimstudio
+RSS_CACHE="${ROBOUSE_CACHE_DIR:-$HOME/.cache/robouse}"
+UV_PROJECT_ENVIRONMENT="$RSS_CACHE/robosimstudio-venv" uv sync \
+  --project "$RSS_CACHE/robosimstudio" --locked --extra cpu --no-group rtx
+robouse run --task rss-open-bag --harness oracle --out runs/rss
+```
+
+The download is about 65.5 MB; the first camera render compiles CPU kernels. `ROBOUSE_ROBOSIMSTUDIO_SOURCE` and `ROBOUSE_ROBOSIMSTUDIO_PYTHON` select another source folder and interpreter. The native examples keep their fixed layouts and success predicates (bag mouth at least 30 mm open; band encircling both pegs), with 1200 native Cartesian control steps and camera observations. They passed reference and no-op checks on macOS arm64 CPU. CPU material coupling differs from the GPU solver, including one-way rod contact; brush, tape, paper, granular material and water still require a GPU. This suite does not reconstruct tasks from video or reproduce the paper's single sponge-wiping real-to-sim-to-real pilot.
 
 `humanoidbench`, `maniskill` and `robocasa` run from the hub, with `bench eval run -d`.
 

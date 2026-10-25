@@ -171,6 +171,10 @@ FIXED_EMBODIMENTS = {
                      summary="Dream Labs' bimanual YAM station in Dream's own MuJoCo scene: two 6-joint YAM arms with "
                              "parallel grippers, a top camera and two wrist cameras; joint-target control (yam suite).",
                      capabilities=["reach", "grasp", "bimanual"]),
+    "robosimstudio-yam": dict(title="RoboSimStudio dual YAM", track="arm", kind="bimanual",
+                              summary="RoboSimStudio's two YAM arms with parallel grippers, absolute Cartesian control "
+                                      "and an overview camera, manipulating a bag or band on the CPU.",
+                              capabilities=["reach", "grasp", "bimanual"]),
     "metadrive-sedan": dict(title="MetaDrive sedan", track="driving", kind="vehicle", summary="Driving suite (MetaDrive 0.4.3).",
                             capabilities=["drive"]),
 }
@@ -278,6 +282,8 @@ SUITES = {
                      capabilities=["pick-and-place"]),
     "yam": dict(embodiments=["dual-yam"], scene="upstream-scenes", scenario="tabletop", track="arm",
                 capabilities=["pick-and-place", "perception"]),
+    "robosimstudio": dict(embodiments=["robosimstudio-yam"], scene="upstream-scenes", scenario="tabletop", track="arm",
+                          capabilities=["perception", "contact-rich"]),
     "embodied-playground": dict(embodiments=["franka-panda-upstream"], scene="upstream-scenes", scenario="outdoor-field",
                                 track="arm", capabilities=["bimanual-coordination", "perception", "contact-rich"]),
     "chemlab": dict(embodiments=["floating-gripper"], scene="upstream-scenes", scenario="lab", track="arm",

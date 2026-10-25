@@ -4,7 +4,7 @@
   robouse run-many [--tasks ROOT] --harness NAME ... --out JOBDIR         run a set of trials
   robouse tasks [list|init|check] ...                                     list, create and check tasks
   robouse components list|show|check ...                                  the component registry
-  robouse fetch-assets [--robot NAME | --all | --chemlab | --embodied-playground]  download models or a suite's files
+  robouse fetch-assets [--robot NAME | --all | --chemlab | --embodied-playground | --robosimstudio]  download files
   robouse report | summarize | doctor                                     results, learnings, what this machine can run
   robouse flora export RUNS... --out DIR | flora import DIR               NVIDIA's Flora models on trial recordings
 
@@ -149,18 +149,21 @@ def _summarize(a: argparse.Namespace) -> int:
 def _fetch_assets(a: argparse.Namespace) -> int:
     from ..assets import fetch
 
-    if a.chemlab and a.embodied_playground:
-        print("robouse: --chemlab and --embodied-playground download separately; give one", file=sys.stderr)
+    selected = [name for name in ("chemlab", "embodied_playground", "robosimstudio") if getattr(a, name)]
+    if len(selected) > 1:
+        print("robouse: suite downloads run separately; give one suite flag", file=sys.stderr)
         return 2
-    if a.chemlab or a.embodied_playground:
-        flag = "--chemlab" if a.chemlab else "--embodied-playground"
+    if selected:
+        flag = "--" + selected[0].replace("_", "-")
         if a.robot or a.all:
             print(f"robouse: {flag} cannot be combined with --robot or --all", file=sys.stderr)
             return 2
         if a.chemlab:
             from ..backends.chemlab.assets import fetch as fetch_suite
-        else:
+        elif a.embodied_playground:
             from ..backends.embodied_playground.source import fetch as fetch_suite
+        else:
+            from ..backends.robosimstudio.source import fetch as fetch_suite
 
         fetch_suite(Path(a.dest) if a.dest else None)
         return 0
@@ -183,13 +186,14 @@ def parser() -> argparse.ArgumentParser:
         "fetch-assets",
         help="download the MuJoCo Menagerie robot models (menagerie, roboharm, drone; "
         "--robot or --all for the embodiment suites and composed tasks; --chemlab for the chemlab suite's instruments; "
-        "--embodied-playground for that suite's simulation package)",
+        "--embodied-playground or --robosimstudio for those suites' simulation packages)",
     )
     f.add_argument(
         "--dest",
         help="target folder (default: <cache>/menagerie, or $ROBOUSE_MENAGERIE_ASSETS; with --chemlab, "
         "<cache>/chemlab, or $ROBOUSE_CHEMLAB_ASSETS; with --embodied-playground, <cache>/embodied-playground, or "
-        "$ROBOUSE_EMBODIED_PLAYGROUND_SOURCE)",
+        "$ROBOUSE_EMBODIED_PLAYGROUND_SOURCE; with --robosimstudio, <cache>/robosimstudio, or "
+        "$ROBOUSE_ROBOSIMSTUDIO_SOURCE)",
     )
     f.add_argument("--robot", action="append", help="only this Menagerie robot folder (repeatable), e.g. unitree_go2")
     from ..assets import about_mb, download_bytes
@@ -214,6 +218,14 @@ def parser() -> argparse.ArgumentParser:
         action="store_true",
         help=f"instead, Embodied Playground's MuJoCo package, which the embodied-playground suite runs on "
         f"({about_mb(ep_bytes())}; code Apache-2.0, its own non-code assets CC BY 4.0, the Panda model Apache-2.0)",
+    )
+    from ..backends.robosimstudio.source import download_bytes as rss_bytes
+
+    f.add_argument(
+        "--robosimstudio",
+        action="store_true",
+        help=f"instead, pinned RoboSimStudio source and robot models ({about_mb(rss_bytes())}; "
+        "code Apache-2.0, robot assets retain their MIT/BSD/Apache terms)",
     )
     f.set_defaults(func=_fetch_assets)
     _analysis(sub)

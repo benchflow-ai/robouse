@@ -1,0 +1,14 @@
+id: robosimstudio-yam
+type: embodiment
+version: 0.1.0
+title: RoboSimStudio dual YAM
+summary: RoboSimStudio's two YAM arms with parallel grippers, absolute Cartesian control and an overview camera, manipulating a bag or band on the CPU.
+track: arm
+kind: bimanual
+capabilities:
+- reach
+- grasp
+- bimanual
+composable: false
+suites:
+- robosimstudio
