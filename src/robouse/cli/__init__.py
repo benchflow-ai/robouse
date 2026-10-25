@@ -4,7 +4,7 @@
   robouse run-many [--tasks ROOT] --harness NAME ... --out JOBDIR         run a set of trials
   robouse tasks [list|init|check] ...                                     list, create and check tasks
   robouse components list|show|check ...                                  the component registry
-  robouse fetch-assets [--robot NAME | --all | --chemlab | --embodied-playground]  download models or a suite's files
+  robouse fetch-assets [--robot NAME | --all | --chemlab | --embodied-playground | --robosimstudio]  download files
   robouse report | summarize | doctor                                     results, learnings, what this machine can run
   robouse flora export RUNS... --out DIR | flora import DIR               NVIDIA's Flora models on trial recordings
 

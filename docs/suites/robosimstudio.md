@@ -39,4 +39,17 @@ RoboSimStudio's brush, tape, paper, granular and water paths still need a GPU. I
 
 Validation on 2026-10-25, macOS arm64 CPU, Python 3.12.15, Newton 1.7.0, MuJoCo 3.15.0 and SuperDex 1.0.0: normal `robouse tasks check` runs scored 1 for both reference controllers (594 bag steps, 404 band steps), and 0 for both no-op controls. `tests/test_robosimstudio.py` also checks the download pin and integrity, path safety, moved-folder sandbox rules, hidden observations, action validation, reset and camera calibration, and, when the worker is available, the native reference controls and full-budget hold controls.
 
+Both 1200-step hold controls also scored 0. From a clean wheel install, downloading every pinned file and running the setup above produced:
+
+```json
+{
+  "trial": "rss-open-bag__oracle__07b2fd",
+  "reward": 1.0,
+  "outcome": "success_reached",
+  "steps": 594,
+  "wall_s": 141.2,
+  "exception": null
+}
+```
+
 Regenerate the task folders with `python adapters/robosimstudio/generate.py`. To repeat the native checks from a checkout after the setup above, run `robouse tasks check tasks/robosimstudio/rss-open-bag` and `robouse tasks check tasks/robosimstudio/rss-hook-band`.

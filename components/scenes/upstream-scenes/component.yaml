@@ -35,6 +35,7 @@ suites:
 - rle-bench
 - robocasa
 - robodojo
+- robosimstudio
 - robosuite
 - stationerybench
 - yam
