@@ -20,6 +20,7 @@ import json
 import os
 import re
 import secrets
+import shlex
 import shutil
 import signal
 import subprocess
@@ -35,6 +36,7 @@ from typing import Any
 from .. import harnesses
 from ..core.protocol import RUNNER_PREFIX, verify_result
 from ..harnesses import interface as iface
+from ..lib.python_runtime import stdlib_python
 from ..lib.text import clip
 from ..tasks import Task
 from . import sandbox
@@ -105,11 +107,12 @@ def _make_workspace(task: Task) -> Path:
     ws = Path(tempfile.mkdtemp(prefix=f"robouse-ws-{task.id[:24]}-"))
     (ws / ".robouse" / "bin").mkdir(parents=True)
     shim = ws / ".robouse" / "bin" / "robo"
-    shim.write_text("#!/usr/bin/env python3\n" + AGENT_CLI.read_text())
+    client = ws / ".robouse" / "bin" / "robo_cli.py"
+    shim.write_text("#!/bin/sh\nexec " + shlex.join([*stdlib_python(), str(client)]) + ' "$@"\n')
     shim.chmod(0o755)
     # `robo mcp` (the MCP front end) and the client module it builds requests with, next to the shim
     (ws / ".robouse" / "bin" / "robo_mcp.py").write_text(MCP_SERVER.read_text())
-    (ws / ".robouse" / "bin" / "robo_cli.py").write_text(AGENT_CLI.read_text())
+    client.write_text(AGENT_CLI.read_text())
     (ws / "observations").mkdir()
     return ws
 

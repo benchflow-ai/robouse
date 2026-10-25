@@ -755,7 +755,9 @@ def test_launch_through_the_gateway_and_for_a_served_model(tmp_path, monkeypatch
     launch = build("show-harness", "glm/glm-5.3", task.instruction, ws, task, dict(env))
     assert seen["ref"].id == "glm/glm-5.3" and seen["protocol"] == "openai-completions"
     client = ws / ".robouse" / "show_harness_client.py"
-    assert launch.cmd == ["python3", str(client), task.instruction] and client.read_text() == CLIENT.read_text()
+    from robouse.lib.python_runtime import stdlib_python
+
+    assert launch.cmd == [*stdlib_python(), str(client), task.instruction] and client.read_text() == CLIENT.read_text()
     assert launch.env["ROBOUSE_GATEWAY_KEY"] == gw.key and launch.env["ROBOUSE_SHOW_HARNESS_MODEL"] == "gw-alias"
     assert json.loads(launch.env["ROBOUSE_SHOW_HARNESS_SETTINGS"]) == {
         "mode": "zs",

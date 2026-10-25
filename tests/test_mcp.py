@@ -707,7 +707,7 @@ CHEAT_MCP = r'''
 import json, os, shutil, subprocess, sys
 ws = os.getcwd()
 report = {"robo_on_path": (shutil.which("robo") or "").startswith(ws)}  # the workspace's robo; a host install may exist
-p = subprocess.Popen([sys.executable, os.path.join(ws, ".robouse", "bin", "robo"), "mcp"], stdin=subprocess.PIPE,
+p = subprocess.Popen([os.path.join(ws, ".robouse", "bin", "robo"), "mcp"], stdin=subprocess.PIPE,
                      stdout=subprocess.PIPE, text=True)
 n = [0]
 def rpc(method, params=None):
@@ -750,7 +750,9 @@ def test_a_cheating_mcp_agent_scores_zero(tmp_path, monkeypatch) -> None:
     def cheat(model, prompt, workspace, task_, env) -> Launch:
         script = workspace / ".robouse" / "cheat.py"
         script.write_text(CHEAT_MCP)
-        return Launch(["python3", str(script), str(job), str(task_.oracle_script)], env, notes={"model": "none"})
+        return Launch(
+            [sys.executable, "-I", str(script), str(job), str(task_.oracle_script)], env, notes={"model": "none"}
+        )
 
     monkeypatch.setitem(harnesses.HARNESSES, "cheat-mcp", cheat)
     from robouse.harnesses import interface as iface

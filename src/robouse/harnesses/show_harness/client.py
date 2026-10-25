@@ -1,6 +1,6 @@
 """`show-harness` harness: NUS Show Lab's Show-Harness (arXiv 2609.10522; github.com/showlab/Show-Harness, Apache-2.0)
 driving a Robo Use episode. Standard library only: the runner copies this file into the trial workspace and runs it
-with `python3` inside the agent sandbox, like every harness; it reaches the robot only through the `robo` socket.
+on the runner's base Python inside the agent sandbox; it reaches the robot only through the `robo` socket.
 
 A VLM chooses one parameter-free action unit per decision (MV_FWD, MV_BACK, MV_LEFT, MV_RIGHT, MV_UP, MV_DOWN,
 GRASP, RELEASE, DONE) and an embodiment interpreter grounds it into motion: a move drives the hand a fixed step

@@ -2,6 +2,8 @@
 
 `--harness vla --model PRESET` drives an episode with a vision-language-action policy served elsewhere (usually on a GPU). The client (`src/robouse/harnesses/vla/client.py`, standard library + numpy) is copied into the trial workspace and reaches the robot only through `robo`, like every harness; it speaks each policy server's own wire protocol, so the servers run unmodified.
 
+The client runs on the runner's Python, which already has numpy, in isolated mode (`-I`); `PYTHONPATH`, `PYTHONHOME` and the user site do not change its imports. `ROBOUSE_VLA_PYTHON` selects another interpreter with numpy. When running Robo Use with `uvx`, set that variable to an environment outside the package caches the sandbox denies; the runner's cached virtualenv stays hidden.
+
 ```bash
 export ROBOUSE_VLA_URL=ws://gpu-box:8000          # the policy server
 robouse run --task libero-10-0 --harness vla --model openpi/pi05_libero --out runs/pi05

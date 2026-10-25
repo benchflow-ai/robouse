@@ -22,6 +22,7 @@ import json
 from pathlib import Path
 
 from ... import config
+from ...lib.python_runtime import stdlib_python
 
 CLIENT = Path(__file__).with_name("client.py")
 MODES = ("zs", "ft")
@@ -57,7 +58,7 @@ def build(model, prompt, workspace: Path, task, env: dict):
     client = workspace / ".robouse" / "show_harness_client.py"
     client.write_text(CLIENT.read_text())
     settings = {"mode": mode, "task_sentence": _task_language(task) if mode == "ft" else "", "overrides": over}
-    cmd = ["python3", str(client), prompt]
+    cmd = [*stdlib_python(), str(client), prompt]
     if via_gateway:
         ref = models.resolve("show-harness", m)
         gw = _gateway(ref, env, GATEWAY_PROTOCOLS["show-harness"])

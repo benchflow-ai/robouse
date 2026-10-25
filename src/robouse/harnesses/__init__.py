@@ -46,12 +46,14 @@ from __future__ import annotations
 
 import json
 import shutil
+import sys
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
 from .. import config
+from ..lib.python_runtime import stdlib_python
 from . import credentials
 
 # the only built-in tools Claude Code offers its model (`--tools`); the robo MCP tools come on top with --interface
@@ -329,7 +331,7 @@ def _molmoact2(model, prompt, workspace, task, env) -> Launch:
         env["ROBOUSE_MOLMOACT2_TOKEN"] = config.env("ROBOUSE_MOLMOACT2_TOKEN")
     env["ROBOUSE_TASK_LANGUAGE"] = _task_language(task)
     m = model or "allenai/MolmoAct2-LIBERO-LeRobot"
-    return Launch(["python3", str(client)], env, notes={"model": m, "server": url})
+    return Launch([*stdlib_python(), str(client)], env, notes={"model": m, "server": url})
 
 
 def _vla(model, prompt, workspace, task, env) -> Launch:
@@ -348,7 +350,7 @@ def _vla(model, prompt, workspace, task, env) -> Launch:
         env["ROBOUSE_VLA_TOKEN"] = config.env("ROBOUSE_VLA_TOKEN")
     env["ROBOUSE_TASK_LANGUAGE"] = _task_language(task)
     return Launch(
-        [config.env("ROBOUSE_VLA_PYTHON", "python3"), str(client)],
+        [config.env("ROBOUSE_VLA_PYTHON", sys.executable), "-I", str(client)],
         env,
         notes={"model": cfg["preset"], "wire": cfg["wire"], "server": env["ROBOUSE_VLA_URL"], "provider": "vla"},
     )

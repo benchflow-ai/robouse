@@ -418,7 +418,9 @@ def test_the_launch_gives_the_key_to_the_client_only(tmp_path, monkeypatch) -> N
     (ws / ".robouse").mkdir(parents=True)
     task = load_task(EASY)
     launch = harnesses.build("jev", "", "PROMPT", ws, task, {"PATH": "/usr/bin", "_ROBOUSE_TRIAL_DIR": "x"})
-    assert launch.cmd == [sys.executable, "-I", "-S", str(ws / ".robouse" / "jev_client.py")]
+    from robouse.lib.python_runtime import stdlib_python
+
+    assert launch.cmd == [*stdlib_python(), str(ws / ".robouse" / "jev_client.py")]
     assert Path(launch.cmd[-1]).read_text() == CLIENT.read_text()
     env = launch.env
     assert env["TYPESAFE_API_KEY"] == KEY and env["TYPESAFE_BASE_URL"] == "http://127.0.0.1:9"
