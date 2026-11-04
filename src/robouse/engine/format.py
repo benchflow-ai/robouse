@@ -10,12 +10,15 @@ from `benchflow.embodied.sidecar.EmbodiedTaskFormat` (BenchFlow's docs/embodied.
   - the reference solutions: oracle/solve.sh with the robouse oracle code vendored (and, for Meta-World, the
     scripted expert policies), driving the robot only through the socket.
 
-No package holds an oracle token. The token that unlocks privileged state (vision tasks) is chosen when the task runs:
-the simulator reads it from ``$ROBOUSE_ORACLE_TOKEN`` on the host (compose interpolation), and the reference solution
-gets the same variable through the task's ``oracle.env``, which BenchFlow passes to the oracle only. With the variable
-unset, the simulator has no token and nothing is privileged. ``robouse run`` sets a fresh random value for oracle jobs;
-with ``bench eval run --agent oracle``, set it yourself (``ROBOUSE_ORACLE_TOKEN=$(openssl rand -hex 16)``). Packages
-are therefore byte-identical across builds, and a published package gives an agent nothing to look up.
+No package holds an oracle token. The token that unlocks privileged state (vision tasks) is chosen when the task runs.
+On BenchFlow 0.10, when the host gives none, the simulator mints one per episode into a root-only file
+(``/run/benchflow-oracle/token``) that the reference solution, running as root, reads and an agent can't. Before 0.10
+the simulator read it from ``$ROBOUSE_ORACLE_TOKEN`` on the host (compose interpolation), and the reference solution
+got the same variable through the task's ``oracle.env``, which BenchFlow passes to the oracle only; with the variable
+unset, nothing was privileged. ``robouse run`` sets a fresh random value for oracle jobs, and with ``bench eval run
+--agent oracle`` on older BenchFlow you set it yourself (``ROBOUSE_ORACLE_TOKEN=$(openssl rand -hex 16)``). So two
+exports with the same BenchFlow and Robo Use give byte-identical packages, and a published package gives an agent
+nothing to look up.
 
 ``materialize_variant(noop=True)`` writes a negative-control oracle that only looks (`robo info`, `robo observe`)
 and exits without `robo done`; it must score 0. ``seed=N`` writes ``<task-id>--seed-N`` (``bench eval run --seeds``).
