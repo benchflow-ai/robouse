@@ -433,7 +433,7 @@ def export(a: argparse.Namespace) -> int:
             print("exported", materialize(t.path, Path(a.out), noop=a.noop, flat=True))
             n += 1
     print(
-        f"{n} task(s) -> {Path(a.out).resolve()}   run: bench eval run --tasks-dir {Path(a.out) / 'tasks'} "
+        f"{n} task(s) -> {Path(a.out).resolve()}   run: bench run {Path(a.out) / 'tasks'} "
         "--agent oracle --sandbox docker"
     )
     return 0 if n else 1
