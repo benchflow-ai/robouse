@@ -23,6 +23,9 @@ EMBODIMENTS_MANIFEST = "embodiments.json"
 ROBOTIS_MANIFEST = "robotis_hx5_d20.json"  # the packaged name; assets/robotis/hx5_d20.json in a checkout
 # manifests of the embodiment suites' robots, fetched only with --all or --robot
 OPTIONAL = (EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST, "hx5_d20.json")
+# The packaged names of manifests(), in its order. The BenchFlow task format copies each manifest into the simulator
+# image under this name, so a manifest added here is the only change a new robot needs.
+PACKAGED_MANIFESTS = ("menagerie.json", "skydio_x2.json", EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST)
 
 
 def cache() -> Path:
@@ -63,7 +66,7 @@ def manifests() -> list[Path]:
     """The Menagerie manifests (the packaged copies in an installed wheel, else the checkout's)."""
     shipped = HERE / "assets_provenance"
     if shipped.is_dir():
-        return [shipped / n for n in ("menagerie.json", "skydio_x2.json", EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST)]
+        return [shipped / n for n in PACKAGED_MANIFESTS]
     root = _checkout_root()
     return [
         root / "provenance.json",
