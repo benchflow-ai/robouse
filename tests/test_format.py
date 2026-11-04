@@ -54,9 +54,13 @@ def test_package_has_no_token(tmp_path, task) -> None:
 
 
 def test_noop_control_gets_no_token(tmp_path) -> None:
+    """The negative control looks as an agent would: no token in its package, and it does not read the token the
+    simulator leaves for the reference solution (BenchFlow 0.10 mints one per episode into a root-only file)."""
     pkg = materialize(ROOT / "tasks" / "arc-style" / "arc-gravity", tmp_path, noop=True, flat=True)
     assert "oracle" not in _frontmatter(pkg / "task.md")
-    assert "ORACLE_TOKEN" not in (pkg / "oracle" / "solve.sh").read_text()
+    solve = (pkg / "oracle" / "solve.sh").read_text()
+    assert "ORACLE_TOKEN=" not in solve.replace("ORACLE_TOKEN_FILE=", "")
+    assert "export ROBO_ORACLE_TOKEN_FILE=/dev/null" in solve
 
 
 @pytest.mark.skipif(importlib.util.find_spec("metaworld") is None, reason="needs metaworld for the vendored policies")

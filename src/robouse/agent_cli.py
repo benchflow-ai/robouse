@@ -27,13 +27,29 @@ STEPPING_TIMEOUT_S = 3600
 HELP_FLAGS = ("-h", "--help")
 
 
+# Where BenchFlow's simulator leaves the episode's oracle token: a root-only file on a volume the agent's container
+# mounts read-only. The reference solution runs as root and reads it; an agent runs as an unprivileged user and cannot.
+ORACLE_TOKEN_FILE = "/run/benchflow-oracle/token"
+
+
+def _oracle_token() -> str | None:
+    token = os.environ.get("ROBOUSE_ORACLE_TOKEN") or os.environ.get("ROBO_ORACLE_TOKEN")
+    if token:
+        return token
+    try:
+        with open(os.environ.get("ROBO_ORACLE_TOKEN_FILE") or ORACLE_TOKEN_FILE) as f:
+            return f.read().strip() or None
+    except OSError:
+        return None
+
+
 def _send(req: dict, path: str | None = None) -> dict:
     if path is None and os.environ.get("ROBOUSE_SEND_VIA") == "mcp":  # reference solutions run through MCP
         return _mcp().send(req)
     path = path or os.environ.get("ROBOUSE_SOCKET") or os.environ.get("ROBO_SOCKET") or _find_socket()
     if not path:
         return {"ok": False, "error": "no episode: ROBOUSE_SOCKET is not set"}
-    token = os.environ.get("ROBOUSE_ORACLE_TOKEN") or os.environ.get("ROBO_ORACLE_TOKEN")  # the reference solution's
+    token = _oracle_token()  # the reference solution's; an agent has none
     if token:
         req = {**req, "token": token}
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
