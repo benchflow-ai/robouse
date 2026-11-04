@@ -90,6 +90,10 @@ uv venv --python 3.12 .venv && uv pip install --python .venv/bin/python -e ".[me
 
 # a movable bundle of native packages
 .venv/bin/robouse export --tasks tasks/metaworld --out dist/robouse-metaworld [--noop]
+# BenchFlow 0.10 runs the exported packages with no robouse installed, on Docker or Daytona, and checks each
+# trial's episode record against its verdict
+bench run dist/robouse-metaworld/tasks --agent oracle --sandbox docker --jobs-dir jobs/oracle
+bench embodied verify jobs/oracle
 
 # two roles on one robot (a BenchFlow scene): a planner that may only look, an operator that acts
 .venv/bin/python tools/benchflow/scene_planner_operator.py --task tasks/arc-style/arc-gravity --agent codex --model gpt-6-astra
@@ -156,4 +160,4 @@ Against the local runner (`runs/oracle-*`, `runs/final-*-astra`): all 8 oracle e
 - **Auth failures score as zeros.** A Codex 401 on every call ends the ACP turn normally, so BenchFlow records reward 0 with no error. A robouse trial with 0 episode requests and a provider error in the agent log should be an infrastructure error.
 - **Viewer timeline.** A local trial has `agent/trajectory.json` (ATIF converted from the harness output) and `artifacts/recording_index.json` (video time per step). A BenchFlow trial has `trajectory/acp_trajectory.jsonl` and `trainer/atif.json`, but no `recording_index.json` yet: `robouse.atif` needs a parser for BenchFlow's ACP trajectory.
 - **Cold-cache start race.** Two of the first ten trials failed at container start with `No such container` while several trials built the simulator image concurrently for the first time. Reruns did not reproduce it. BenchFlow did not retry them.
-- **Claude harness version.** BenchFlow pins `claude-agent-acp@0.73.0` (Claude Code 2.1.257); models that need a newer Claude Code are rejected by the API until the pin moves.
+- **Claude harness version.** BenchFlow pins its Claude Code harness (on 0.10, `claude-agent-acp@0.81.2` with Claude Code 2.1.280); models that need a newer Claude Code are rejected by the API until the pin moves.
