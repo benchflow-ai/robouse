@@ -131,7 +131,7 @@ def register(sub: argparse._SubParsersAction) -> None:
 
     ex = sub.add_parser("export")  # native BenchFlow packages; listed once BenchFlow releases the task-format hook
     ex.add_argument("--tasks", required=True, nargs="+", help="task folders, suite folders or a task root")
-    ex.add_argument("--out", required=True, help="bundle folder: <out>/tasks/<id>/ and <out>/runtime-<hash>/")
+    ex.add_argument("--out", required=True, help="bundle folder: <out>/tasks/<id>/, one task package each (with BenchFlow 0.10 each package holds its simulator's build context in environment/simulator/; older BenchFlow writes <out>/runtime-<hash>/ beside them)")
     ex.add_argument("--filter", default="", help="comma-separated substrings; keep tasks whose id contains one")
     ex.add_argument("--noop", action="store_true", help="no-op reference solution (negative control: must score 0)")
     ex.set_defaults(func=export)
