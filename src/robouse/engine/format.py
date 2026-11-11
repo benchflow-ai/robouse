@@ -130,10 +130,9 @@ def _oracle_closure(backend: str) -> list[Path]:
 
 def _asset_manifests() -> dict[str, Path]:
     """Provenance manifests of the Menagerie robot meshes (the simulator image downloads the files at build time)."""
-    from ..assets import manifests
+    from ..assets import PACKAGED_MANIFESTS, manifests
 
-    names = ("menagerie.json", "skydio_x2.json", "embodiments.json")
-    return dict(zip(names, manifests(), strict=True))
+    return dict(zip(PACKAGED_MANIFESTS, manifests(), strict=True))
 
 
 def _metaworld_policies(dst: Path) -> None:

@@ -65,3 +65,13 @@ def test_vendored_metaworld_carries_its_licence(tmp_path) -> None:
     pkg = materialize(task, tmp_path, flat=True)
     lic = (pkg / "oracle" / "vendor" / "metaworld" / "LICENSE").read_text()
     assert "Copyright (c) 2019 Meta-World Team" in lic and "MIT License" in lic
+
+
+def test_runtime_ships_every_mesh_manifest(tmp_path) -> None:
+    from robouse.assets import PACKAGED_MANIFESTS, manifests
+
+    pkg = materialize(ROOT / "tasks" / "arc-style" / "arc-gravity", tmp_path, flat=True)
+    prov = pkg / "environment" / "simulator" / "robouse" / "src" / "robouse" / "assets_provenance"
+    # the image's robouse reads its manifests from here by these names, one per manifest of the checkout
+    assert sorted(p.name for p in prov.iterdir()) == sorted(PACKAGED_MANIFESTS)
+    assert len(PACKAGED_MANIFESTS) == len(manifests())

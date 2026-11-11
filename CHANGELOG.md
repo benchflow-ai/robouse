@@ -19,6 +19,10 @@ Notable changes to the `robouse` package, newest first. Versions follow [semanti
 - The `chemlab` suite's gripper is the Franka Hand of MuJoCo Menagerie's Franka Emika Panda instead of a gripper made of boxes: Menagerie's meshes, materials, inertias and collision geometry, with the fingertip pads, the fingers' coupled slide joints (0.04 m each) and the hand's actuator at the real hand's force, from the pinned Menagerie files robouse already uses. It floats on the same welded body, with the tool point between the fingertip pads, and turns about its tool axis as before; actions and observations are unchanged, except that fully open the fingers are 8 cm apart, not 10. Each task's instruction gives the hand's size. The balance task starts with the top door open rather than the right one, which a hand pointing down cannot push shut by its grip without its body meeting the glass; the reference solutions of the balance, oven, moisture analyzer and shaker tasks keep the hand's body clear of the instruments. Reference solution 7/7, no-op 0/7. `robouse doctor` also checks that the hand's model is there.
 - The `chemlab` scenes look like a lab rather than a default simulator: a lab bench with a dark epoxy-resin top on a light cabinet, a plain light floor and a light grey sky instead of a black one and a checkerboard, and a key light with shadows, a fill and a rim light. Only what is drawn changed; collision and physics are the same.
 
+### Fixed
+
+- `robouse export` and the BenchFlow task format work again: since the HX5-D20 hand added a fourth robot manifest, building a task's simulator image stopped with `ValueError: zip() argument 2 is longer than argument 1`. The exporter and the installed package now take the manifests' names from one list (`assets.PACKAGED_MANIFESTS`), and the simulator image ships all four.
+
 ## 0.6.1 (2026-10-23)
 
 NVIDIA's Flora models label trial recordings (`robouse flora export` and `import`), and agents can no longer change the Kinex install that every `kinex` trial runs. The docs give the first runs on real models of Gemini CLI, Kinex, Jev and the `chemlab` suite, and a limitation of Gemini CLI that those runs found.
