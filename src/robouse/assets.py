@@ -21,6 +21,8 @@ from .lib.download import fetch as fetch_file
 HERE = Path(__file__).resolve().parent
 EMBODIMENTS_MANIFEST = "embodiments.json"
 ROBOTIS_MANIFEST = "robotis_hx5_d20.json"  # the packaged name; assets/robotis/hx5_d20.json in a checkout
+# the manifests' names in an installed wheel (assets_provenance), in the order manifests() lists them
+PACKAGED_MANIFESTS = ("menagerie.json", "skydio_x2.json", EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST)
 # manifests of the embodiment suites' robots, fetched only with --all or --robot
 OPTIONAL = (EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST, "hx5_d20.json")
 
@@ -63,7 +65,7 @@ def manifests() -> list[Path]:
     """The Menagerie manifests (the packaged copies in an installed wheel, else the checkout's)."""
     shipped = HERE / "assets_provenance"
     if shipped.is_dir():
-        return [shipped / n for n in ("menagerie.json", "skydio_x2.json", EMBODIMENTS_MANIFEST, ROBOTIS_MANIFEST)]
+        return [shipped / n for n in PACKAGED_MANIFESTS]
     root = _checkout_root()
     return [
         root / "provenance.json",
